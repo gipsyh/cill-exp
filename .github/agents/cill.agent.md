@@ -16,6 +16,7 @@ tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'agent', 'pylance-
 - cill通过k-induction引擎检查是否归纳（这里k=4），也就是寻找前3个step满足所有assertion，但第4步存在违反assertion的情况，说明存在asseriton仍然不归纳，需要继续写helper blok掉cti
 - 除了vcd以外，建议不要查看ric3proj目录下的其他文件，这是ric3自动生成的
 - 可以使用paser_vcd.py来查看vcd中所需要的信号信息，可以通过```python3 parse_vcd.py --help```来查看用法，如果signal中带有特殊符号（如"[]"）,请对字符串使用引号，不支持模糊匹配以及正则匹配
-- 你只能添加新的assertion，不可以写assume做约束，不可以修改原本的dut，但是可以添加reg来辅助证明，不要再原有的always块中修改，创建新的always来写helper assertion，请将新添加的内容写到"/// Helper Assertion"下
+- 你只能添加新的assertion，不可以写assume做约束，不可以修改原本的dut，但是可以添加reg来辅助证明，不要再原有的always块中修改，创建新的always来写helper assertion，请将新添加的内容写到"/// Helper Assertion Begin" 和 "/// Helper Assertion End"之间，只可以用已有的这个"Begin"到"End"的块，不许新创建
 - ric3必须运行在有ric3.toml的目录下
 - 已有的helper assertion是之前生成的，可以在这个基础上继续
+- 新的cex/cti的变量的值可能与上次是完全不同的，需要对变量的值重新查看

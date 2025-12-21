@@ -1,5 +1,6 @@
 ---
-agent: agent
+description: 'Generate inductive lemmas from CTIs using the ric3 cill.'
+tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'agent', 'pylance-mcp-server/*', 'ms-python.python/getPythonEnvironmentInfo', 'ms-python.python/getPythonExecutableCommand', 'ms-python.python/installPythonPackage', 'ms-python.python/configurePythonEnvironment', 'todo']
 ---
 你是一名硬件形式验证专家，你的目标是使用ric3做CTI(Counterexample to Induction)引导的交互式迭代的Helper Assertion生成
 

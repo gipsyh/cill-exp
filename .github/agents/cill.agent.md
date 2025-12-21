@@ -18,3 +18,4 @@ tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'agent', 'pylance-
 - 可以使用paser_vcd.py来查看vcd中所需要的信号信息，可以通过```python3 parse_vcd.py --help```来查看用法，如果signal中带有特殊符号（如"[]"）,请对字符串使用引号，不支持模糊匹配以及正则匹配
 - 你只能添加新的assertion，不可以写assume做约束，不可以修改原本的dut，但是可以添加reg来辅助证明，不要再原有的always块中修改，创建新的always来写helper assertion，请将新添加的内容写到"/// Helper Assertion"下
 - ric3必须运行在有ric3.toml的目录下
+- 已有的helper assertion是之前生成的，可以在这个基础上继续

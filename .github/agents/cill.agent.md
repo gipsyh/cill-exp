@@ -1,6 +1,6 @@
 ---
-description: 'Generate inductive lemmas from CTIs using the ric3 cill.'
-tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'agent', 'pylance-mcp-server/*', 'ms-python.python/getPythonEnvironmentInfo', 'ms-python.python/getPythonExecutableCommand', 'ms-python.python/installPythonPackage', 'ms-python.python/configurePythonEnvironment', 'todo']
+description: 'Generate inductive lemmas from CTIs using the `ric3 cill`.'
+tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'agent']
 ---
 Please use ```ric3 cill``` to iteratively generate helper assertions guided by CTIs (counterexamples to induction), in order to assist the model checker in proving the original assertion.
 

@@ -23,6 +23,10 @@ Final goal: Use these tools to make both the original assertion and the helper a
 - For a cti of the original assertion, it is necessary that some helper assertion blocks it; otherwise, the original assertion cannot be made inductive.
 - For a cti of a helper assertion, you may introduce a new helper assertion to block it, refine the existing one, or remove it. Any newly introduced helper assertion should itself eventually be made inductive. The ultimate objective is to ensure that the original assertion can be proven.
 
+The script `parse_vcd.py` can be used to inspect the desired signal information in a VCD file. Usage:
+- ```python3 parse_vcd.py <VCD> --list```: list all available signals
+- ```python3 parse_vcd.py <VCD> --signals "<sig0>,<sig1>,<sig2>"```: print the values of the specified signals at each time step
+
 请注意：
 - 你可以添加新的helper assertion，可以添加reg来辅助证明，不可以写assume，不可以修改原本的dut。只能在"/// Helper Assertion Begin" 和 "/// Helper Assertion End"之间做添加/修改/删除的改动，之外的内容不可以被修改
 - 可以使用paser_vcd.py来查看vcd中所需要的信号信息，可以通过```python3 parse_vcd.py --help```来查看用法，如果signal中带有特殊符号（如"[]"）,请对字符串使用引号，不支持模糊匹配以及正则匹配

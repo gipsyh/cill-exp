@@ -105,12 +105,12 @@ if __name__ == "__main__":
         "filename", nargs="?", default="ric3proj/ctilg/cti.vcd", help="VCD file path"
     )
     parser.add_argument(
-        "--list", action="store_true", help="List all signals under uut"
+        "--list", action="store_true", help="list all available signals"
     )
     parser.add_argument(
         "--signals",
         type=str,
-        help="Comma-separated list of signals (e.g. 'clk,rst,data')",
+        help="print the values of the specified signals at each time step",
     )
 
     args = parser.parse_args()

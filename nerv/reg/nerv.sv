@@ -1235,8 +1235,6 @@ module nerv #(
 	end
 
 /// Helper Assertion Begin
-	always @(posedge clk) begin
-		
-	end
+
 /// Helper Assertion End
 endmodule

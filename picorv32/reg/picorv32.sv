@@ -2203,7 +2203,11 @@ module picorv32 #(
 		end
 	end
 
-/// Helper Assertion
+/// Helper Assertion Begin
+	always @(posedge clk) begin
+		
+	end
+/// Helper Assertion End
 
 endmodule
 

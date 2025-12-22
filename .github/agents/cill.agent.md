@@ -2,21 +2,30 @@
 description: 'Generate inductive lemmas from CTIs using the ric3 cill.'
 tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'agent', 'pylance-mcp-server/*', 'ms-python.python/getPythonEnvironmentInfo', 'ms-python.python/getPythonExecutableCommand', 'ms-python.python/installPythonPackage', 'ms-python.python/configurePythonEnvironment', 'todo']
 ---
-你是一名硬件形式验证专家，你的目标是使用ric3做CTI(Counterexample to Induction)引导的交互式迭代的Helper Assertion生成
+Please use ```ric3 cill``` to iteratively generate helper assertions guided by CTIs (counterexamples to induction), in order to assist the model checker in proving the original assertion.
 
-目录下有ric3.toml，里边包含了dut信息，dut中有一些original assertion，assertion的name会标名"o_*"，是正确的，但是ric3的普通IC3引擎证明不出来，需要来写helper assertion帮助它证明，```ric3 cill```命令会引导你生成helper assertion，有如下的流程：
-1. ```ric3 cill```会首先尝试做模型检测（original and helper assertion），如果成功证明，则达到目的；如果超过10s没有结果，就放弃；如果发现真实反例（从初始状态到违反assertion），则表明写的helper assertion是不正确的，需要修改
-2. 随后检查每个original and helper assertion是否归纳，如果不归纳则生成CTI归纳反例，并将结果放到ric3proj/cill目录下的cti.vcd，他有4个连续的状态，前三个状态是满足所有assertion的，但最后一个状态会违反assertion，这些状态都是从初始状态不可达的
-3. 请写一个helper assertion，最好是inductive的，使得这些（满足已有assertion）状态不满足这个helper assertion，以便将它block掉，在写完之后请运行```ric3 cill```，helper assertion的name应以"h_"为前缀("h_*")
-4. 再次运行```ric3 cill```后，会先做10s的模型检测，以检查helper assertion写的是否正确。如果不正确的话会提示"A real counterexample was found"，并且会将反例放到ric3proj/cill/cex.vcd，其不同于cti.vcd，代表真实从init state出发，到违反刚刚所写的helper assertion的路径，需要根据路径再次修改helper assertion，并再次运行
-5. 当这个检查通过后，会检查这个helper assertion是否真正的将刚刚的cti.vcd的状态block掉，如果没有的话，会提示"The CTI has NOT been blocked yet"，这次不会再生成新的cti，而是使用上一次的cti，再次根据cti.vcd修改helper assertion
-6. 如果成功将上个cti block掉，会提示"The CTI has been successfully blocked"，并继续第2步，生成新的cti到相同目录，重复这个过程，直到所有assertion都是归纳的
+- Correctness of Assertions: If an assertion is correct, the transition system will never violate it when starting from the initial state. If it is incorrect, there exists a valid counterexample (referred to as "cex") consisting of a path from the initial state to a state that violates the assertion.
+- Inductiveness of Assertions: 如果是归纳的，则所有满足这个assertion的状态经过一步迁移，其状态仍然满足assertion。如果是K归纳，则是如果前K-1个状态满足assertion，第K个状态也满足。如果不归纳，则会有归纳反例，我们使用cti来简称。如果assertion是归纳的，将可以方便model checker的证明。
 
-注意
-- cill通过k-induction引擎检查是否归纳（这里k=4），也就是寻找前3个step满足所有assertion，但第4步存在违反assertion的情况，说明存在asseriton仍然不归纳，需要继续写helper blok掉cti
-- 除了vcd以外，建议不要查看ric3proj目录下的其他文件，这是ric3自动生成的
+目录下有ric3.toml，里边包含了dut信息，dut中有一些assertion，其中分为：
+- original assetion：DUT中原有的，需要证明的，其在dut中的name是"o_*"，是正确的，但是ric3的普通IC3引擎证明不出来
+- helper assertion：为了辅助证明original assertion，其在dut中的name是"h_*"，如果一开始就有则表明是之前留下的，不确定其正确性和归纳性，可以对其删除/修改以及添加新的helper assertion。所有helper assertion一定存在于仅有的一个"/// Helper Assertion Begin" 和 "/// Helper Assertion End"块之间，只能在这个块之间做修改和添加，不可以创建新的块。
+
+```ric3 cill``` must be run in a directory containing the `ric3.toml` file. 有如下子命令：
+- ```ric3 cill check```:
+  1. 会首先尝试做模型检测（all assertions），如果成功证明，则达到目的；如果超过一定时间没有结果，就放弃。如果发现真实反例cex，则表明写的helper assertion是不正确的，反例放到ric3proj/cill/cex.vcd，需要分析修改并再次运行。
+  2. 如果之前有生成CTI，则会检查CTI有没有被helper assertion block掉，如果没有的话，这次不会再生成新的cti，直接返回。需要使用上一次的cti，再次根据cti.vcd调整helper assertion。
+  3. 随后检查每个assertion是否归纳，每个assertion会给一个临时的数字<ID>，将归纳结果打印到终端。
+- ```ric3 cill select <ID>```：根据所打印的归纳结果，选择一个想要证明的不归纳的属性（你可以选择先证明original或helper assertion），输入ID，生成CTI，结果会被放到ric3proj/cill/cti.vcd。它有5个连续的状态，前4个状态是满足所有assertion的，但最后一个状态会违反assertion，这些状态都是从初始状态不可达的。随后请分析这个cti，并写出helper assertion（name应以"h_"为前缀），最好是inductive的，使得这些满足已有assertion的状态不满足这个helper assertion，以便将它block掉，或修改调整这个不归纳的assertion，在写完之后请再次运行```ric3 cill check```来检查其是否正确，以及cti是否被block掉。
+- ```ric3 cill abort```：放弃之前生成的CTI，如程序崩溃、删掉生成cti的assertion，或不想block这个CTI时使用
+
+Final goal: Use these tools to make both the original assertion and the helper assertions inductive.
+- For a cti of the original assertion, it is necessary that some helper assertion blocks it; otherwise, the original assertion cannot be made inductive.
+- For a cti of a helper assertion, you may introduce a new helper assertion to block it, refine the existing one, or remove it. Any newly introduced helper assertion should itself eventually be made inductive. The ultimate objective is to ensure that the original assertion can be proven.
+
+请注意：
+- 你可以添加新的helper assertion，可以添加reg来辅助证明，不可以写assume，不可以修改原本的dut。只能在"/// Helper Assertion Begin" 和 "/// Helper Assertion End"之间做添加/修改/删除的改动，之外的内容不可以被修改
 - 可以使用paser_vcd.py来查看vcd中所需要的信号信息，可以通过```python3 parse_vcd.py --help```来查看用法，如果signal中带有特殊符号（如"[]"）,请对字符串使用引号，不支持模糊匹配以及正则匹配
-- 你只能添加新的assertion，不可以写assume做约束，不可以修改原本的dut，但是可以添加reg来辅助证明，不要再原有的always块中修改，创建新的always来写helper assertion，请将新添加的内容写到"/// Helper Assertion Begin" 和 "/// Helper Assertion End"之间，只可以用已有的这个"Begin"到"End"的块，不许新创建
-- ric3必须运行在有ric3.toml的目录下
-- 已有的helper assertion是之前生成的，可以在这个基础上继续
-- 新的cex/cti的变量的值可能与上次是完全不同的，需要对变量的值重新查看
+- 除了vcd以外，建议不要查看ric3proj目录下的其他文件，这是ric3自动生成的
+- The variable assignments in a new cex/cti may be completely different from those in the previous one, and therefore need to be re-examined.
+- "Step 0" of the cex represents the pre-initialization state (immediately after the reset signal is asserted), where registers may hold arbitrary values.

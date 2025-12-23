@@ -27,8 +27,8 @@ The script `parse_vcd.py` can be used to inspect the desired signal information 
 - ```python3 parse_vcd.py <VCD> --list```: List all available signals.
 - ```python3 parse_vcd.py <VCD> --signals "<sig0>,<sig1>,<sig2>"```: Print the values of the specified signals at each time step. Fuzzy matching and regular expression matching are not supported.
 
-请注意：
-- 你可以添加新的helper assertion，可以添加reg来辅助证明，不可以写assume，不可以修改原本的dut。你只能在"/// Helper Assertion Begin" 和 "/// Helper Assertion End"之间添加/修改/删除。"/// Helper Assertion Begin"和"/// Helper Assertion End"之外的内容无论如何都不可以被修改
+Please Note：
+- You are strictly limited to adding, modifying, or deleting code between the "/// Helper Assertion Begin" and "/// Helper Assertion End" markers. Within these blocks, you may introduce new helper assertions and auxiliary registers to assist with the proof, provided that all new assertion and register names begin with the prefix h_ (e.g., "h_xx: assert(...);" or "reg h_yy;"). You are expressly prohibited from using assume statements or modifying the original DUT in any way, and under no circumstances should any content outside the designated helper assertion blocks be altered.
 - 除了vcd以外，建议不要查看ric3proj目录下的其他文件，这是ric3自动生成的
 - The variable assignments in a new cex/cti may be completely different from those in the previous one, and therefore need to be re-examined.
 - "Step 0" of the cex represents the pre-initialization state (immediately after the reset signal is asserted), where registers may hold arbitrary values.

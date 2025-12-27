@@ -34,8 +34,8 @@ Performs the following steps automatically:
 Use this when assertions are not inductive.
 * **Input**: The `<ID>` of a failing assertion (original or helper).
 * **Output**: Generates a **CTI** saved to `ric3proj/cill/cti.vcd`. The resulting VCD file contains only the signals relevant to the induction failure; irrelevant signals are either omitted or marked with the 'x'/'X' (don’t care) value.
-* **Format**: The CTI usually contains 5 steps. Steps (0..=3) satisfy all assertions; Step 4 violates the selected assertion.
-* **Goal**: Analyze this CTI and write a new `h_*` assertion that is valid on reachable states but invalid for this specific CTI trace (thus "blocking" it).
+* **Format**: A CTI usually consists of 5 steps. The first 4 steps satisfy all assertions, while the final step violates the selected assertion.
+* **Goal**: Analyze this CTI and write a new h_* assertion that is valid on all reachable states but is violated at one of the first four steps of this specific CTI trace (thus "blocking" it), and is preferably inductive.
 
 ### 3. `ric3 cill abort`
 Discards the current CTI context. Use this if the tool crashes, if you delete the assertion that generated the CTI, or if you decide not to block the current CTI.

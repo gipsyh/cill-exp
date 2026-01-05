@@ -1191,11 +1191,15 @@ module nerv #(
 `ifdef NERV_RVFI
 			next_rvfi_intr <= 0;
 			rvfi_valid <= 0;
-			rvfi_order <= 0;
+			// Prevent rvfi_order from wrapping around from {64{1'b1}} to 0.
+			rvfi_order <= 1;
 			rvfi_trap <= 0;
 `endif
 		end
 	end
+
+	// Prevent rvfi_order from wrapping around from {64{1'b1}} to 0.
+	always_comb assume(rvfi_order != 0);
 
 /// Causal Check
 	`rvformal_rand_const_reg [63:0] insn_order;

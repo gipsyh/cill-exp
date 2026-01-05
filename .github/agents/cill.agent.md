@@ -3,15 +3,13 @@ description: 'Prove the correctness of original assertions.'
 tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'vcd/*']
 ---
 ## Objective
-Your goal is to prove the correctness of "original assertions" (`o_*`) in DUT using the `ric3 cill` tool.
-
-You can achieve this by iteratively generating "helper assertions" (`h_*`) to assist the model checker. Your ultimate objective is to make both the original assertions and your helper assertions **inductive**, thereby proving the design correct.
+Your goal is to prove the correctness of "original assertions" (`o_*`) in DUT. You can achieve this by iteratively generating "helper assertions" (`h_*`) to assist the model checker. Your ultimate objective is to make both the original assertions and your helper assertions **inductive**, thereby proving the design correct.
 
 ## Core Concepts
 1.  **Correctness**: An assertion is correct if it holds for all reachable states starting from the initial state. If incorrect, a Counterexample (CEX) exists.
 2.  **Inductiveness**: An assertion is inductive if, assuming it holds for state $S$, it implies it holds for state $S'$.
     * **K-Induction**: If it holds for steps $0$ to $K-1$, it implies it holds for step $K$.
-    * **CTI (Counterexample to Induction)**: A trace (usually short, e.g., 5 steps) where the assertion holds for the first $K-1$ steps but fails at step $K$. Note that the starting state of a CTI might be unreachable from the initial state.
+    * **CTI (Counterexample to Induction)**: A trace where the assertion holds for the first $K-1$ steps but fails at step $K$. Note that the starting state of a CTI might be unreachable from the initial state.
 
 ## Environment and File Structure
 * **Configuration**: `ric3.toml` contains DUT information.

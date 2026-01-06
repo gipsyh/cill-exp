@@ -2,9 +2,8 @@
 version = "1.6.0"
 
 [dut]
-files = ["tb.sv", "picorv32.sv", "rvfi_causal_check.sv"]
-include_files = ["defines.sv", "rvfi_macros.vh", "rvfi_channel.sv"]
+files = ["picorv32.sv", "rvfi_causal_check.sv", "tb.sv"]
+include_files = ["defines.vh", "rvfi_macros.vh"]
+# reset signal
+reset = "reset"
 top = "testbench"
-
-[trace]
-top = "testbench.wrapper.uut"

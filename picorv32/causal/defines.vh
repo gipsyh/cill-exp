@@ -1,3 +1,6 @@
+`ifndef DEFINES_VH
+`define DEFINES_VH
+
 `define RISCV_FORMAL
 `define RISCV_FORMAL_NRET 1
 `define RISCV_FORMAL_XLEN 32
@@ -16,3 +19,4 @@
 `define DEBUGNETS
 `include "rvfi_macros.vh"
 
+`endif

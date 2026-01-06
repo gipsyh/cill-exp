@@ -1,5 +1,5 @@
-`include "defines.sv"
-`include "rvfi_channel.sv"
+`default_nettype none
+`include "defines.vh"
 
 module rvfi_wrapper (
 	input         clock,
@@ -74,36 +74,17 @@ module testbench (
 	`RVFI_WIRES
 	`RVFI_BUS_WIRES
 
-	always_comb assume (reset == $initstate);
-
 	// Prevent rvfi_order from wrapping around from {64{1'b1}} to 0.
 	// Also set the initial value of rvfi_order to 1 in the DUT.
 	always_comb assume(rvfi_order != 0);
 
-	reg [7:0] cycle_reg = 0;
-	wire [7:0] cycle = reset ? 8'd 0 : cycle_reg;
-
-	always @(posedge clock) begin
-		cycle_reg <= reset ? 8'd 1 : cycle_reg + (cycle_reg != 8'h ff);
-	end
-
 	`RISCV_FORMAL_CHECKER checker_inst (
 		.clock  (clock),
-		.reset  (cycle < `RISCV_FORMAL_RESET_CYCLES),
-`ifdef RISCV_FORMAL_TRIG_CYCLE
-`ifdef RISCV_FORMAL_UNBOUNDED
+		.reset  (reset),
+	`ifdef RISCV_FORMAL_TRIG_CYCLE
 		.trig   (trig),
-`else
-		.trig   (cycle == `RISCV_FORMAL_TRIG_CYCLE),
-`endif
-`endif
-`ifdef RISCV_FORMAL_CHECK_CYCLE
-`ifdef RISCV_FORMAL_UNBOUNDED
+	`endif
 		.check   (check),
-`else
-		.check  (cycle == `RISCV_FORMAL_CHECK_CYCLE),
-`endif
-`endif
 		`RVFI_CONN
 		`RVFI_BUS_CONN
 	);
@@ -114,4 +95,10 @@ module testbench (
 		`RVFI_CONN
 		`RVFI_BUS_CONN
 	);
+
+
+/// Helper Assertion Begin
+
+/// Helper Assertion End
+
 endmodule

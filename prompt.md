@@ -1,9 +1,5 @@
----
-description: 'Prove the correctness of original assertions.'
-tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'vcd/*']
----
 ## Objective
-Your goal is to prove the correctness of "original assertions" (`o_*`) in DUT. You can achieve this by iteratively generating "helper assertions" (`h_*`) to assist the model checker. Your ultimate objective is to make both the original assertions and your helper assertions **inductive**, thereby proving the design correct.
+Your goal is to prove the correctness of the original assertions in the DUT. You can achieve this by generating lemmas (helper assertions). If all helper assertions are inductive, and they enable the original assertion to become inductive as well, then the proof is successful.
 
 ## Core Concepts
 1.  **Correctness**: An assertion is correct if it holds for all reachable states starting from the initial state. If incorrect, a Counterexample (CEX) exists.
@@ -14,10 +10,8 @@ Your goal is to prove the correctness of "original assertions" (`o_*`) in DUT. Y
 ## Environment and File Structure
 * **Configuration**: `ric3.toml` contains DUT information.
 * **Assertions**:
-    * `o_*`: Original assertions (Read-only, assumed correct but hard to prove).
-    * `h_*`: Helper assertions (Created/Modified by you to block CTIs).
-* **Modification Area**: You may ONLY modify code between the markers:
-    `/// Helper Assertion Begin` and `/// Helper Assertion End`.
+  * `o_*`: Original assertions (Read-only, assumed correct but hard to prove).
+  * `h_*`: Helper assertions (Created/Modified by you to block CTIs).
 
 ## Tool Usage: `ric3 cill`
 Run `ric3 cill <subcommand>` in the directory containing `ric3.toml`.
@@ -54,7 +48,7 @@ Use these MCP tools to inspect VCD files.
 - In CEX (NOT CTI), Step 0 typically represents the cycle in which the reset signal is asserted. During this cycle, register values may be non-deterministic.
 - Variable assignments in each new CTI/CEX are independent of those in previous ones; signal values may be completely different from earlier cases and must be re-examined each time.
 - The generated VCD for CTI includes only the signals pertinent to the current non-induction failure. If a DUT signal is absent from the VCD, or if specific bits of a signal are marked as 'x'/'X', it indicates that these elements are irrelevant to the non-inductive transition. It is highly recommended to derive helper assertions based solely on the relevant (non-'x') signals.
-- `ric3` uses Yosys as the DUT parser and does not include a Verific frontend; therefore, please avoid writing full SVA constructs (e.g., `assert property @(posedge clk)`, `|->`, `$past`, etc.). It is recommended to write assertions in the following form:
+- `ric3` uses Yosys as the DUT parser and does not include a Verific frontend; therefore, please avoid writing SVA constructs (e.g., `assert property @(posedge clk)`, `|->`, `$past`, etc.). It is recommended to write assertions in the following form:
     ```systemverilog
     always @(posedge clk) begin
         h_*: assert();

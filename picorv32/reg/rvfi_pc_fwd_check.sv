@@ -1,0 +1,1 @@
+../../riscv-formal/rvfi_pc_fwd_check.sv

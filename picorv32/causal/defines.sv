@@ -1,5 +1,5 @@
-`ifndef DEFINES_VH
-`define DEFINES_VH
+`ifndef DEFINES_SV
+`define DEFINES_SV
 
 `define RISCV_FORMAL
 `define RISCV_FORMAL_NRET 1

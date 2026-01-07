@@ -2,8 +2,10 @@
 version = "1.6.0"
 
 [dut]
-files = ["picorv32.sv", "rvfi_causal_check.sv", "tb.sv"]
-include_files = ["defines.vh", "rvfi_macros.vh"]
-# reset signal
+files = ["picorv32.sv", "rvfi_causal_check.sv", "wrapper.sv", "tb.sv"]
+include_files = ["defines.sv", "rvfi_macros.vh"]
 reset = "reset"
 top = "testbench"
+
+[modeling]
+parser = "yosys_slang"

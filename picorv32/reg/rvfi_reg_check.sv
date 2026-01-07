@@ -1,0 +1,1 @@
+../../riscv-formal/rvfi_reg_check.sv

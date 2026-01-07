@@ -183,7 +183,7 @@ module testbench (
 		`RVFI_BUS_CONN
 	);
 
-	// Ignore rvfi_order loopback from all ones, otherwise the check might be invalid.
+	// Ignore rvfi_order loopback, otherwise the check might be invalid.
 	reg rvfi_order_loopback;
 	always@(posedge clock) begin
 		if (reset) begin

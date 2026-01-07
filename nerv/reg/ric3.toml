@@ -2,7 +2,7 @@
 version = "1.6.0"
 
 [dut]
-files = ["rvfi_reg_check.sv", "nerv.sv", "tb.sv"]
+files = ["rvfi_reg_check.sv", "nerv.sv", "wrapper.sv", "tb.sv"]
 include_files = ["defines.sv", "rvfi_macros.vh"]
 top = "testbench"
 reset = "reset"

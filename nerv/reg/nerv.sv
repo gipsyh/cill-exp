@@ -17,6 +17,9 @@
  *
  */
 
+`default_nettype none
+`include "defines.sv"
+
 `define NERV_CSR
 
 `ifdef NERV_CSR
@@ -212,9 +215,6 @@ module nerv #(
 	input clock,
 	input reset,
 	input stall,
-`ifdef FORMAL
-	input check,
-`endif
 	output trap,
 
 `ifdef NERV_RVFI
@@ -464,6 +464,8 @@ module nerv #(
 `endif
 
 	assign trap = cycle_trap;
+	wire [31:0] irq_en;
+	reg [4:0] irq_num;
 
 `ifdef NERV_CSR
 	/*********************
@@ -521,12 +523,12 @@ module nerv #(
 	wire [31:0] csr_``NAME``_next  = csr_``ARRAY``_next[(INDEX)*32 +: 32];  \
 	assign csr_``ARRAY``_sel[INDEX] = csr_``NAME``_sel;
 
+`NERV_CSRS
+
 	// dummy out missing select lines
 	assign csr_hpm_event_sel[2:0] = 0;
 	assign csr_hpm_counter_sel[1] = 0;
 	assign csr_hpm_counterh_sel[1] = 0;
-
-`NERV_CSRS
 `undef NERV_CSR_REG_MRW
 `undef NERV_CSR_VAL_MRW
 `undef NERV_CSR_VAL_MRO
@@ -534,9 +536,8 @@ module nerv #(
 `undef NERV_CSR_ARR_MRW
 `endif // NERV_CSR
 
-	wire [31:0] irq_en;
-	reg [4:0] irq_num;
 	assign irq_en = irq & csr_mie_value;
+	reg [31:0] mem_rdata;
 
 	// resolve interrupt priority
 	always @* begin
@@ -1052,7 +1053,6 @@ module nerv #(
 		end
 	end
 
-	reg [31:0] mem_rdata;
 `ifdef NERV_RVFI
 	reg next_rvfi_intr;
 	reg rvfi_trap_q;
@@ -1197,44 +1197,4 @@ module nerv #(
 		end
 	end
 
-/// Reg Check
-	`rvformal_rand_const_reg [63:0] insn_order;
-	`rvformal_rand_const_reg [4:0] register_index;
-	reg [`RISCV_FORMAL_XLEN-1:0] register_shadow = 0;
-	reg register_written = 0;
-
-	integer channel_idx;
-	always @(posedge clock) begin
-		if (reset) begin
-			register_shadow = 0;
-			register_written = 0;
-		end else begin
-			if (check) begin
-				for (channel_idx = 0; channel_idx < `RISCV_FORMAL_CHANNEL_IDX; channel_idx=channel_idx+1) begin
-					if (rvfi_valid[channel_idx] && !rvfi_trap[channel_idx] && rvfi_order[64*channel_idx +: 64] < insn_order && register_index == rvfi_rd_addr[channel_idx*5 +: 5]) begin
-						register_shadow = rvfi_rd_wdata[channel_idx*`RISCV_FORMAL_XLEN +: `RISCV_FORMAL_XLEN];
-						register_written = 1;
-					end
-				end
-
-				assume(rvfi_valid[`RISCV_FORMAL_CHANNEL_IDX]);
-				assume(insn_order == rvfi_order[64*`RISCV_FORMAL_CHANNEL_IDX +: 64]);
-
-				if (register_written && !rvfi_trap[`RISCV_FORMAL_CHANNEL_IDX] && register_index == rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] && register_index != 0)
-					o_shadow_rs1r: assert(register_shadow == rvfi_rs1_rdata[`RISCV_FORMAL_CHANNEL_IDX*`RISCV_FORMAL_XLEN +: `RISCV_FORMAL_XLEN]);
-				if (register_written && !rvfi_trap[`RISCV_FORMAL_CHANNEL_IDX] && register_index == rvfi_rs2_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] && register_index != 0)
-					o_shadow_rs2r: assert(register_shadow == rvfi_rs2_rdata[`RISCV_FORMAL_CHANNEL_IDX*`RISCV_FORMAL_XLEN +: `RISCV_FORMAL_XLEN]);
-			end
-			for (channel_idx = 0; channel_idx < `RISCV_FORMAL_NRET; channel_idx=channel_idx+1) begin
-				if (rvfi_valid[channel_idx] && !rvfi_trap[channel_idx] && register_index == rvfi_rd_addr[channel_idx*5 +: 5]) begin
-					register_shadow = rvfi_rd_wdata[channel_idx*`RISCV_FORMAL_XLEN +: `RISCV_FORMAL_XLEN];
-					register_written = 1;
-				end
-			end
-		end
-	end
-
-/// Helper Assertion Begin
-
-/// Helper Assertion End
 endmodule

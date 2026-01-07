@@ -2,9 +2,10 @@
 version = "1.6.0"
 
 [dut]
-files = ["tb.sv", "nerv.sv"]
-include_files = ["defines.sv", "rvfi_macros.vh", "rvfi_channel.sv"]
+files = ["rvfi_reg_check.sv", "nerv.sv", "tb.sv"]
+include_files = ["defines.sv", "rvfi_macros.vh"]
 top = "testbench"
+reset = "reset"
 
-[trace]
-top = "testbench.wrapper.uut"
+[modeling]
+parser = "yosys_slang"

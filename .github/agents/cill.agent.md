@@ -54,7 +54,7 @@ Use these MCP tools to inspect VCD files.
 - In CEX (NOT CTI), Step 0 typically represents the cycle in which the reset signal is asserted. During this cycle, register values may be non-deterministic.
 - Variable assignments in each new CTI/CEX are independent of those in previous ones; signal values may be completely different from earlier cases and must be re-examined each time.
 - The generated VCD for CTI includes only the signals pertinent to the current non-induction failure. If a DUT signal is absent from the VCD, or if specific bits of a signal are marked as 'x'/'X', it indicates that these elements are irrelevant to the non-inductive transition. It is highly recommended to derive helper assertions based solely on the relevant (non-'x') signals.
-- `ric3` uses Yosys as the DUT parser and does not include a Verific frontend; therefore, please avoid writing full SVA constructs (e.g., `assert property @(posedge clk)`, `|->`, etc.). Simple SystemVerilog expressions such as `$past` and `$stable` are supported. It is recommended to write assertions in the following form:
+- `ric3` uses Yosys as the DUT parser and does not include a Verific frontend; therefore, please avoid writing full SVA constructs (e.g., `assert property @(posedge clk)`, `|->`, `$past`, etc.). It is recommended to write assertions in the following form:
     ```systemverilog
     always @(posedge clk) begin
         h_*: assert();

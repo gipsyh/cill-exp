@@ -1,11 +1,11 @@
 ## Objective
-Your goal is to prove the correctness of the original assertions in the DUT. You can achieve this by generating lemmas (helper assertions). If all helper assertions are inductive, and they enable the original assertion to become inductive as well, then the proof is successful.
+Your goal is to prove the correctness of the original assertions in the DUT. You can achieve this by generating invariants (helper assertions). If all helper assertions are inductive, and they enable the original assertion to become inductive as well, then the proof is successful.
 
 ## Core Concepts
-1.  **Correctness**: An assertion is correct if it holds for all reachable states starting from the initial state. If incorrect, a Counterexample (CEX) exists.
+1.  **Correctness**: An assertion is correct if it holds for all states reachable from the initial state. A correct assertion is referred to as an **invariant**. If an assertion is incorrect, a **Counterexample (CEX)** exists.
 2.  **Inductiveness**: An assertion is inductive if, assuming it holds for state $S$, it implies it holds for state $S'$.
     * **K-Induction**: If it holds for steps $0$ to $K-1$, it implies it holds for step $K$.
-    * **CTI (Counterexample to Induction)**: A trace where the assertion holds for the first $K-1$ steps but fails at step $K$. Note that the starting state of a CTI might be unreachable from the initial state.
+    * **CTI (Counterexample to Induction)**: A trace segment where the assertion holds for the first $K$ steps (from $0$ to $K-1$) but fails at step $K$. If an invariant is not inductive, its CTIs must be unreachable from the initial state.
 
 ## Environment and File Structure
 * **Configuration**: `ric3.toml` contains DUT information.

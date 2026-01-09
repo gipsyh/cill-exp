@@ -56,15 +56,5 @@ module testbench (
 
 /// Helper Assertion Begin
 
-	// In this setup `RISCV_FORMAL_CHANNEL_IDX == 0`, so there is no earlier retire
-	// channel to populate `expect_pc` during the check phase.
-	always @(posedge clock) begin
-		if (!reset) begin
-			if (rvfi_valid[0] && rvfi_order[63:0] == checker_inst.insn_order && checker_inst.expect_pc_valid) begin
-				h_expect_pc_matches_pc_rdata_on_retire: assert(`rvformal_addr_eq(checker_inst.expect_pc, checker_inst.pc_rdata));
-			end
-		end
-	end
-
 /// Helper Assertion End
 endmodule

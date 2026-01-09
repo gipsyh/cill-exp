@@ -302,6 +302,16 @@ module serv_debug
 
    always @(posedge i_clk) begin
       /* End of instruction */
+   if (i_rst) begin
+      rvfi_valid <= 1'b0;
+      rvfi_order <= 64'd0;
+      rvfi_insn <= 32'd0;
+      rvfi_trap <= 1'b0;
+      rvfi_halt <= 1'b0;
+      rvfi_intr <= 1'b0;
+      rvfi_mode <= 2'b11;
+      rvfi_ixl <= 2'b01;
+   end else begin
       rvfi_valid <= i_cnt_done & i_ctrl_pc_en & !i_rst;
       rvfi_order <= rvfi_order + {63'd0,rvfi_valid};
 
@@ -345,6 +355,7 @@ module serv_debug
          rvfi_mem_rmask <= 4'b0000;
          rvfi_mem_wmask <= 4'b0000;
       end
+   end
    end
 
    assign rvfi_pc_wdata = i_ibus_adr;

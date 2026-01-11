@@ -1,0 +1,11 @@
+[ric3]
+version = "1.6.0"
+
+[dut]
+files = ["xxxx.v", "rvfi_insn_check.sv", "picorv32.sv", "wrapper.sv", "tb.sv"]
+include_files = ["defines.sv", "rvfi_macros.vh"]
+reset = "reset"
+top = "testbench"
+
+[modeling]
+parser = "yosys_slang"

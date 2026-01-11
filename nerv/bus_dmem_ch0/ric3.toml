@@ -1,0 +1,11 @@
+[ric3]
+version = "1.6.0"
+
+[dut]
+files = ["rvfi_bus_dmem_check.sv", "nerv.sv", "wrapper.sv", "tb.sv"]
+include_files = ["defines.sv", "rvfi_macros.vh"]
+top = "testbench"
+reset = "reset"
+
+[modeling]
+parser = "yosys_slang"

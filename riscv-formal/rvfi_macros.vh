@@ -3,7 +3,7 @@
 `ifdef YOSYS_SLANG
 `define rvformal_rand_reg reg
 // unsupported rand const now
-// `define rvformal_rand_const_reg rand const reg
+`define rvformal_rand_const_reg rand const reg
 `else
 `ifdef YOSYS
 `define rvformal_rand_reg rand reg

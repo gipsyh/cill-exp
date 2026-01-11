@@ -1,1 +1,0 @@
-../../riscv-formal/insn/insn_lb.v

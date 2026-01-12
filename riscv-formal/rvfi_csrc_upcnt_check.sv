@@ -50,12 +50,12 @@ module rvfi_csrc_upcnt_check (
 	reg csr_read_shadowed = 0;
 
 	always @(posedge clock) begin
-		insn_order <= insn_order;
 		if (reset) begin
 			rdata_shadow = 0;
 			csr_event_written = 0;
 			csr_read_shadowed = 0;
 		end else begin
+			insn_order <= insn_order;
 			// No writes of CSR under test allowed
 			assume (!(csr_write_valid && csr_insn_under_test));
 			if (check) begin

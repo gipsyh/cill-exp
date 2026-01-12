@@ -53,11 +53,11 @@ module rvfi_csrc_zero_check (
 	reg csr_written = 0;
 
 	always @(posedge clock) begin
-		insn_order <= insn_order;
 		if (reset) begin
 			wdata_shadow = 0;
 			csr_written = 0;
 		end else begin
+			insn_order <= insn_order;
 			if (check) begin
 				if (csr_written && csr_read_valid && csr_insn_under_test) begin
 					o_check: assert(csr_insn_rdata == 0);

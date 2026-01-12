@@ -51,13 +51,13 @@ module rvfi_csrc_inc_check (
 	reg csr_read_shadowed = 0;
 
 	always @(posedge clock) begin
-		insn_order <= insn_order;
 		if (reset) begin
 			wdata_shadow = 0;
 			rdata_shadow = 0;
 			csr_written = 0;
 			csr_read_shadowed = 0;
 		end else begin
+			insn_order <= insn_order;
 			// no writes without read that could decrease the value manually
 			if (csr_write_valid) assume(csr_read_valid);
 			if (check) begin

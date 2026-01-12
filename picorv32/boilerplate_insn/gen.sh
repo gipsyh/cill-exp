@@ -14,8 +14,6 @@ B=(
   "insn_auipc"
   "insn_div"
   "insn_divu"
-  "insn_jal"
-  "insn_jalr"
   "insn_lb"
   "insn_lbu"
   "insn_lh"
@@ -80,6 +78,8 @@ C=(
   "insn_bne"
   "insn_c_jal"
   "insn_c_jalr"
+  "insn_jal"
+  "insn_jalr"
 )
 
 for B in "${B[@]}"; do

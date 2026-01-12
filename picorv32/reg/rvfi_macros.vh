@@ -1,1 +1,0 @@
-../../riscv-formal/rvfi_macros.vh

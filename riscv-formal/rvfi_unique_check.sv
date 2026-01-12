@@ -15,46 +15,32 @@
 `default_nettype none
 `include "defines.sv"
 
-module testbench (
-	`ifdef RISCV_FORMAL_TRIG_CYCLE
-		input trig,
-	`endif
-	input check,
-	input clock, reset
+module rvfi_unique_check (
+	input clock, reset, trig, check,
+	`RVFI_INPUTS
 );
-	`RVFI_WIRES
-	`RVFI_BUS_WIRES
+	reg [63:0] insn_order;
+	reg found_other_insn = 0;
 
-	`RISCV_FORMAL_CHECKER checker_inst (
-		.clock  (clock),
-		.reset  (reset),
-	`ifdef RISCV_FORMAL_TRIG_CYCLE
-		.trig   (trig),
-	`endif
-		.check   (check),
-		`RVFI_CONN
-		`RVFI_BUS_CONN
-	);
-
-	// Ignore rvfi_order loopback, otherwise the check might be invalid.
-	reg rvfi_order_loopback;
-	always@(posedge clock) begin
+	integer channel_idx;
+	always @(posedge clock) begin
 		if (reset) begin
-			rvfi_order_loopback <= 0;
-		end else if (rvfi_valid && rvfi_order == {64{1'b1}}) begin
-			rvfi_order_loopback <= 1;
+			found_other_insn = 0;
+		end else begin
+			insn_order <= insn_order;
+			for (channel_idx = 0; channel_idx < `RISCV_FORMAL_NRET; channel_idx=channel_idx+1) begin
+				if (rvfi_valid[channel_idx] && rvfi_order[64*channel_idx +: 64] == insn_order &&
+						(!trig || channel_idx != `RISCV_FORMAL_CHANNEL_IDX)) begin
+					found_other_insn = 1;
+				end
+			end
+			if (trig) begin
+				assume(rvfi_valid[`RISCV_FORMAL_CHANNEL_IDX]);
+				assume(insn_order == rvfi_order[64*`RISCV_FORMAL_CHANNEL_IDX +: 64]);
+			end
+			if (check) begin
+				o_unique: assert(!found_other_insn);
+			end
 		end
 	end
-	always_comb assume (!(rvfi_order_loopback && check));
-
-	rvfi_wrapper wrapper (
-		.clock (clock),
-		.reset (reset),
-		`RVFI_CONN
-		`RVFI_BUS_CONN
-	);
-
-/// Helper Assertion Begin
-
-/// Helper Assertion End
 endmodule

@@ -1,11 +1,3 @@
 *ric3proj/
-hard_trans/
 */insn_*
 riscv-formal/insn
-
-nerv/*
-!nerv/boilerplate*
-!nerv/*.sv
-picorv32/*
-!picorv32/boilerplate*
-!picorv32/*.sv

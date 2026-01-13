@@ -35,10 +35,10 @@ module rvfi_ill_check (
 			if (!reset && check) begin
 				assume(valid);
 				assume(insn == 0);
-				assert(trap);
-				assert(rd_addr == 0);
-				assert(rd_wdata == 0);
-				assert(mem_wmask == 0);
+				o_trap: assert(trap);
+				o_rd_addr: assert(rd_addr == 0);
+				o_rd_wdata: assert(rd_wdata == 0);
+				o_mem_wmask: assert(mem_wmask == 0);
 			end
 		end
 `ifndef RISCV_FORMAL_CHANNEL_IDX

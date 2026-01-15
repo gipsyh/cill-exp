@@ -1,6 +1,7 @@
 `default_nettype none
 `include "defines.sv"
 
+// free input variables, can take any value each cycle as long as the assumptions are satisfied
 module testbench (
 	input check,
 	input clock, reset

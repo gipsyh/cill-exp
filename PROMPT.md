@@ -36,10 +36,9 @@ You can use it to check whether the assertions are inductive and generate CTI.
 - You can only use the three `ric3 cill` commands listed above; no other `ric3` commands are permitted.
 
 ## NOTE
-- `ric3` restricts the reset signal to be high only at cycle 0 (step 0 in CEX (NOT CTI)), with no resets afterward. During cycle 0, register values may be non-deterministic. Therefore, make sure invariants are checked post-reset: `if (!reset) h_*: assert`.
 - Variable assignments in each new CTI/CEX are independent of those in previous ones; signal values may be completely different from earlier cases and must be re-examined each time.
 - The generated VCD for CTI includes only the signals pertinent to the current non-induction failure. If a DUT signal is absent from the VCD, or if specific bits of a signal are marked as 'x'/'X', it indicates that these elements are irrelevant to the non-inductive transition. It is highly recommended to derive helper assertions based solely on the relevant (non-'x') signals.
-- `ric3` uses Yosys as the DUT parser and does not include a Verific frontend. Please avoid using SVA constructs (e.g., `|->`), but `$past` is supported. It is recommended to write assertions in the following format:
+- `ric3` uses Yosys-Slang as the DUT parser and does not include a Verific frontend. Please avoid using SVA constructs (e.g., `|->`), but `$past` is supported. It is recommended to write assertions in the following format:
     ```systemverilog
     always @(posedge clk) begin
         if (!reset) 
@@ -47,3 +46,4 @@ You can use it to check whether the assertions are inductive and generate CTI.
     end
     ```
 - Submodule signals can be accessed using '.' notation.
+- `ric3` restricts the reset signal to be high only at cycle 0 (step 0 in CEX (NOT CTI)), with no resets afterward (`fminit -seq reset 0,1`). During cycle 0, register values may be non-deterministic. Therefore, make sure invariants are checked post-reset: `if (!reset) h_*: assert`.

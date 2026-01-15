@@ -103,7 +103,7 @@ for B in "${C[@]}"; do
   ln -sf ../../riscv-formal/insn/$B.v picorv32/$B/$B.v
   ln -sf ../../riscv-formal/rvfi_insn_check.sv picorv32/$B/rvfi_insn_check.sv
   ln -sf ../../riscv-formal/rvfi_macros.vh picorv32/$B/rvfi_macros.vh
-  cp picorv32/boilerplate_insn/{ric3.toml} picorv32/$B
+  cp picorv32/boilerplate_insn/ric3.toml picorv32/$B
   cp riscv-formal/tb.sv picorv32/$B
   cp picorv32/boilerplate_insn/defines_jump.sv picorv32/$B/defines.sv
   sed --in-place "s/xxxx/$B/g" picorv32/$B/defines.sv

@@ -18,7 +18,7 @@ module testbench (
 
 	// Ignore rvfi_order loopback, otherwise the check might be invalid.
 	reg rvfi_order_loopback;
-	always@(posedge clock) begin
+	always @(posedge clock) begin
 		if (reset) begin
 			rvfi_order_loopback <= 0;
 		end else if (rvfi_valid && rvfi_order == {64{1'b1}}) begin

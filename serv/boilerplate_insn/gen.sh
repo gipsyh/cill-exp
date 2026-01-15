@@ -51,7 +51,8 @@ for B in "${B[@]}"; do
   ln -sf ../../riscv-formal/insn/$B.v serv/$B/$B.v
   ln -sf ../../riscv-formal/rvfi_insn_check.sv serv/$B/rvfi_insn_check.sv
   ln -sf ../../riscv-formal/rvfi_macros.vh serv/$B/rvfi_macros.vh
-  cp serv/boilerplate_insn/{ric3.toml,defines.sv,tb.sv} serv/$B
+  cp serv/boilerplate_insn/{ric3.toml,defines.sv} serv/$B
+  cp riscv-formal/tb.sv serv/$B
   sed --in-place "s/xxxx/$B/g" serv/$B/defines.sv
   sed --in-place "s/xxxx/$B/g" serv/$B/ric3.toml
 done

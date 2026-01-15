@@ -40,8 +40,8 @@ module testbench (
 		`RVFI_BUS_CONN
 	);
 
-	/// Helper Assertion Begin
+/// Helper Assertion Begin
 
-	/// Helper Assertion End
+/// Helper Assertion End
 
 endmodule

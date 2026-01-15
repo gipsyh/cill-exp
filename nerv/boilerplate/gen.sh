@@ -1,10 +1,6 @@
 #!/bin/bash
 set -e
 cd $(dirname $0)/../..
-if [ "$1" = rm ]; then
-  rm -r nerv/bus_* nerv/csr* nerv/pc_* nerv/{unique,causal,ill,reg}
-  exit 0
-fi
 
 # populate DIRNAME RVFI_CHECKNAME DEFINES_SV_DIFF
 populate() {

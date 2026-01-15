@@ -2,10 +2,6 @@
 set -e
 cd $(dirname $0)/../..
 
-if [ "$1" = 'rm' ]; then
-  exec rm -r picorv32/{causal,csr*,pc_bwd,pc_fwd,reg,unique}
-fi
-
 # populate DIRNAME RVFI_CHECKNAME DEFINES_SV_DIFF
 populate() {
   mkdir -p picorv32/$1

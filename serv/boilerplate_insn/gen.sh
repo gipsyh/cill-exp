@@ -1,9 +1,6 @@
 #!/bin/bash
 set -e
 cd $(dirname $0)/../..
-if [ $1 = 'rm' ]; then
-  exec rm -r riscv-formal/insn/ serv/insn_*
-fi
 
 mkdir -p riscv-formal/insn
 B=(

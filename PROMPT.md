@@ -14,7 +14,16 @@ You can use it to check whether the assertions are inductive and generate CTI.
 - `ric3 cill check`: Performs the following steps automatically:
   1. Bounded Model Checking: Checks the correctness of helper assertions. If a CEX is found, it is saved to `ric3proj/cill/cex.vcd`, and the violated assertion is reported. You should analyze the CEX and fix the incorrect assertion.
   2. CTI Validation: If a CTI was generated previously, this step checks whether the new helper assertions successfully block it. If the CTI is not blocked, the command returns immediately, indicating that the assertion may need further refinement.
-  3. Induction Check: Each assertion is assigned a temporary `<ID>`, and its inductiveness result is printed.
+  3. Induction Check: Each assertion is assigned a temporary `<ID>`, and its inductiveness result is printed. CIll first attempts to prove assertions using IC3; if IC3 times out, CIll falls back to 4-induction with *local proof*. Under local proof, when verifying a set of $n$ properties, we prove a target property $P_t$ while assuming the remaining properties hold as invariants, using them as additional constraints. Formally, the $k$-induction check is: for any path $s_0,\ldots,s_k$,
+  $$
+      \left(
+          \bigwedge_{i=0}^{k-1}\ \bigwedge_{j=0}^{n-1} P_j(s_i)
+          \ \land\
+          \bigwedge_{i=0}^{k-1} T(s_i, s_{i+1})
+      \right)
+      \Rightarrow
+      P_t(s_k).
+  $$
 
 - `ric3 cill select <ID>`: Selects a non-inductive assertion to generate CTI. It must be used immediately after `ric3 cill check` reports non-inductive assertions. After each `ric3 cill check`, the `select` command can be invoked only once; otherwise, you need to rerun `ric3 cill check`.
   * Output: Generates a CTI to `ric3proj/cill/cti.vcd`. The CTI contains only the signals relevant to the induction failure; irrelevant signals are either omitted or marked with `'x'`/`'X'`. The CTI trace consists of 5 steps: the first 4 steps satisfy all assertions, while the final step violates the selected assertion.

@@ -82,7 +82,8 @@ for B in "${B[@]}"; do
   ln -sf ../../riscv-formal/insn/$B.v nerv/$B/$B.v
   ln -sf ../../riscv-formal/rvfi_insn_check.sv nerv/$B/rvfi_insn_check.sv
   ln -sf ../../riscv-formal/rvfi_macros.vh nerv/$B/rvfi_macros.vh
-  cp nerv/boilerplate_insn/{ric3.toml,defines.sv,tb.sv} nerv/$B
+  cp nerv/boilerplate_insn/{ric3.toml,defines.sv} nerv/$B
+  cp riscv-formal/tb.sv nerv/$B
   sed --in-place "s/xxxx/$B/g" nerv/$B/defines.sv
   sed --in-place "s/xxxx/$B/g" nerv/$B/ric3.toml
 done

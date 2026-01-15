@@ -9,7 +9,8 @@ populate() {
   ln -sf ../nerv.sv nerv/$1/nerv.sv
   ln -sf ../../riscv-formal/rvfi_${2}_check.sv nerv/$1/rvfi_${2}_check.sv
   ln -sf ../../riscv-formal/rvfi_macros.vh nerv/$1/rvfi_macros.vh
-  cp nerv/boilerplate/{ric3.toml,defines.sv,tb.sv} nerv/$1/
+  cp nerv/boilerplate/{ric3.toml,defines.sv} nerv/$1/
+  cp riscv-formal/tb.sv nerv/$1/
   echo -e "$3" '\n`include "rvfi_macros.vh"\n`endif' >>nerv/$1/defines.sv
   sed --in-place "s/xxxx/$2/g" nerv/$1/defines.sv
   sed --in-place "s/xxxx/$2/g" nerv/$1/ric3.toml

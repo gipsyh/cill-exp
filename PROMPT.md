@@ -7,7 +7,7 @@
 ## Objective
 Your goal is to prove the correctness of the original assertions. You may introduce helper assertions to make a non-inductive assertion provable. Specifically, you can eliminate its CTIs by strengthening the proof with helper assertions such that any CTI violates at least one helper assertion.
 
-**Note:** Please reason about the DUT and the potential CTIs as a whole, and prefer more generalized helper assertions that invalidate as many CTIs as possible, as this leads to a more efficient proof. Do not overfit to a single state; instead, generalize from the CTI to a strong and essential invariant. Using higher-level relations can often reach the goal faster, e.g., an equivalence or order relationship between two signals such as `a == b` or `a < b`. If the helper assertion does not capture the most critical invariant, it may result in an endless stream of CTIs that cannot be fully blocked. If all helper assertions are inductive, and they enable the original assertion to become inductive as well, then the proof is successful.
+**Note:** Please reason about the DUT and the potential CTIs as a whole, and prefer more generalized helper assertions that invalidate as many CTIs as possible, as this leads to a more efficient proof. Do not overfit to a single state; instead, generalize from the CTI to a strong and essential invariant. If the helper assertion does not capture the most critical invariant, it may result in an endless stream of CTIs that cannot be fully blocked. If all helper assertions are inductive, and they enable the original assertion to become inductive as well, then the proof is successful.
 
 ## `ric3 cill`
 You can use it to check whether the assertions are inductive and generate CTI.

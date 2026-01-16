@@ -10,10 +10,10 @@ picorv32/insn_blt,Timeout,Timeout,Timeout
 picorv32/insn_bgeu,Timeout,Timeout,Timeout
 picorv32/insn_beq,Timeout,Timeout,Timeout
 picorv32/insn_auipc,Timeout,Timeout,Timeout
-nerv/reg,Timeout,Timeout,Timeout,2/10,3409
+nerv/reg,Timeout,Timeout,Timeout,1/3,3409
 nerv/csrc_upcnt_minstret,Timeout,Memout,Timeout,0/2
 nerv/csrc_upcnt_mcycle,Timeout,Memout,Timeout,0/2
-nerv/causal,Timeout,Memout,Timeout,7/10,325
+nerv/causal,Timeout,Memout,Timeout,2/2,325
 nerv/pc_bwd,Timeout,Memout,Memout,0/3
 serv/reg,Timeout,Timeout,NotRun
 serv/pc_bwd,Timeout,Timeout,NotRun

@@ -53,6 +53,7 @@ for B in "${B[@]}"; do
   ln -sf ../../riscv-formal/rvfi_macros.vh serv/$B/rvfi_macros.vh
   cp serv/boilerplate_insn/{ric3.toml,defines.sv} serv/$B
   cp riscv-formal/tb.sv serv/$B
+  echo 'ric3proj/' > serv/$B/.gitignore
   sed --in-place "s/xxxx/$B/g" serv/$B/defines.sv
   sed --in-place "s/xxxx/$B/g" serv/$B/ric3.toml
 done

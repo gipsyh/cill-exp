@@ -11,6 +11,7 @@ populate() {
   ln -sf ../../riscv-formal/rvfi_macros.vh nerv/$1/rvfi_macros.vh
   cp nerv/boilerplate/{ric3.toml,defines.sv} nerv/$1/
   cp riscv-formal/tb.sv nerv/$1/
+  echo 'ric3proj/' > nerv/$1/.gitignore
   echo -e "$3" '\n`include "rvfi_macros.vh"\n`endif' >>nerv/$1/defines.sv
   sed --in-place "s/xxxx/$2/g" nerv/$1/defines.sv
   sed --in-place "s/xxxx/$2/g" nerv/$1/ric3.toml

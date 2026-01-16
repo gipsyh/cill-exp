@@ -84,6 +84,7 @@ for B in "${B[@]}"; do
   ln -sf ../../riscv-formal/rvfi_macros.vh nerv/$B/rvfi_macros.vh
   cp nerv/boilerplate_insn/{ric3.toml,defines.sv} nerv/$B
   cp riscv-formal/tb.sv nerv/$B
+  echo 'ric3proj/' > nerv/$B/.gitignore
   sed --in-place "s/xxxx/$B/g" nerv/$B/defines.sv
   sed --in-place "s/xxxx/$B/g" nerv/$B/ric3.toml
 done

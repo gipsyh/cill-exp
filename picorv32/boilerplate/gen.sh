@@ -11,6 +11,7 @@ populate() {
   ln -sf ../../riscv-formal/rvfi_macros.vh picorv32/$1/rvfi_macros.vh
   cp picorv32/boilerplate/{ric3.toml,defines.sv} picorv32/$1/
   cp riscv-formal/tb.sv picorv32/$1/
+  echo 'ric3proj/' > picorv32/$1/.gitignore
   echo -e "$3" '\n`include "rvfi_macros.vh"' >>picorv32/$1/defines.sv
   sed --in-place "s/XXXX/$2/g" picorv32/$1/defines.sv
   sed --in-place "s/XXXX/$2/g" picorv32/$1/ric3.toml

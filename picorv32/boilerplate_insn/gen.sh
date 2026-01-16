@@ -90,6 +90,7 @@ for B in "${B[@]}"; do
   ln -sf ../../riscv-formal/rvfi_macros.vh picorv32/$B/rvfi_macros.vh
   cp picorv32/boilerplate_insn/{ric3.toml,defines.sv} picorv32/$B
   cp riscv-formal/tb.sv picorv32/$B
+  echo 'ric3proj/' > picorv32/$B/.gitignore
   sed --in-place "s/xxxx/$B/g" picorv32/$B/defines.sv
   sed --in-place "s/xxxx/$B/g" picorv32/$B/ric3.toml
 done
@@ -105,6 +106,7 @@ for B in "${C[@]}"; do
   ln -sf ../../riscv-formal/rvfi_macros.vh picorv32/$B/rvfi_macros.vh
   cp picorv32/boilerplate_insn/ric3.toml picorv32/$B
   cp riscv-formal/tb.sv picorv32/$B
+  echo 'ric3proj/' > picorv32/$B/.gitignore
   cp picorv32/boilerplate_insn/defines_jump.sv picorv32/$B/defines.sv
   sed --in-place "s/xxxx/$B/g" picorv32/$B/defines.sv
   sed --in-place "s/xxxx/$B/g" picorv32/$B/ric3.toml

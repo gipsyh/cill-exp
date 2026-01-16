@@ -2,7 +2,7 @@ cases,rIC3-CIll,rIC3-CIll-SR,rIC3-portfolio,ABC-superprove,AVR-portfolio
 nerv/bus_dmem,,,Timeout,,
 nerv/bus_dmem_fault,,,Timeout,,
 nerv/bus_imem,,,Timeout,,
-nerv/causal,325,1/1,Timeout,,
+nerv/causal,325,2/2,Timeout,,
 nerv/csrc_upcnt_mcycle,,,Timeout,,
 nerv/csrc_upcnt_minstret,,,Timeout,,
 nerv/reg,3409,1/3,Timeout,,

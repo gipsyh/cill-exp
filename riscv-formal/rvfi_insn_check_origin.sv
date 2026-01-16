@@ -53,6 +53,11 @@ module rvfi_insn_check (
 		.spec_mem_wdata      (spec_mem_wdata     )
 	);
 
+	wire [1:0] mem_log2len =
+		((spec_mem_rmask | spec_mem_wmask) & 8'b 1111_0000) ? 3 :
+		((spec_mem_rmask | spec_mem_wmask) & 8'b 0000_1100) ? 2 :
+		((spec_mem_rmask | spec_mem_wmask) & 8'b 0000_0010) ? 1 : 0;
+
 `ifdef RISCV_FORMAL_MEM_FAULT
 	wire mem_access_fault = mem_fault ||
 `else
@@ -60,13 +65,64 @@ module rvfi_insn_check (
 `endif
 			((spec_mem_rmask || spec_mem_wmask) && !`rvformal_addr_valid(spec_mem_addr));
 
-	always @(posedge clock) begin
-		if (!reset && check && spec_valid) begin
-			if (`rvformal_addr_valid(rvfi_pc_rdata) && !mem_access_fault) begin
+	reg [1:0] i;
+	always@(posedge clock) begin
+		i <= i;
+	end
+
+	always @* begin
+		if (!reset && check) begin
+			assume(spec_valid);
+
+			if (!`rvformal_addr_valid(rvfi_pc_rdata) || mem_access_fault) begin
+				o_pc_rdata: assert(rvfi_trap && rvfi_rd_addr == 0 && rvfi_rd_wdata == 0 && rvfi_mem_wmask == 0);
+`ifdef RISCV_FORMAL_MEM_FAULT
+				if (mem_fault) begin
+					o_mem_fault0: assert(rvfi_mem_rmask == 0 && (spec_mem_wmask || spec_mem_rmask));
+					o_mem_fault1: assert(`rvformal_addr_eq(spec_mem_addr, rvfi_mem_addr));
+					o_mem_fault2: assert(rvfi_mem_fault_wmask == spec_mem_wmask);
+					o_mem_fault3: assert((rvfi_mem_fault_rmask & spec_mem_rmask) == spec_mem_rmask);
+				end
+`endif
+			end else begin
+`ifdef RISCV_FORMAL_CSR_MISA
+				o_scr_misa: assert((spec_csr_misa_rmask & rvfi_csr_misa_rmask) == spec_csr_misa_rmask);
+`endif
+
+				if (rvfi_rs1_addr == 0)
+					o_rs1_rdata_zero: assert(rvfi_rs1_rdata == 0);
+
+				if (rvfi_rs2_addr == 0)
+					o_rs2_rdata_zero: assert(rvfi_rs2_rdata == 0);
+
 				if (!spec_trap) begin
+					if (spec_rs1_addr != 0)
+						o_rs1_addr_match: assert(spec_rs1_addr == rvfi_rs1_addr);
+
+					if (spec_rs2_addr != 0)
+						o_rs2_addr_match: assert(spec_rs2_addr == rvfi_rs2_addr);
+
+					o_rd_addr_match: assert(spec_rd_addr == rvfi_rd_addr);
 					o_rd_wdata_match: assert(spec_rd_wdata == rvfi_rd_wdata);
 					o_pc_wdata_match: assert(`rvformal_addr_eq(spec_pc_wdata, rvfi_pc_wdata));
+
+					if (spec_mem_wmask || spec_mem_rmask) begin
+						o_mem_addr_match: assert(`rvformal_addr_eq(spec_mem_addr, rvfi_mem_addr));
+					end
+
+					if (spec_mem_wmask[i]) begin
+						o_mem_wmask_set_i: assert(rvfi_mem_wmask[i]);
+						o_mem_wdata_match_i: assert(spec_mem_wdata[i*8 +: 8] == rvfi_mem_wdata[i*8 +: 8]);
+					end else if (rvfi_mem_wmask[i]) begin
+						o_mem_wmask_implies_rmask_i: assert(rvfi_mem_rmask[i]);
+						o_mem_rdata_eq_wdata_i: assert(rvfi_mem_rdata[i*8 +: 8] == rvfi_mem_wdata[i*8 +: 8]);
+					end
+					if (spec_mem_rmask[i]) begin
+						o_mem_rmask_set_i: assert(rvfi_mem_rmask[i]);
+					end
 				end
+
+				o_trap_match: assert(spec_trap == rvfi_trap);
 			end
 		end
 	end

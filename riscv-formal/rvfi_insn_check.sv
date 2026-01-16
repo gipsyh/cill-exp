@@ -7,33 +7,8 @@ module rvfi_insn_check (
 );
 	localparam integer channel_idx = `RISCV_FORMAL_CHANNEL_IDX;
 	(* keep *) wire valid = !reset && rvfi_valid[channel_idx];
-	(* keep *) wire [`RISCV_FORMAL_ILEN   - 1 : 0] insn      = rvfi_insn     [channel_idx*`RISCV_FORMAL_ILEN   +: `RISCV_FORMAL_ILEN];
-	(* keep *) wire                                trap      = rvfi_trap     [channel_idx];
-	(* keep *) wire                                halt      = rvfi_halt     [channel_idx];
-	(* keep *) wire                                intr      = rvfi_intr     [channel_idx];
-	(* keep *) wire [                       4 : 0] rs1_addr  = rvfi_rs1_addr [channel_idx*5  +:  5];
-	(* keep *) wire [                       4 : 0] rs2_addr  = rvfi_rs2_addr [channel_idx*5  +:  5];
-	(* keep *) wire [`RISCV_FORMAL_XLEN   - 1 : 0] rs1_rdata = rvfi_rs1_rdata[channel_idx*`RISCV_FORMAL_XLEN   +: `RISCV_FORMAL_XLEN];
-	(* keep *) wire [`RISCV_FORMAL_XLEN   - 1 : 0] rs2_rdata = rvfi_rs2_rdata[channel_idx*`RISCV_FORMAL_XLEN   +: `RISCV_FORMAL_XLEN];
-	(* keep *) wire [                       4 : 0] rd_addr   = rvfi_rd_addr  [channel_idx*5  +:  5];
-	(* keep *) wire [`RISCV_FORMAL_XLEN   - 1 : 0] rd_wdata  = rvfi_rd_wdata [channel_idx*`RISCV_FORMAL_XLEN   +: `RISCV_FORMAL_XLEN];
-	(* keep *) wire [`RISCV_FORMAL_XLEN   - 1 : 0] pc_rdata  = rvfi_pc_rdata [channel_idx*`RISCV_FORMAL_XLEN   +: `RISCV_FORMAL_XLEN];
-	(* keep *) wire [`RISCV_FORMAL_XLEN   - 1 : 0] pc_wdata  = rvfi_pc_wdata [channel_idx*`RISCV_FORMAL_XLEN   +: `RISCV_FORMAL_XLEN];
-
-	(* keep *) wire [`RISCV_FORMAL_XLEN   - 1 : 0] mem_addr  = rvfi_mem_addr [channel_idx*`RISCV_FORMAL_XLEN   +: `RISCV_FORMAL_XLEN];
-	(* keep *) wire [`RISCV_FORMAL_XLEN/8 - 1 : 0] mem_rmask = rvfi_mem_rmask[channel_idx*`RISCV_FORMAL_XLEN/8 +: `RISCV_FORMAL_XLEN/8];
-	(* keep *) wire [`RISCV_FORMAL_XLEN/8 - 1 : 0] mem_wmask = rvfi_mem_wmask[channel_idx*`RISCV_FORMAL_XLEN/8 +: `RISCV_FORMAL_XLEN/8];
-	(* keep *) wire [`RISCV_FORMAL_XLEN   - 1 : 0] mem_rdata = rvfi_mem_rdata[channel_idx*`RISCV_FORMAL_XLEN   +: `RISCV_FORMAL_XLEN];
-	(* keep *) wire [`RISCV_FORMAL_XLEN   - 1 : 0] mem_wdata = rvfi_mem_wdata[channel_idx*`RISCV_FORMAL_XLEN   +: `RISCV_FORMAL_XLEN];
-`ifdef RISCV_FORMAL_MEM_FAULT
-	(* keep *) wire                                mem_fault = rvfi_mem_fault[channel_idx];
-	(* keep *) wire [`RISCV_FORMAL_XLEN/8 - 1 : 0] mem_fault_rmask = rvfi_mem_fault_rmask[channel_idx*`RISCV_FORMAL_XLEN/8 +: `RISCV_FORMAL_XLEN/8];
-	(* keep *) wire [`RISCV_FORMAL_XLEN/8 - 1 : 0] mem_fault_wmask = rvfi_mem_fault_wmask[channel_idx*`RISCV_FORMAL_XLEN/8 +: `RISCV_FORMAL_XLEN/8];
-`endif
 
 `ifdef RISCV_FORMAL_CSR_MISA
-	(* keep *) wire [`RISCV_FORMAL_XLEN   - 1 : 0] csr_misa_rdata = rvfi_csr_misa_rdata[channel_idx*`RISCV_FORMAL_XLEN   +: `RISCV_FORMAL_XLEN];
-	(* keep *) wire [`RISCV_FORMAL_XLEN   - 1 : 0] csr_misa_rmask = rvfi_csr_misa_rmask[channel_idx*`RISCV_FORMAL_XLEN   +: `RISCV_FORMAL_XLEN];
 	(* keep *) wire [`RISCV_FORMAL_XLEN   - 1 : 0] spec_csr_misa_rmask;
 `endif
 
@@ -49,16 +24,16 @@ module rvfi_insn_check (
 	(* keep *) wire [`RISCV_FORMAL_XLEN/8 - 1 : 0] spec_mem_wmask;
 	(* keep *) wire [`RISCV_FORMAL_XLEN   - 1 : 0] spec_mem_wdata;
 
-	(* keep *) wire [`RISCV_FORMAL_XLEN   - 1 : 0] rs1_rdata_or_zero = spec_rs1_addr != 0 ? rs1_rdata : 0;
-	(* keep *) wire [`RISCV_FORMAL_XLEN   - 1 : 0] rs2_rdata_or_zero = spec_rs2_addr != 0 ? rs2_rdata : 0;
+	(* keep *) wire [`RISCV_FORMAL_XLEN   - 1 : 0] rs1_rdata_or_zero = spec_rs1_addr != 0 ? rvfi_rs1_rdata : 0;
+	(* keep *) wire [`RISCV_FORMAL_XLEN   - 1 : 0] rs2_rdata_or_zero = spec_rs2_addr != 0 ? rvfi_rs2_rdata : 0;
 
 	`RISCV_FORMAL_INSN_MODEL insn_spec (
 		.rvfi_valid          (valid              ),
-		.rvfi_insn           (insn               ),
-		.rvfi_pc_rdata       (pc_rdata           ),
+		.rvfi_insn           (rvfi_insn          ),
+		.rvfi_pc_rdata       (rvfi_pc_rdata      ),
 		.rvfi_rs1_rdata      (rs1_rdata_or_zero  ),
 		.rvfi_rs2_rdata      (rs2_rdata_or_zero  ),
-		.rvfi_mem_rdata      (mem_rdata          ),
+		.rvfi_mem_rdata      (rvfi_mem_rdata     ),
 
 `ifdef RISCV_FORMAL_CSR_MISA
 		.rvfi_csr_misa_rdata (csr_misa_rdata     ),
@@ -99,8 +74,8 @@ module rvfi_insn_check (
 		if (!reset && check) begin
 			assume(spec_valid);
 
-			if (!`rvformal_addr_valid(pc_rdata) || mem_access_fault) begin
-				o_pc_rdata: assert(trap && rd_addr == 0 && rd_wdata == 0 && mem_wmask == 0);
+			if (!`rvformal_addr_valid(rvfi_pc_rdata) || mem_access_fault) begin
+				o_pc_rdata: assert(rvfi_trap && rvfi_rd_addr == 0 && rvfi_rd_wdata == 0 && rvfi_mem_wmask == 0);
 `ifdef RISCV_FORMAL_MEM_FAULT
 				if (mem_fault) begin
 					o_mem_fault0: assert(mem_rmask == 0 && (spec_mem_wmask || spec_mem_rmask));
@@ -114,40 +89,40 @@ module rvfi_insn_check (
 				o_scr_misa: assert((spec_csr_misa_rmask & csr_misa_rmask) == spec_csr_misa_rmask);
 `endif
 
-				if (rs1_addr == 0)
-					o_rs1_rdata_zero: assert(rs1_rdata == 0);
+				if (rvfi_rs1_addr == 0)
+					o_rs1_rdata_zero: assert(rvfi_rs1_rdata == 0);
 
-				if (rs2_addr == 0)
-					o_rs2_rdata_zero: assert(rs2_rdata == 0);
+				if (rvfi_rs2_addr == 0)
+					o_rs2_rdata_zero: assert(rvfi_rs2_rdata == 0);
 
 				if (!spec_trap) begin
 					if (spec_rs1_addr != 0)
-						o_rs1_addr_match: assert(spec_rs1_addr == rs1_addr);
+						o_rs1_addr_match: assert(spec_rs1_addr == rvfi_rs1_addr);
 
 					if (spec_rs2_addr != 0)
-						o_rs2_addr_match: assert(spec_rs2_addr == rs2_addr);
+						o_rs2_addr_match: assert(spec_rs2_addr == rvfi_rs2_addr);
 
-					o_rd_addr_match: assert(spec_rd_addr == rd_addr);
-					o_rd_wdata_match: assert(spec_rd_wdata == rd_wdata);
-					o_pc_wdata_match: assert(`rvformal_addr_eq(spec_pc_wdata, pc_wdata));
+					o_rd_addr_match: assert(spec_rd_addr == rvfi_rd_addr);
+					o_rd_wdata_match: assert(spec_rd_wdata == rvfi_rd_wdata);
+					o_pc_wdata_match: assert(`rvformal_addr_eq(spec_pc_wdata, rvfi_pc_wdata));
 
 					if (spec_mem_wmask || spec_mem_rmask) begin
-						o_mem_addr_match: assert(`rvformal_addr_eq(spec_mem_addr, mem_addr));
+						o_mem_addr_match: assert(`rvformal_addr_eq(spec_mem_addr, rvfi_mem_addr));
 					end
 
 					if (spec_mem_wmask[i]) begin
-						o_mem_wmask_set_i: assert(mem_wmask[i]);
-						o_mem_wdata_match_i: assert(spec_mem_wdata[i*8 +: 8] == mem_wdata[i*8 +: 8]);
-					end else if (mem_wmask[i]) begin
-						o_mem_wmask_implies_rmask_i: assert(mem_rmask[i]);
-						o_mem_rdata_eq_wdata_i: assert(mem_rdata[i*8 +: 8] == mem_wdata[i*8 +: 8]);
+						o_mem_wmask_set_i: assert(rvfi_mem_wmask[i]);
+						o_mem_wdata_match_i: assert(spec_mem_wdata[i*8 +: 8] == rvfi_mem_wdata[i*8 +: 8]);
+					end else if (rvfi_mem_wmask[i]) begin
+						o_mem_wmask_implies_rmask_i: assert(rvfi_mem_rmask[i]);
+						o_mem_rdata_eq_wdata_i: assert(rvfi_mem_rdata[i*8 +: 8] == rvfi_mem_wdata[i*8 +: 8]);
 					end
 					if (spec_mem_rmask[i]) begin
-						o_mem_rmask_set_i: assert(mem_rmask[i]);
+						o_mem_rmask_set_i: assert(rvfi_mem_rmask[i]);
 					end
 				end
 
-				o_trap_match: assert(spec_trap == trap);
+				o_trap_match: assert(spec_trap == rvfi_trap);
 			end
 		end
 	end

@@ -18,7 +18,6 @@ You can use it to check whether the assertions are inductive and generate CTI.
 
 - `ric3 cill select <ID>`: Selects a non-inductive assertion to generate CTI. It must be used immediately after `ric3 cill check` reports non-inductive assertions. After each `ric3 cill check`, the `select` command can be invoked only once; otherwise, you need to rerun `ric3 cill check`.
   * Output: Generates a CTI to `ric3proj/cill/cti.vcd`. The CTI contains only the signals relevant to the induction failure; irrelevant signals are either omitted or marked with `'x'`/`'X'`. The CTI trace consists of 4 steps: the first 3 steps satisfy all assertions, while the final step violates the selected assertion.
-  * It is recommended to prioritize selecting CTIs for the original assertions.
 
 - `ric3 cill abort`: Discards the current CTI context. Use this if the tool crashes, if you delete the assertion that generated the CTI, or if you decide not to block the current CTI.
 
@@ -40,7 +39,7 @@ You can use it to check whether the assertions are inductive and generate CTI.
 - Because we rely on IC3 and local proof, the inductiveness results can be **unstable** (i.e., may fluctuate across iterations). However, by iteratively generating helper assertions that invalidate the CTIs, we increase the overall likelihood of eventually establishing inductiveness.
 - Variable assignments in each new CTI/CEX are independent of those in previous ones; signal values may be completely different from earlier cases and must be re-examined each time.
 - The generated VCD for CTI includes only the signals pertinent to the current non-induction failure. If a DUT signal is absent from the VCD, or if specific bits of a signal are marked as 'x'/'X', it indicates that these elements are irrelevant to the non-inductive transition. It is highly recommended to derive helper assertions based solely on the relevant (non-'x') signals.
-- `ric3` uses Yosys-Slang as the DUT parser and does not include a Verific frontend. Please avoid using SVA constructs (e.g., `|->`), but `$past` is supported. It is recommended to write assertions in the following format:
+- `ric3` uses Yosys-Slang as the DUT parser and does not include a Verific frontend. Please avoid using SVA constructs (e.g., `|->`), but `$past(signal, cycle)` is supported. It is recommended to write assertions in the following format:
     ```systemverilog
     always @(posedge clk) begin
         if (!reset) 

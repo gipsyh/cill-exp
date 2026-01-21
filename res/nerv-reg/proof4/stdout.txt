@@ -1,0 +1,275 @@
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[13:23:26 INFO] Yosys: parsing the DUT and generating BTOR.
+[13:23:29 INFO] BMC: Checking correctness of all properties.
+[13:23:42 INFO] BMC found no CEX in limited steps.
+[13:23:42 INFO] Checking inductiveness of all properties.
+ ID  Property       Result        
+ 0   o_shadow_rs1r  Not Inductive 
+ 1   o_shadow_rs2r  Not Inductive 
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:reg git:(master) ✗  ric3 cill select 0
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[13:28:10 INFO] Yosys: parsing the DUT and generating BTOR.
+[13:28:13 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_shadow_matches_regfile was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[13:30:12 INFO] Yosys: parsing the DUT and generating BTOR.
+[13:30:16 INFO] BMC: Checking correctness of all properties.
+[13:30:28 INFO] BMC found no CEX in limited steps.
+[13:30:28 INFO] Checking inductiveness of all properties.
+[13:31:00 INFO] IC3 proved [0, 1] prop.
+ ID  Property                      Result        
+ 0   h_checker_shadow_consistent   Inductive     
+ 1   h_checker_written_consistent  Inductive     
+ 2   o_shadow_rs1r                 Not Inductive 
+ 3   o_shadow_rs2r                 Not Inductive 
+The CTI of o_shadow_rs1r has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[13:33:51 INFO] Yosys: parsing the DUT and generating BTOR.
+[13:33:54 INFO] BMC: Checking correctness of all properties.
+[13:34:07 INFO] BMC found no CEX in limited steps.
+[13:34:07 INFO] Checking inductiveness of all properties.
+[13:34:39 INFO] IC3 proved [0, 1] prop.
+ ID  Property                     Result        
+ 0   h_checker_shadow_consistent  Inductive     
+ 1   h_checker_written_equiv      Inductive     
+ 2   o_shadow_rs1r                Not Inductive 
+ 3   o_shadow_rs2r                Not Inductive 
+The CTI has been successfully blocked.
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:reg git:(master) ✗  ric3 cill select 2
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[13:35:39 INFO] Yosys: parsing the DUT and generating BTOR.
+[13:35:43 INFO] BMC: Checking correctness of all properties.
+[13:35:56 INFO] BMC found no CEX in limited steps.
+[13:35:56 INFO] Checking inductiveness of all properties.
+[13:36:28 INFO] IC3 proved [0, 1] prop.
+ ID  Property                     Result        
+ 0   h_checker_shadow_consistent  Inductive     
+ 1   h_checker_written_equiv      Inductive     
+ 2   h_rs1_rdata_matches_shadow   Not Inductive 
+ 3   h_rs2_rdata_matches_shadow   Not Inductive 
+ 4   o_shadow_rs1r                Not Inductive 
+ 5   o_shadow_rs2r                Not Inductive 
+The CTI of o_shadow_rs1r has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[13:40:02 INFO] Yosys: parsing the DUT and generating BTOR.
+[13:40:05 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_regfile_matches_shadow was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[13:43:21 INFO] Yosys: parsing the DUT and generating BTOR.
+[13:43:22 INFO] 
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.60+70 (git sha1 8101c87fa, clang++ 18.1.3 -fPIC -O3)
+
+-- Running command `read_slang -Wnone -D FORMAL -D YOSYS_SLANG rvfi_reg_check.sv nerv.sv wrapper.sv tb.sv ; prep -flatten -top testbench ; hierarchy -smtcheck -nokeep_prints ; scc -select; simplemap; select -clear ; memory_nordff ; fminit -seq reset 1,0 ; chformal -cover -remove ; chformal -early ; async2sync ; formalff -clk2ff -ff2anyinit -hierarchy -assume ; memory_map -formal ; dffunmap ; setundef -undriven -anyseq ; opt -fast ; opt_clean ; delete -output ; rename -witness ; check ; write_rtlil ../dut.il ; write_btor -ywmap ../dut.ywb -i ../dut.info ../dut.btor' --
+
+1. Executing SLANG frontend.
+Top level design units:
+    testbench
+
+
+Build failed: 20 errors, 0 warnings
+
+[13:43:22 INFO] tb.sv:45:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 1)  ? $past(wrapper.uut.regfile[1])  :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:46:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 2)  ? $past(wrapper.uut.regfile[2])  :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:47:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 3)  ? $past(wrapper.uut.regfile[3])  :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:48:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 4)  ? $past(wrapper.uut.regfile[4])  :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:49:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 5)  ? $past(wrapper.uut.regfile[5])  :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:50:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 6)  ? $past(wrapper.uut.regfile[6])  :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:51:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 7)  ? $past(wrapper.uut.regfile[7])  :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:52:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 8)  ? $past(wrapper.uut.regfile[8])  :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:53:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 9)  ? $past(wrapper.uut.regfile[9])  :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:54:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 10) ? $past(wrapper.uut.regfile[10]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:55:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 11) ? $past(wrapper.uut.regfile[11]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:56:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 12) ? $past(wrapper.uut.regfile[12]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:57:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 13) ? $past(wrapper.uut.regfile[13]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:58:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 14) ? $past(wrapper.uut.regfile[14]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:59:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 15) ? $past(wrapper.uut.regfile[15]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:60:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 16) ? $past(wrapper.uut.regfile[16]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:61:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 17) ? $past(wrapper.uut.regfile[17]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:62:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 18) ? $past(wrapper.uut.regfile[18]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:63:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 19) ? $past(wrapper.uut.regfile[19]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:64:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 20) ? $past(wrapper.uut.regfile[20]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+fatal error: too many errors emitted, stopping now [--error-limit=]
+ERROR: Compilation failed
+
+Error: Yosys execution failed.
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.60+70 (git sha1 8101c87fa, clang++ 18.1.3 -fPIC -O3)
+
+-- Running command `read_slang -Wnone -D FORMAL -D YOSYS_SLANG rvfi_reg_check.sv nerv.sv wrapper.sv tb.sv ; prep -flatten -top testbench ; hierarchy -smtcheck -nokeep_prints ; scc -select; simplemap; select -clear ; memory_nordff ; fminit -seq reset 1,0 ; chformal -cover -remove ; chformal -early ; async2sync ; formalff -clk2ff -ff2anyinit -hierarchy -assume ; memory_map -formal ; dffunmap ; setundef -undriven -anyseq ; opt -fast ; opt_clean ; delete -output ; rename -witness ; check ; write_rtlil ../dut.il ; write_btor -ywmap ../dut.ywb -i ../dut.info ../dut.btor' --
+
+1. Executing SLANG frontend.
+Top level design units:
+    testbench
+
+
+Build failed: 20 errors, 0 warnings
+
+tb.sv:45:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 1)  ? $past(wrapper.uut.regfile[1])  :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:46:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 2)  ? $past(wrapper.uut.regfile[2])  :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:47:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 3)  ? $past(wrapper.uut.regfile[3])  :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:48:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 4)  ? $past(wrapper.uut.regfile[4])  :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:49:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 5)  ? $past(wrapper.uut.regfile[5])  :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:50:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 6)  ? $past(wrapper.uut.regfile[6])  :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:51:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 7)  ? $past(wrapper.uut.regfile[7])  :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:52:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 8)  ? $past(wrapper.uut.regfile[8])  :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:53:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 9)  ? $past(wrapper.uut.regfile[9])  :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:54:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 10) ? $past(wrapper.uut.regfile[10]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:55:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 11) ? $past(wrapper.uut.regfile[11]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:56:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 12) ? $past(wrapper.uut.regfile[12]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:57:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 13) ? $past(wrapper.uut.regfile[13]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:58:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 14) ? $past(wrapper.uut.regfile[14]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:59:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 15) ? $past(wrapper.uut.regfile[15]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:60:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 16) ? $past(wrapper.uut.regfile[16]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:61:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 17) ? $past(wrapper.uut.regfile[17]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:62:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 18) ? $past(wrapper.uut.regfile[18]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:63:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 19) ? $past(wrapper.uut.regfile[19]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:64:75: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                (rvfi_rs1_addr[`RISCV_FORMAL_CHANNEL_IDX*5 +: 5] == 20) ? $past(wrapper.uut.regfile[20]) :
+                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+fatal error: too many errors emitted, stopping now [--error-limit=]
+ERROR: Compilation failed
+
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[13:44:17 INFO] Yosys: parsing the DUT and generating BTOR.
+[13:44:21 INFO] BMC: Checking correctness of all properties.
+[13:44:33 INFO] BMC found no CEX in limited steps.
+[13:44:33 INFO] Checking inductiveness of all properties.
+[13:45:06 INFO] IC3 proved [0, 1, 2, 3] prop.
+ ID  Property                         Result        
+ 0   h_checker_shadow_consistent      Inductive     
+ 1   h_checker_written_equiv          Inductive     
+ 2   h_rvfi_rs1_matches_regfile_past  Inductive     
+ 3   h_rvfi_rs2_matches_regfile_past  Inductive     
+ 4   o_shadow_rs1r                    Not Inductive 
+ 5   o_shadow_rs2r                    Not Inductive 
+The CTI of o_shadow_rs1r has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:reg git:(master) ✗  ric3 cill select 4
+A CTI for o_shadow_rs1r already exists. It has been cleared.
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[13:48:10 INFO] Yosys: parsing the DUT and generating BTOR.
+[13:48:14 INFO] BMC: Checking correctness of all properties.
+[13:48:27 INFO] BMC found no CEX in limited steps.
+[13:48:27 INFO] Checking inductiveness of all properties.
+[13:49:00 INFO] IC3 proved [0, 1, 2, 3, 4, 5] prop.
+ ID  Property                         Result        
+ 0   h_checker_shadow_consistent      Inductive     
+ 1   h_checker_written_equiv          Inductive     
+ 2   h_rvfi_rs1_matches_regfile_past  Inductive     
+ 3   h_rvfi_rs2_matches_regfile_past  Inductive     
+ 4   h_trap_no_rd_wdata               Inductive     
+ 5   h_trap_no_rd_write               Inductive     
+ 6   o_shadow_rs1r                    Not Inductive 
+ 7   o_shadow_rs2r                    Not Inductive 
+The CTI of o_shadow_rs1r has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:reg git:(master) ✗  ric3 cill select 6
+A CTI for o_shadow_rs1r already exists. It has been cleared.
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[13:53:30 INFO] Yosys: parsing the DUT and generating BTOR.
+[13:53:34 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_no_retire_on_stall was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[13:57:27 INFO] Yosys: parsing the DUT and generating BTOR.
+[13:57:31 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_rs2_value_matches_shadow was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[14:00:03 INFO] Yosys: parsing the DUT and generating BTOR.
+[14:00:07 INFO] BMC: Checking correctness of all properties.
+[14:00:20 INFO] BMC found no CEX in limited steps.
+[14:00:20 INFO] Checking inductiveness of all properties.
+[14:00:53 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6] prop.
+CIll Statistic: Total time: 2255s, Correctness check: 113s, Inductiveness check: 318s
+All properties are inductive. Proof succeeded.

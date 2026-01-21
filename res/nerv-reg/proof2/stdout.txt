@@ -1,0 +1,400 @@
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[10:22:17 INFO] Yosys: parsing the DUT and generating BTOR.
+[10:22:20 INFO] BMC: Checking correctness of all properties.
+[10:22:33 INFO] BMC found no CEX in limited steps.
+[10:22:33 INFO] Checking inductiveness of all properties.
+ ID  Property       Result        
+ 0   o_shadow_rs1r  Not Inductive 
+ 1   o_shadow_rs2r  Not Inductive 
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:reg git:(master) ✗  ric3 cill select 0
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[10:25:20 INFO] Yosys: parsing the DUT and generating BTOR.
+[10:25:24 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_x0_is_zero was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[10:26:53 INFO] Yosys: parsing the DUT and generating BTOR.
+[10:26:56 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_shadow_matches_regfile was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[10:29:24 INFO] Yosys: parsing the DUT and generating BTOR.
+[10:29:27 INFO] BMC: Checking correctness of all properties.
+[10:29:40 INFO] BMC found no CEX in limited steps.
+[10:29:40 INFO] Checking inductiveness of all properties.
+[10:30:12 INFO] IC3 proved [0, 1, 2] prop.
+ ID  Property                      Result        
+ 0   h_shadow_is_prev_regfile      Inductive     
+ 1   h_shadow_x0_is_zero           Inductive     
+ 2   h_shadow_zero_when_unwritten  Inductive     
+ 3   o_shadow_rs1r                 Not Inductive 
+ 4   o_shadow_rs2r                 Not Inductive 
+The CTI has been successfully blocked.
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:reg git:(master) ✗  ric3 cill select 3
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[10:32:35 INFO] Yosys: parsing the DUT and generating BTOR.
+[10:32:39 INFO] BMC: Checking correctness of all properties.
+[10:32:52 INFO] BMC found no CEX in limited steps.
+[10:32:52 INFO] Checking inductiveness of all properties.
+[10:33:24 INFO] IC3 proved [0, 1, 2] prop.
+ ID  Property                      Result        
+ 0   h_shadow_is_prev_regfile      Inductive     
+ 1   h_shadow_x0_is_zero           Inductive     
+ 2   h_shadow_zero_when_unwritten  Inductive     
+ 3   o_shadow_rs1r                 Not Inductive 
+ 4   o_shadow_rs2r                 Not Inductive 
+The CTI of o_shadow_rs1r has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[10:35:07 INFO] Yosys: parsing the DUT and generating BTOR.
+[10:35:11 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_rvfi_rs1_matches_prev_regfile was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[10:36:12 INFO] Yosys: parsing the DUT and generating BTOR.
+[10:36:15 INFO] BMC: Checking correctness of all properties.
+[10:36:28 INFO] BMC found no CEX in limited steps.
+[10:36:28 INFO] Checking inductiveness of all properties.
+[10:37:00 INFO] IC3 proved [0, 1, 2, 3, 4] prop.
+ ID  Property                           Result        
+ 0   h_rvfi_rs1_matches_past_rs1_value  Inductive     
+ 1   h_rvfi_rs2_matches_past_rs2_value  Inductive     
+ 2   h_shadow_is_prev_regfile           Inductive     
+ 3   h_shadow_x0_is_zero                Inductive     
+ 4   h_shadow_zero_when_unwritten       Inductive     
+ 5   o_shadow_rs1r                      Not Inductive 
+ 6   o_shadow_rs2r                      Not Inductive 
+The CTI of o_shadow_rs1r has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[10:38:11 INFO] Yosys: parsing the DUT and generating BTOR.
+[10:38:15 INFO] BMC: Checking correctness of all properties.
+[10:38:27 INFO] BMC found no CEX in limited steps.
+[10:38:27 INFO] Checking inductiveness of all properties.
+[10:38:59 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8] prop.
+ ID  Property                               Result        
+ 0   h_rvfi_rs1_addr_stable_without_order   Inductive     
+ 1   h_rvfi_rs1_matches_past_rs1_value      Inductive     
+ 2   h_rvfi_rs1_rdata_stable_without_order  Inductive     
+ 3   h_rvfi_rs2_addr_stable_without_order   Inductive     
+ 4   h_rvfi_rs2_matches_past_rs2_value      Inductive     
+ 5   h_rvfi_rs2_rdata_stable_without_order  Inductive     
+ 6   h_shadow_is_prev_regfile               Inductive     
+ 7   h_shadow_x0_is_zero                    Inductive     
+ 8   h_shadow_zero_when_unwritten           Inductive     
+ 9   o_shadow_rs1r                          Not Inductive 
+ 10  o_shadow_rs2r                          Not Inductive 
+The CTI of o_shadow_rs1r has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[10:41:01 INFO] Yosys: parsing the DUT and generating BTOR.
+[10:41:04 INFO] BMC: Checking correctness of all properties.
+[10:41:17 INFO] BMC found no CEX in limited steps.
+[10:41:17 INFO] Checking inductiveness of all properties.
+[10:41:49 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 9, 10] prop.
+ ID  Property                               Result        
+ 0   h_rvfi_rs1_addr_stable_without_order   Inductive     
+ 1   h_rvfi_rs1_matches_past_rs1_value      Inductive     
+ 2   h_rvfi_rs1_rdata_stable_without_order  Inductive     
+ 3   h_rvfi_rs2_addr_stable_without_order   Inductive     
+ 4   h_rvfi_rs2_matches_past_rs2_value      Inductive     
+ 5   h_rvfi_rs2_rdata_stable_without_order  Inductive     
+ 6   h_shadow_is_prev_regfile               Inductive     
+ 7   h_shadow_rs1_nocheck                   Not Inductive 
+ 8   h_shadow_rs2_nocheck                   Not Inductive 
+ 9   h_shadow_x0_is_zero                    Inductive     
+ 10  h_shadow_zero_when_unwritten           Inductive     
+ 11  o_shadow_rs1r                          Not Inductive 
+ 12  o_shadow_rs2r                          Not Inductive 
+The CTI of o_shadow_rs1r has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:reg git:(master) ✗  ric3 cill select 7
+Unable to select: A CTI for o_shadow_rs1r has already been selected. To select a different one, please run `ric3 cill abort` to clear the current, then rerun `cill check`
+➜  root@host1:reg git:(master) ✗  ric3 cill abort
+Successfully aborted the CTI.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[10:42:49 INFO] BMC: Checking correctness of all properties.
+[10:43:02 INFO] BMC found no CEX in limited steps.
+[10:43:02 INFO] Checking inductiveness of all properties.
+[10:43:34 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 9, 10] prop.
+ ID  Property                               Result        
+ 0   h_rvfi_rs1_addr_stable_without_order   Inductive     
+ 1   h_rvfi_rs1_matches_past_rs1_value      Inductive     
+ 2   h_rvfi_rs1_rdata_stable_without_order  Inductive     
+ 3   h_rvfi_rs2_addr_stable_without_order   Inductive     
+ 4   h_rvfi_rs2_matches_past_rs2_value      Inductive     
+ 5   h_rvfi_rs2_rdata_stable_without_order  Inductive     
+ 6   h_shadow_is_prev_regfile               Inductive     
+ 7   h_shadow_rs1_nocheck                   Not Inductive 
+ 8   h_shadow_rs2_nocheck                   Not Inductive 
+ 9   h_shadow_x0_is_zero                    Inductive     
+ 10  h_shadow_zero_when_unwritten           Inductive     
+ 11  o_shadow_rs1r                          Not Inductive 
+ 12  o_shadow_rs2r                          Not Inductive 
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:reg git:(master) ✗  ric3 cill select 7
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[10:46:18 INFO] Yosys: parsing the DUT and generating BTOR.
+[10:46:21 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_shadow_rs1_idle_matches was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[10:47:01 INFO] Yosys: parsing the DUT and generating BTOR.
+[10:47:05 INFO] BMC: Checking correctness of all properties.
+[10:47:18 INFO] BMC found no CEX in limited steps.
+[10:47:18 INFO] Checking inductiveness of all properties.
+[10:47:50 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 9, 10] prop.
+ ID  Property                               Result        
+ 0   h_rvfi_rs1_addr_stable_without_order   Inductive     
+ 1   h_rvfi_rs1_matches_past_rs1_value      Inductive     
+ 2   h_rvfi_rs1_rdata_stable_without_order  Inductive     
+ 3   h_rvfi_rs2_addr_stable_without_order   Inductive     
+ 4   h_rvfi_rs2_matches_past_rs2_value      Inductive     
+ 5   h_rvfi_rs2_rdata_stable_without_order  Inductive     
+ 6   h_shadow_is_prev_regfile               Inductive     
+ 7   h_shadow_rs1_nocheck                   Not Inductive 
+ 8   h_shadow_rs2_nocheck                   Not Inductive 
+ 9   h_shadow_x0_is_zero                    Inductive     
+ 10  h_shadow_zero_when_unwritten           Inductive     
+ 11  o_shadow_rs1r                          Not Inductive 
+ 12  o_shadow_rs2r                          Not Inductive 
+The CTI of h_shadow_rs1_nocheck has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[10:52:54 INFO] Yosys: parsing the DUT and generating BTOR.
+[10:52:57 INFO] BMC: Checking correctness of all properties.
+[10:53:10 INFO] BMC found no CEX in limited steps.
+[10:53:10 INFO] Checking inductiveness of all properties.
+[10:53:42 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16] prop.
+ ID  Property                               Result        
+ 0   h_mem_rd_enable_q_updates              Inductive     
+ 1   h_mem_rd_func_q_updates                Inductive     
+ 2   h_mem_rd_reg_q_updates                 Inductive     
+ 3   h_mem_wr_enable_q_updates              Inductive     
+ 4   h_rvfi_rs1_addr_stable_without_order   Inductive     
+ 5   h_rvfi_rs1_matches_past_rs1_value      Inductive     
+ 6   h_rvfi_rs1_rdata_stable_without_order  Inductive     
+ 7   h_rvfi_rs2_addr_stable_without_order   Inductive     
+ 8   h_rvfi_rs2_matches_past_rs2_value      Inductive     
+ 9   h_rvfi_rs2_rdata_stable_without_order  Inductive     
+ 10  h_rvfi_valid_low_in_resetq             Inductive     
+ 11  h_rvfi_valid_updates                   Inductive     
+ 12  h_shadow_is_prev_regfile               Inductive     
+ 13  h_shadow_rs1_nocheck                   Not Inductive 
+ 14  h_shadow_rs2_nocheck                   Not Inductive 
+ 15  h_shadow_x0_is_zero                    Inductive     
+ 16  h_shadow_zero_when_unwritten           Inductive     
+ 17  o_shadow_rs1r                          Not Inductive 
+ 18  o_shadow_rs2r                          Not Inductive 
+The CTI of h_shadow_rs1_nocheck has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:reg git:(master) ✗  ric3 cill abort
+Successfully aborted the CTI.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[10:55:20 INFO] BMC: Checking correctness of all properties.
+[10:55:33 INFO] BMC found no CEX in limited steps.
+[10:55:33 INFO] Checking inductiveness of all properties.
+[10:56:05 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16] prop.
+ ID  Property                               Result        
+ 0   h_mem_rd_enable_q_updates              Inductive     
+ 1   h_mem_rd_func_q_updates                Inductive     
+ 2   h_mem_rd_reg_q_updates                 Inductive     
+ 3   h_mem_wr_enable_q_updates              Inductive     
+ 4   h_rvfi_rs1_addr_stable_without_order   Inductive     
+ 5   h_rvfi_rs1_matches_past_rs1_value      Inductive     
+ 6   h_rvfi_rs1_rdata_stable_without_order  Inductive     
+ 7   h_rvfi_rs2_addr_stable_without_order   Inductive     
+ 8   h_rvfi_rs2_matches_past_rs2_value      Inductive     
+ 9   h_rvfi_rs2_rdata_stable_without_order  Inductive     
+ 10  h_rvfi_valid_low_in_resetq             Inductive     
+ 11  h_rvfi_valid_updates                   Inductive     
+ 12  h_shadow_is_prev_regfile               Inductive     
+ 13  h_shadow_rs1_nocheck                   Not Inductive 
+ 14  h_shadow_rs2_nocheck                   Not Inductive 
+ 15  h_shadow_x0_is_zero                    Inductive     
+ 16  h_shadow_zero_when_unwritten           Inductive     
+ 17  o_shadow_rs1r                          Not Inductive 
+ 18  o_shadow_rs2r                          Not Inductive 
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:reg git:(master) ✗  ric3 cill select 17
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[10:57:25 INFO] Yosys: parsing the DUT and generating BTOR.
+[10:57:28 INFO] BMC: Checking correctness of all properties.
+[10:57:41 INFO] BMC found no CEX in limited steps.
+[10:57:41 INFO] Checking inductiveness of all properties.
+[10:58:14 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 19, 20] prop.
+ ID  Property                               Result        
+ 0   h_load_pending_rs1_matches_regfile     Inductive     
+ 1   h_load_pending_rs1_x0_is_zero          Inductive     
+ 2   h_load_pending_rs2_matches_regfile     Inductive     
+ 3   h_load_pending_rs2_x0_is_zero          Inductive     
+ 4   h_mem_rd_enable_q_updates              Inductive     
+ 5   h_mem_rd_func_q_updates                Inductive     
+ 6   h_mem_rd_reg_q_updates                 Inductive     
+ 7   h_mem_wr_enable_q_updates              Inductive     
+ 8   h_rvfi_rs1_addr_stable_without_order   Inductive     
+ 9   h_rvfi_rs1_matches_past_rs1_value      Inductive     
+ 10  h_rvfi_rs1_rdata_stable_without_order  Inductive     
+ 11  h_rvfi_rs2_addr_stable_without_order   Inductive     
+ 12  h_rvfi_rs2_matches_past_rs2_value      Inductive     
+ 13  h_rvfi_rs2_rdata_stable_without_order  Inductive     
+ 14  h_rvfi_valid_low_in_resetq             Inductive     
+ 15  h_rvfi_valid_updates                   Inductive     
+ 16  h_shadow_is_prev_regfile               Inductive     
+ 17  h_shadow_rs1_nocheck                   Not Inductive 
+ 18  h_shadow_rs2_nocheck                   Not Inductive 
+ 19  h_shadow_x0_is_zero                    Inductive     
+ 20  h_shadow_zero_when_unwritten           Inductive     
+ 21  o_shadow_rs1r                          Not Inductive 
+ 22  o_shadow_rs2r                          Not Inductive 
+The CTI has been successfully blocked.
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:reg git:(master) ✗  ric3 cill select 21
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[11:03:20 INFO] Yosys: parsing the DUT and generating BTOR.
+[11:03:24 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_shadow_rs1_order_match was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[11:04:37 INFO] Yosys: parsing the DUT and generating BTOR.
+[11:04:41 INFO] BMC: Checking correctness of all properties.
+[11:04:54 INFO] BMC found no CEX in limited steps.
+[11:04:54 INFO] Checking inductiveness of all properties.
+[11:05:26 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 19, 20] prop.
+ ID  Property                               Result        
+ 0   h_load_pending_rs1_matches_regfile     Inductive     
+ 1   h_load_pending_rs1_x0_is_zero          Inductive     
+ 2   h_load_pending_rs2_matches_regfile     Inductive     
+ 3   h_load_pending_rs2_x0_is_zero          Inductive     
+ 4   h_mem_rd_enable_q_updates              Inductive     
+ 5   h_mem_rd_func_q_updates                Inductive     
+ 6   h_mem_rd_reg_q_updates                 Inductive     
+ 7   h_mem_wr_enable_q_updates              Inductive     
+ 8   h_rvfi_rs1_addr_stable_without_order   Inductive     
+ 9   h_rvfi_rs1_matches_past_rs1_value      Inductive     
+ 10  h_rvfi_rs1_rdata_stable_without_order  Inductive     
+ 11  h_rvfi_rs2_addr_stable_without_order   Inductive     
+ 12  h_rvfi_rs2_matches_past_rs2_value      Inductive     
+ 13  h_rvfi_rs2_rdata_stable_without_order  Inductive     
+ 14  h_rvfi_valid_low_in_resetq             Inductive     
+ 15  h_rvfi_valid_updates                   Inductive     
+ 16  h_shadow_is_prev_regfile               Inductive     
+ 17  h_shadow_rs1_nocheck                   Not Inductive 
+ 18  h_shadow_rs2_nocheck                   Not Inductive 
+ 19  h_shadow_x0_is_zero                    Inductive     
+ 20  h_shadow_zero_when_unwritten           Inductive     
+ 21  o_shadow_rs1r                          Not Inductive 
+ 22  o_shadow_rs2r                          Not Inductive 
+The CTI of o_shadow_rs1r has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[11:06:54 INFO] Yosys: parsing the DUT and generating BTOR.
+[11:06:57 INFO] BMC: Checking correctness of all properties.
+[11:07:10 INFO] BMC found no CEX in limited steps.
+[11:07:10 INFO] Checking inductiveness of all properties.
+[11:07:42 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 22] prop.
+ ID  Property                               Result        
+ 0   h_load_pending_rs1_matches_regfile     Inductive     
+ 1   h_load_pending_rs1_x0_is_zero          Inductive     
+ 2   h_load_pending_rs2_matches_regfile     Inductive     
+ 3   h_load_pending_rs2_x0_is_zero          Inductive     
+ 4   h_mem_rd_enable_q_updates              Inductive     
+ 5   h_mem_rd_func_q_updates                Inductive     
+ 6   h_mem_rd_reg_q_updates                 Inductive     
+ 7   h_mem_wr_enable_q_updates              Inductive     
+ 8   h_rvfi_rs1_addr_stable_without_order   Inductive     
+ 9   h_rvfi_rs1_matches_past_rs1_value      Inductive     
+ 10  h_rvfi_rs1_rdata_stable_without_order  Inductive     
+ 11  h_rvfi_rs2_addr_stable_without_order   Inductive     
+ 12  h_rvfi_rs2_matches_past_rs2_value      Inductive     
+ 13  h_rvfi_rs2_rdata_stable_without_order  Inductive     
+ 14  h_rvfi_valid_low_in_resetq             Inductive     
+ 15  h_rvfi_valid_updates                   Inductive     
+ 16  h_shadow_is_prev_regfile               Inductive     
+ 17  h_shadow_rs1_nocheck                   Inductive     
+ 18  h_shadow_rs1_on_late_or_fault          Not Inductive 
+ 19  h_shadow_rs2_nocheck                   Inductive     
+ 20  h_shadow_rs2_on_late_or_fault          Not Inductive 
+ 21  h_shadow_x0_is_zero                    Inductive     
+ 22  h_shadow_zero_when_unwritten           Inductive     
+ 23  o_shadow_rs1r                          Inductive     
+ 24  o_shadow_rs2r                          Inductive     
+The CTI has been successfully blocked.
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:reg git:(master) ✗  ric3 cill select 18
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill abort && ric3 cill check
+Successfully aborted the CTI.
+[11:09:37 INFO] Yosys: parsing the DUT and generating BTOR.
+[11:09:40 INFO] BMC: Checking correctness of all properties.
+[11:09:54 INFO] BMC found no CEX in limited steps.
+[11:09:54 INFO] Checking inductiveness of all properties.
+[11:10:26 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 19, 20] prop.
+ ID  Property                               Result        
+ 0   h_load_pending_rs1_matches_regfile     Inductive     
+ 1   h_load_pending_rs1_x0_is_zero          Inductive     
+ 2   h_load_pending_rs2_matches_regfile     Inductive     
+ 3   h_load_pending_rs2_x0_is_zero          Inductive     
+ 4   h_mem_rd_enable_q_updates              Inductive     
+ 5   h_mem_rd_func_q_updates                Inductive     
+ 6   h_mem_rd_reg_q_updates                 Inductive     
+ 7   h_mem_wr_enable_q_updates              Inductive     
+ 8   h_rvfi_rs1_addr_stable_without_order   Inductive     
+ 9   h_rvfi_rs1_matches_past_rs1_value      Inductive     
+ 10  h_rvfi_rs1_rdata_stable_without_order  Inductive     
+ 11  h_rvfi_rs2_addr_stable_without_order   Inductive     
+ 12  h_rvfi_rs2_matches_past_rs2_value      Inductive     
+ 13  h_rvfi_rs2_rdata_stable_without_order  Inductive     
+ 14  h_rvfi_valid_low_in_resetq             Inductive     
+ 15  h_rvfi_valid_updates                   Inductive     
+ 16  h_shadow_is_prev_regfile               Inductive     
+ 17  h_shadow_rs1_nocheck                   Not Inductive 
+ 18  h_shadow_rs2_nocheck                   Not Inductive 
+ 19  h_shadow_x0_is_zero                    Inductive     
+ 20  h_shadow_zero_when_unwritten           Inductive     
+ 21  o_shadow_rs1r                          Not Inductive 
+ 22  o_shadow_rs2r                          Not Inductive 
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:reg git:(master) ✗  ric3 cill abort && ric3 cill check
+Waiting to select a non-inductive assertion for CTI generation, no abort required.
+[11:12:18 INFO] Yosys: parsing the DUT and generating BTOR.
+[11:12:21 INFO] BMC: Checking correctness of all properties.
+[11:12:34 INFO] BMC found no CEX in limited steps.
+[11:12:34 INFO] Checking inductiveness of all properties.
+[11:13:06 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 22] prop.
+ ID  Property                               Result        
+ 0   h_load_pending_rs1_matches_regfile     Inductive     
+ 1   h_load_pending_rs1_x0_is_zero          Inductive     
+ 2   h_load_pending_rs2_matches_regfile     Inductive     
+ 3   h_load_pending_rs2_x0_is_zero          Inductive     
+ 4   h_mem_rd_enable_q_updates              Inductive     
+ 5   h_mem_rd_func_q_updates                Inductive     
+ 6   h_mem_rd_reg_q_updates                 Inductive     
+ 7   h_mem_wr_enable_q_updates              Inductive     
+ 8   h_rvfi_rs1_addr_stable_without_order   Inductive     
+ 9   h_rvfi_rs1_matches_past_rs1_value      Inductive     
+ 10  h_rvfi_rs1_rdata_stable_without_order  Inductive     
+ 11  h_rvfi_rs2_addr_stable_without_order   Inductive     
+ 12  h_rvfi_rs2_matches_past_rs2_value      Inductive     
+ 13  h_rvfi_rs2_rdata_stable_without_order  Inductive     
+ 14  h_rvfi_valid_low_in_resetq             Inductive     
+ 15  h_rvfi_valid_updates                   Inductive     
+ 16  h_shadow_is_prev_regfile               Inductive     
+ 17  h_shadow_rs1_nocheck                   Inductive     
+ 18  h_shadow_rs1_on_late_or_fault          Not Inductive 
+ 19  h_shadow_rs2_nocheck                   Inductive     
+ 20  h_shadow_rs2_on_late_or_fault          Not Inductive 
+ 21  h_shadow_x0_is_zero                    Inductive     
+ 22  h_shadow_zero_when_unwritten           Inductive     
+ 23  o_shadow_rs1r                          Inductive     
+ 24  o_shadow_rs2r                          Inductive     
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:reg git:(master) ✗  ric3 cill select 18
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[11:16:50 INFO] Yosys: parsing the DUT and generating BTOR.
+[11:16:53 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_store_pending_rs1_matches_regfile was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[11:17:49 INFO] Yosys: parsing the DUT and generating BTOR.
+[11:17:53 INFO] BMC: Checking correctness of all properties.
+[11:18:06 INFO] BMC found no CEX in limited steps.
+[11:18:06 INFO] Checking inductiveness of all properties.
+[11:18:38 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 22, 23, 24, 25, 26] prop.
+CIll Statistic: Total time: 3412s, Correctness check: 248s, Inductiveness check: 879s
+All properties are inductive. Proof succeeded.

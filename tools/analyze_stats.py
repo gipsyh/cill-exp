@@ -2,12 +2,44 @@
 """
 Analyze CIll statistics from proof folders.
 Extracts timing information from stdout.txt files in proof[x] directories.
+Also counts assert statements in tb.sv files.
 """
 
 import os
 import re
 import sys
 from pathlib import Path
+
+
+def count_asserts_in_file(file_path):
+    """
+    Count the number of assert statements in a SystemVerilog file.
+    Excludes asserts in comments (both // and /* */ style).
+    """
+    if not file_path.exists():
+        return 0
+    
+    with open(file_path, 'r') as f:
+        content = f.read()
+    
+    # Remove multi-line comments /* ... */
+    content = re.sub(r'/\*.*?\*/', '', content, flags=re.DOTALL)
+    
+    # Remove single-line comments // ...
+    lines = content.split('\n')
+    code_lines = []
+    for line in lines:
+        # Remove everything after // on each line
+        code_part = line.split('//')[0]
+        code_lines.append(code_part)
+    
+    code_content = '\n'.join(code_lines)
+    
+    # Count assert statements (word boundary to avoid matching "assertion" etc.)
+    assert_pattern = r'\bassert\s*\('
+    matches = re.findall(assert_pattern, code_content)
+    
+    return len(matches)
 
 
 def parse_cill_statistic_line(line):
@@ -52,6 +84,7 @@ def analyze_directory(root_dir):
     print(f"Found {len(proof_dirs)} proof directories\n")
     
     stats_list = []
+    assert_counts = []
     
     # Process each proof directory
     for proof_dir in sorted(proof_dirs):
@@ -68,6 +101,14 @@ def analyze_directory(root_dir):
                     stats = parse_cill_statistic_line(line)
                     if stats:
                         stats['proof_dir'] = str(proof_dir.relative_to(root_path))
+                        
+                        # Count asserts in tb.sv
+                        tb_file = proof_dir / 'tb.sv'
+                        assert_count = count_asserts_in_file(tb_file)
+                        stats['assert_count'] = assert_count
+                        if assert_count > 0:
+                            assert_counts.append(assert_count)
+                        
                         stats_list.append(stats)
                         break
     
@@ -85,6 +126,7 @@ def analyze_directory(root_dir):
     min_total_time = min(total_times)
     avg_total_time = sum(total_times) / len(total_times)
     avg_percentage = sum(percentages) / len(percentages)
+    avg_assert_count = sum(assert_counts) / len(assert_counts) if assert_counts else 0
     
     # Print results
     print("=" * 80)
@@ -94,6 +136,7 @@ def analyze_directory(root_dir):
     print(f"\nMinimum total time: {min_total_time}s")
     print(f"Average total time: {avg_total_time:.2f}s")
     print(f"Average (Correctness + Inductiveness) / Total time: {avg_percentage:.2f}%")
+    print(f"Average assert count in tb.sv: {avg_assert_count:.2f}")
     print("\n" + "=" * 80)
     print("INDIVIDUAL RESULTS")
     print("=" * 80)
@@ -105,6 +148,7 @@ def analyze_directory(root_dir):
         print(f"  Correctness check: {stats['correctness_time']}s")
         print(f"  Inductiveness check: {stats['inductiveness_time']}s")
         print(f"  Combined percentage: {pct:.2f}%")
+        print(f"  Assert count: {stats['assert_count']}")
 
 
 if __name__ == '__main__':

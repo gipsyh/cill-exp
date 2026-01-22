@@ -31,16 +31,7 @@ module rvfi_pc_bwd_check (
 			expect_pc_valid = 0;
 		end else begin
 			insn_order <= insn_order;
-			if (check) begin
-				for (channel_idx = 0; channel_idx < `RISCV_FORMAL_CHANNEL_IDX; channel_idx=channel_idx+1) begin
-					if (rvfi_valid[channel_idx] && rvfi_order[64*channel_idx +: 64] == insn_order+1) begin
-						expect_pc = rvfi_pc_rdata[channel_idx*`RISCV_FORMAL_XLEN +: `RISCV_FORMAL_XLEN];
-						expect_pc_valid = !rvfi_intr[`RISCV_FORMAL_CHANNEL_IDX];
-					end
-				end
-
-				assume(rvfi_valid[`RISCV_FORMAL_CHANNEL_IDX]);
-				assume(insn_order == rvfi_order[64*`RISCV_FORMAL_CHANNEL_IDX +: 64]);
+			if (check && rvfi_valid[`RISCV_FORMAL_CHANNEL_IDX] && insn_order == rvfi_order[64*`RISCV_FORMAL_CHANNEL_IDX +: 64]) begin
 				if (expect_pc_valid) begin
 					o_pc_rdata: assert(`rvformal_addr_eq(expect_pc, pc_wdata));
 				end

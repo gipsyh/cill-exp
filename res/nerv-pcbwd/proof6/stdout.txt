@@ -1,0 +1,18 @@
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[11:52:14 INFO] Yosys: parsing the DUT and generating BTOR.
+[11:52:17 INFO] BMC: Checking correctness of all properties.
+[11:52:32 INFO] BMC found no CEX in limited steps.
+[11:52:32 INFO] Checking inductiveness of all properties.
+ ID  Property    Result        
+ 0   o_pc_rdata  Not Inductive 
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill select 0
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[12:00:54 INFO] Yosys: parsing the DUT and generating BTOR.
+[12:00:57 INFO] BMC: Checking correctness of all properties.
+[12:01:12 INFO] BMC found no CEX in limited steps.
+[12:01:12 INFO] Checking inductiveness of all properties.
+[12:01:44 INFO] IC3 proved [0, 1] prop.
+CIll Statistic: Total time: 566s, Correctness check: 28s, Inductiveness check: 64s
+All properties are inductive. Proof succeeded.

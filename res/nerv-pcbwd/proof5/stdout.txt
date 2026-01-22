@@ -1,0 +1,109 @@
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[09:22:48 INFO] Yosys: parsing the DUT and generating BTOR.
+[09:22:52 INFO] BMC: Checking correctness of all properties.
+[09:23:10 INFO] BMC found no CEX in limited steps.
+[09:23:10 INFO] Checking inductiveness of all properties.
+ ID  Property    Result        
+ 0   o_pc_rdata  Not Inductive 
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill select 0
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[09:25:42 INFO] Yosys: parsing the DUT and generating BTOR.
+[09:25:45 INFO] BMC: Checking correctness of all properties.
+[09:25:59 INFO] BMC found no CEX in limited steps.
+[09:25:59 INFO] Checking inductiveness of all properties.
+[09:26:31 INFO] IC3 proved [0, 1, 2] prop.
+ ID  Property                  Result        
+ 0   h_expect_pc_mirror        Inductive     
+ 1   h_expect_pc_valid_mirror  Inductive     
+ 2   h_seen_gate               Inductive     
+ 3   o_pc_rdata                Not Inductive 
+The CTI has been successfully blocked.
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill select 3
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[09:28:51 INFO] Yosys: parsing the DUT and generating BTOR.
+[09:28:55 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_order_stable_on_stall was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[09:29:24 INFO] Yosys: parsing the DUT and generating BTOR.
+[09:29:28 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_no_valid_on_stall was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[09:30:02 INFO] Yosys: parsing the DUT and generating BTOR.
+[09:30:06 INFO] BMC: Checking correctness of all properties.
+[09:30:22 INFO] BMC found no CEX in limited steps.
+[09:30:22 INFO] Checking inductiveness of all properties.
+[09:30:54 INFO] IC3 proved [0, 1, 2, 3] prop.
+ ID  Property                  Result        
+ 0   h_expect_pc_mirror        Inductive     
+ 1   h_expect_pc_valid_mirror  Inductive     
+ 2   h_no_valid_on_stall       Inductive     
+ 3   h_seen_gate               Inductive     
+ 4   o_pc_rdata                Not Inductive 
+The CTI of o_pc_rdata has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill select 4
+A CTI for o_pc_rdata already exists. It has been cleared.
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[09:36:49 INFO] Yosys: parsing the DUT and generating BTOR.
+[09:36:53 INFO] BMC: Checking correctness of all properties.
+[09:37:08 INFO] BMC found no CEX in limited steps.
+[09:37:08 INFO] Checking inductiveness of all properties.
+[09:37:40 INFO] IC3 proved [0, 1, 2, 3, 4] prop.
+ ID  Property                  Result        
+ 0   h_expect_pc_mirror        Inductive     
+ 1   h_expect_pc_valid_mirror  Inductive     
+ 2   h_no_valid_on_stall       Inductive     
+ 3   h_saved_pc_align          Inductive     
+ 4   h_seen_gate               Inductive     
+ 5   o_pc_rdata                Not Inductive 
+The CTI has been successfully blocked.
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill select 5
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[09:42:30 INFO] Yosys: parsing the DUT and generating BTOR.
+[09:42:34 INFO] BMC: Checking correctness of all properties.
+[09:42:49 INFO] BMC found no CEX in limited steps.
+[09:42:49 INFO] Checking inductiveness of all properties.
+[09:43:21 INFO] IC3 proved [0, 1, 2, 3, 4] prop.
+ ID  Property                  Result        
+ 0   h_expect_pc_mirror        Inductive     
+ 1   h_expect_pc_valid_mirror  Inductive     
+ 2   h_no_valid_on_stall       Inductive     
+ 3   h_saved_pc_align          Inductive     
+ 4   h_seen_gate               Inductive     
+ 5   o_pc_rdata                Not Inductive 
+The CTI has been successfully blocked.
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill select 5
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[09:46:49 INFO] Yosys: parsing the DUT and generating BTOR.
+[09:46:52 INFO] BMC: Checking correctness of all properties.
+[09:47:08 INFO] BMC found no CEX in limited steps.
+[09:47:08 INFO] Checking inductiveness of all properties.
+[09:47:39 INFO] IC3 proved [0, 1, 2, 3, 4, 5] prop.
+ ID  Property                       Result        
+ 0   h_expect_pc_mirror             Inductive     
+ 1   h_expect_pc_valid_mirror       Inductive     
+ 2   h_no_valid_on_stall            Inductive     
+ 3   h_saved_pc_align               Inductive     
+ 4   h_seen_gate                    Inductive     
+ 5   h_seen_implies_order_ge_plus1  Inductive     
+ 6   o_pc_rdata                     Not Inductive 
+The CTI has been successfully blocked.
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill select 6
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[09:51:31 INFO] Yosys: parsing the DUT and generating BTOR.
+[09:51:34 INFO] BMC: Checking correctness of all properties.
+[09:51:47 INFO] BMC found no CEX in limited steps.
+[09:51:47 INFO] Checking inductiveness of all properties.
+[09:52:19 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6] prop.
+CIll Statistic: Total time: 1768s, Correctness check: 116s, Inductiveness check: 228s
+All properties are inductive. Proof succeeded.

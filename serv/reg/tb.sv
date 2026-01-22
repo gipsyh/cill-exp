@@ -1,10 +1,8 @@
 `default_nettype none
 `include "defines.sv"
 
+// free input variables, can take any value each cycle as long as the `assume` are satisfied
 module testbench (
-	`ifdef RISCV_FORMAL_TRIG_CYCLE
-		input trig,
-	`endif
 	input check,
 	input clock, reset
 );
@@ -14,9 +12,6 @@ module testbench (
 	`RISCV_FORMAL_CHECKER checker_inst (
 		.clock  (clock),
 		.reset  (reset),
-	`ifdef RISCV_FORMAL_TRIG_CYCLE
-		.trig   (trig),
-	`endif
 		.check   (check),
 		`RVFI_CONN
 		`RVFI_BUS_CONN
@@ -43,5 +38,4 @@ module testbench (
 /// Helper Assertion Begin
 
 /// Helper Assertion End
-
 endmodule

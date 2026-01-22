@@ -14,7 +14,7 @@ nerv/reg,Timeout,Timeout,Timeout,8/10,956
 nerv/csrc_upcnt_minstret,Timeout,Memout,Timeout,
 nerv/csrc_upcnt_mcycle,Timeout,Memout,Timeout,
 nerv/causal,Timeout,Memout,Timeout,5/6,510
-nerv/pc_bwd,Timeout,Memout,Memout,
+nerv/pc_bwd,Timeout,Memout,Memout,1/1
 serv/reg,Timeout,Timeout,NotRun
 serv/pc_bwd,Timeout,Timeout,NotRun
 serv/insn_sub,Timeout,Timeout,NotRun

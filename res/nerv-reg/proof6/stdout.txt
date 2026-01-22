@@ -1,0 +1,802 @@
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[02:12:03 INFO] Yosys: parsing the DUT and generating BTOR.
+[02:12:07 INFO] BMC: Checking correctness of all properties.
+[02:12:19 INFO] BMC found no CEX in limited steps.
+[02:12:19 INFO] Checking inductiveness of all properties.
+ ID  Property       Result        
+ 0   o_shadow_rs1r  Not Inductive 
+ 1   o_shadow_rs2r  Not Inductive 
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:reg git:(master) ✗  ric3 cill select 0
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[02:16:07 INFO] Yosys: parsing the DUT and generating BTOR.
+[02:16:11 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_rs1_shadow was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[02:17:11 INFO] Yosys: parsing the DUT and generating BTOR.
+[02:17:14 INFO] BMC: Checking correctness of all properties.
+[02:17:27 INFO] BMC found no CEX in limited steps.
+[02:17:27 INFO] Checking inductiveness of all properties.
+[02:18:00 INFO] IC3 proved [1, 3] prop.
+ ID  Property       Result        
+ 0   h_rs1_shadow   Not Inductive 
+ 1   h_rs1_x0       Inductive     
+ 2   h_rs2_shadow   Not Inductive 
+ 3   h_rs2_x0       Inductive     
+ 4   o_shadow_rs1r  Not Inductive 
+ 5   o_shadow_rs2r  Not Inductive 
+The CTI of o_shadow_rs1r has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[02:25:09 INFO] Yosys: parsing the DUT and generating BTOR.
+[02:25:10 INFO] 
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.60+70 (git sha1 8101c87fa, clang++ 18.1.3 -fPIC -O3)
+
+-- Running command `read_slang -Wnone -D FORMAL -D YOSYS_SLANG rvfi_reg_check.sv nerv.sv wrapper.sv tb.sv ; prep -flatten -top testbench ; hierarchy -smtcheck -nokeep_prints ; scc -select; simplemap; select -clear ; memory_nordff ; fminit -seq reset 1,0 ; chformal -cover -remove ; chformal -early ; async2sync ; formalff -clk2ff -ff2anyinit -hierarchy -assume ; memory_map -formal ; dffunmap ; setundef -undriven -anyseq ; opt -fast ; opt_clean ; delete -output ; rename -witness ; check ; write_rtlil ../dut.il ; write_btor -ywmap ../dut.ywb -i ../dut.info ../dut.btor' --
+
+1. Executing SLANG frontend.
+Top level design units:
+    testbench
+
+
+[02:25:10 INFO] ERROR: Assert `count_id(cell->name) == 0' failed in kernel/rtlil.cc:2962.
+
+Error: Yosys execution failed.
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.60+70 (git sha1 8101c87fa, clang++ 18.1.3 -fPIC -O3)
+
+-- Running command `read_slang -Wnone -D FORMAL -D YOSYS_SLANG rvfi_reg_check.sv nerv.sv wrapper.sv tb.sv ; prep -flatten -top testbench ; hierarchy -smtcheck -nokeep_prints ; scc -select; simplemap; select -clear ; memory_nordff ; fminit -seq reset 1,0 ; chformal -cover -remove ; chformal -early ; async2sync ; formalff -clk2ff -ff2anyinit -hierarchy -assume ; memory_map -formal ; dffunmap ; setundef -undriven -anyseq ; opt -fast ; opt_clean ; delete -output ; rename -witness ; check ; write_rtlil ../dut.il ; write_btor -ywmap ../dut.ywb -i ../dut.info ../dut.btor' --
+
+1. Executing SLANG frontend.
+Top level design units:
+    testbench
+
+
+ERROR: Assert `count_id(cell->name) == 0' failed in kernel/rtlil.cc:2962.
+
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[02:25:44 INFO] Yosys: parsing the DUT and generating BTOR.
+[02:25:48 INFO] BMC: Checking correctness of all properties.
+A CEX violating _witness_.assert_2129 was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[02:27:27 INFO] Yosys: parsing the DUT and generating BTOR.
+[02:27:31 INFO] BMC: Checking correctness of all properties.
+[02:27:44 INFO] BMC found no CEX in limited steps.
+[02:27:44 INFO] Checking inductiveness of all properties.
+[02:28:17 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31] prop.
+ ID  Property               Result        
+ 0   _witness_.assert_2120  Inductive     
+ 1   _witness_.assert_2129  Inductive     
+ 2   _witness_.assert_2138  Inductive     
+ 3   _witness_.assert_2147  Inductive     
+ 4   _witness_.assert_2156  Inductive     
+ 5   _witness_.assert_2165  Inductive     
+ 6   _witness_.assert_2174  Inductive     
+ 7   _witness_.assert_2183  Inductive     
+ 8   _witness_.assert_2192  Inductive     
+ 9   _witness_.assert_2201  Inductive     
+ 10  _witness_.assert_2210  Inductive     
+ 11  _witness_.assert_2219  Inductive     
+ 12  _witness_.assert_2228  Inductive     
+ 13  _witness_.assert_2237  Inductive     
+ 14  _witness_.assert_2246  Inductive     
+ 15  _witness_.assert_2255  Inductive     
+ 16  _witness_.assert_2264  Inductive     
+ 17  _witness_.assert_2273  Inductive     
+ 18  _witness_.assert_2282  Inductive     
+ 19  _witness_.assert_2291  Inductive     
+ 20  _witness_.assert_2300  Inductive     
+ 21  _witness_.assert_2309  Inductive     
+ 22  _witness_.assert_2318  Inductive     
+ 23  _witness_.assert_2327  Inductive     
+ 24  _witness_.assert_2336  Inductive     
+ 25  _witness_.assert_2345  Inductive     
+ 26  _witness_.assert_2354  Inductive     
+ 27  _witness_.assert_2363  Inductive     
+ 28  _witness_.assert_2372  Inductive     
+ 29  _witness_.assert_2381  Inductive     
+ 30  _witness_.assert_2390  Inductive     
+ 31  h_x0_const             Inductive     
+ 32  o_shadow_rs1r          Not Inductive 
+ 33  o_shadow_rs2r          Not Inductive 
+The CTI of o_shadow_rs1r has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:reg git:(master) ✗  ric3 cill select 32
+A CTI for o_shadow_rs1r already exists. It has been cleared.
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[02:30:02 INFO] Yosys: parsing the DUT and generating BTOR.
+[02:30:05 INFO] BMC: Checking correctness of all properties.
+[02:30:18 INFO] BMC found no CEX in limited steps.
+[02:30:18 INFO] Checking inductiveness of all properties.
+[02:30:52 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32] prop.
+ ID  Property               Result        
+ 0   _witness_.assert_2120  Inductive     
+ 1   _witness_.assert_2129  Inductive     
+ 2   _witness_.assert_2138  Inductive     
+ 3   _witness_.assert_2147  Inductive     
+ 4   _witness_.assert_2156  Inductive     
+ 5   _witness_.assert_2165  Inductive     
+ 6   _witness_.assert_2174  Inductive     
+ 7   _witness_.assert_2183  Inductive     
+ 8   _witness_.assert_2192  Inductive     
+ 9   _witness_.assert_2201  Inductive     
+ 10  _witness_.assert_2210  Inductive     
+ 11  _witness_.assert_2219  Inductive     
+ 12  _witness_.assert_2228  Inductive     
+ 13  _witness_.assert_2237  Inductive     
+ 14  _witness_.assert_2246  Inductive     
+ 15  _witness_.assert_2255  Inductive     
+ 16  _witness_.assert_2264  Inductive     
+ 17  _witness_.assert_2273  Inductive     
+ 18  _witness_.assert_2282  Inductive     
+ 19  _witness_.assert_2291  Inductive     
+ 20  _witness_.assert_2300  Inductive     
+ 21  _witness_.assert_2309  Inductive     
+ 22  _witness_.assert_2318  Inductive     
+ 23  _witness_.assert_2327  Inductive     
+ 24  _witness_.assert_2336  Inductive     
+ 25  _witness_.assert_2345  Inductive     
+ 26  _witness_.assert_2354  Inductive     
+ 27  _witness_.assert_2363  Inductive     
+ 28  _witness_.assert_2372  Inductive     
+ 29  _witness_.assert_2381  Inductive     
+ 30  _witness_.assert_2390  Inductive     
+ 31  h_checker_x0_shadow    Inductive     
+ 32  h_x0_const             Inductive     
+ 33  o_shadow_rs1r          Not Inductive 
+ 34  o_shadow_rs2r          Not Inductive 
+The CTI has been successfully blocked.
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[02:33:59 INFO] Yosys: parsing the DUT and generating BTOR.
+[02:33:59 INFO] 
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.60+70 (git sha1 8101c87fa, clang++ 18.1.3 -fPIC -O3)
+
+-- Running command `read_slang -Wnone -D FORMAL -D YOSYS_SLANG rvfi_reg_check.sv nerv.sv wrapper.sv tb.sv ; prep -flatten -top testbench ; hierarchy -smtcheck -nokeep_prints ; scc -select; simplemap; select -clear ; memory_nordff ; fminit -seq reset 1,0 ; chformal -cover -remove ; chformal -early ; async2sync ; formalff -clk2ff -ff2anyinit -hierarchy -assume ; memory_map -formal ; dffunmap ; setundef -undriven -anyseq ; opt -fast ; opt_clean ; delete -output ; rename -witness ; check ; write_rtlil ../dut.il ; write_btor -ywmap ../dut.ywb -i ../dut.info ../dut.btor' --
+
+1. Executing SLANG frontend.
+Top level design units:
+    testbench
+
+
+Build failed: 20 errors, 0 warnings
+
+[02:33:59 INFO] tb.sv:86:25: error: declaration must come before all statements in the block
+                        reg [31:0] h_regfile_q [0:31];
+                        ^
+tb.sv:92:25: error: expected statement
+                        wire h_c_rvfi_valid = rvfi_valid[0];
+                        ^~~~
+tb.sv:92:30: error: use of undeclared identifier 'h_c_rvfi_valid'; did you mean 'rvfi_valid'?
+                        wire h_c_rvfi_valid = rvfi_valid[0];
+                             ^~~~~~~~~~~~~~
+tb.sv:9:9: note: declared here
+        `RVFI_WIRES
+        ^
+rvfi_macros.vh:10441:71: note: expanded from macro 'RVFI_WIRES'
+  (* keep *) wire [`RISCV_FORMAL_NRET                        - 1 : 0] rvfi_valid    ; \
+                                                                      ^
+tb.sv:93:25: error: expected statement
+                        wire h_c_rvfi_trap  = rvfi_trap[0];
+                        ^~~~
+tb.sv:93:30: error: use of undeclared identifier 'h_c_rvfi_trap'; did you mean 'rvfi_trap'?
+                        wire h_c_rvfi_trap  = rvfi_trap[0];
+                             ^~~~~~~~~~~~~
+tb.sv:9:9: note: declared here
+        `RVFI_WIRES
+        ^
+rvfi_macros.vh:10444:71: note: expanded from macro 'RVFI_WIRES'
+  (* keep *) wire [`RISCV_FORMAL_NRET                        - 1 : 0] rvfi_trap     ; \
+                                                                      ^
+tb.sv:94:25: error: expected statement
+                        wire [4:0] h_c_rs1_addr = rvfi_rs1_addr[0*5 +: 5];
+                        ^~~~
+tb.sv:94:36: error: use of undeclared identifier 'h_c_rs1_addr'; did you mean 'rvfi_rs1_addr'?
+                        wire [4:0] h_c_rs1_addr = rvfi_rs1_addr[0*5 +: 5];
+                                   ^~~~~~~~~~~~
+tb.sv:9:9: note: declared here
+        `RVFI_WIRES
+        ^
+rvfi_macros.vh:10449:71: note: expanded from macro 'RVFI_WIRES'
+  (* keep *) wire [`RISCV_FORMAL_NRET *                  5   - 1 : 0] rvfi_rs1_addr ; \
+                                                                      ^
+tb.sv:95:25: error: expected statement
+                        wire [4:0] h_c_rs2_addr = rvfi_rs2_addr[0*5 +: 5];
+                        ^~~~
+tb.sv:95:36: error: use of undeclared identifier 'h_c_rs2_addr'; did you mean 'rvfi_rs2_addr'?
+                        wire [4:0] h_c_rs2_addr = rvfi_rs2_addr[0*5 +: 5];
+                                   ^~~~~~~~~~~~
+tb.sv:9:9: note: declared here
+        `RVFI_WIRES
+        ^
+rvfi_macros.vh:10450:71: note: expanded from macro 'RVFI_WIRES'
+  (* keep *) wire [`RISCV_FORMAL_NRET *                  5   - 1 : 0] rvfi_rs2_addr ; \
+                                                                      ^
+tb.sv:96:25: error: expected statement
+                        wire [`RISCV_FORMAL_XLEN-1:0] h_c_rs1_rdata = rvfi_rs1_rdata[0*`RISCV_FORMAL_XLEN +: `RISCV_FORMAL_XLEN];
+                        ^~~~
+tb.sv:96:55: error: use of undeclared identifier 'h_c_rs1_rdata'; did you mean 'rvfi_rs1_rdata'?
+                        wire [`RISCV_FORMAL_XLEN-1:0] h_c_rs1_rdata = rvfi_rs1_rdata[0*`RISCV_FORMAL_XLEN +: `RISCV_FORMAL_XLEN];
+                                                      ^~~~~~~~~~~~~
+tb.sv:9:9: note: declared here
+        `RVFI_WIRES
+        ^
+rvfi_macros.vh:10451:71: note: expanded from macro 'RVFI_WIRES'
+  (* keep *) wire [`RISCV_FORMAL_NRET * `RISCV_FORMAL_XLEN   - 1 : 0] rvfi_rs1_rdata; \
+                                                                      ^
+tb.sv:97:25: error: expected statement
+                        wire [`RISCV_FORMAL_XLEN-1:0] h_c_rs2_rdata = rvfi_rs2_rdata[0*`RISCV_FORMAL_XLEN +: `RISCV_FORMAL_XLEN];
+                        ^~~~
+tb.sv:97:55: error: use of undeclared identifier 'h_c_rs2_rdata'; did you mean 'rvfi_rs2_rdata'?
+                        wire [`RISCV_FORMAL_XLEN-1:0] h_c_rs2_rdata = rvfi_rs2_rdata[0*`RISCV_FORMAL_XLEN +: `RISCV_FORMAL_XLEN];
+                                                      ^~~~~~~~~~~~~
+tb.sv:9:9: note: declared here
+        `RVFI_WIRES
+        ^
+rvfi_macros.vh:10452:71: note: expanded from macro 'RVFI_WIRES'
+  (* keep *) wire [`RISCV_FORMAL_NRET * `RISCV_FORMAL_XLEN   - 1 : 0] rvfi_rs2_rdata; \
+                                                                      ^
+tb.sv:98:25: error: expected statement
+                        wire [4:0] h_c_rd_addr = rvfi_rd_addr[0*5 +: 5];
+                        ^~~~
+tb.sv:98:36: error: use of undeclared identifier 'h_c_rd_addr'
+                        wire [4:0] h_c_rd_addr = rvfi_rd_addr[0*5 +: 5];
+                                   ^~~~~~~~~~~
+tb.sv:99:25: error: expected statement
+                        wire [`RISCV_FORMAL_XLEN-1:0] h_c_rd_wdata = rvfi_rd_wdata[0*`RISCV_FORMAL_XLEN +: `RISCV_FORMAL_XLEN];
+                        ^~~~
+tb.sv:99:55: error: use of undeclared identifier 'h_c_rd_wdata'; did you mean 'rvfi_rd_wdata'?
+                        wire [`RISCV_FORMAL_XLEN-1:0] h_c_rd_wdata = rvfi_rd_wdata[0*`RISCV_FORMAL_XLEN +: `RISCV_FORMAL_XLEN];
+                                                      ^~~~~~~~~~~~
+tb.sv:9:9: note: declared here
+        `RVFI_WIRES
+        ^
+rvfi_macros.vh:10454:71: note: expanded from macro 'RVFI_WIRES'
+  (* keep *) wire [`RISCV_FORMAL_NRET * `RISCV_FORMAL_XLEN   - 1 : 0] rvfi_rd_wdata ; \
+                                                                      ^
+tb.sv:101:25: error: expected statement
+                        always @(posedge clock) begin
+                        ^~~~~~
+tb.sv:105:66: error: use of undeclared identifier 'h_c_rvfi_valid'; did you mean 'rvfi_valid'?
+                                        if (h_regfile_q_valid && h_c_rvfi_valid) begin
+                                                                 ^~~~~~~~~~~~~~
+tb.sv:9:9: note: declared here
+        `RVFI_WIRES
+        ^
+rvfi_macros.vh:10441:71: note: expanded from macro 'RVFI_WIRES'
+  (* keep *) wire [`RISCV_FORMAL_NRET                        - 1 : 0] rvfi_valid    ; \
+                                                                      ^
+tb.sv:108:53: error: use of undeclared identifier 'h_c_rs1_addr'; did you mean 'rvfi_rs1_addr'?
+                                                if (h_c_rs1_addr == 0)
+                                                    ^~~~~~~~~~~~
+tb.sv:9:9: note: declared here
+        `RVFI_WIRES
+        ^
+rvfi_macros.vh:10449:71: note: expanded from macro 'RVFI_WIRES'
+  (* keep *) wire [`RISCV_FORMAL_NRET *                  5   - 1 : 0] rvfi_rs1_addr ; \
+                                                                      ^
+fatal error: too many errors emitted, stopping now [--error-limit=]
+ERROR: Compilation failed
+
+Error: Yosys execution failed.
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.60+70 (git sha1 8101c87fa, clang++ 18.1.3 -fPIC -O3)
+
+-- Running command `read_slang -Wnone -D FORMAL -D YOSYS_SLANG rvfi_reg_check.sv nerv.sv wrapper.sv tb.sv ; prep -flatten -top testbench ; hierarchy -smtcheck -nokeep_prints ; scc -select; simplemap; select -clear ; memory_nordff ; fminit -seq reset 1,0 ; chformal -cover -remove ; chformal -early ; async2sync ; formalff -clk2ff -ff2anyinit -hierarchy -assume ; memory_map -formal ; dffunmap ; setundef -undriven -anyseq ; opt -fast ; opt_clean ; delete -output ; rename -witness ; check ; write_rtlil ../dut.il ; write_btor -ywmap ../dut.ywb -i ../dut.info ../dut.btor' --
+
+1. Executing SLANG frontend.
+Top level design units:
+    testbench
+
+
+Build failed: 20 errors, 0 warnings
+
+tb.sv:86:25: error: declaration must come before all statements in the block
+                        reg [31:0] h_regfile_q [0:31];
+                        ^
+tb.sv:92:25: error: expected statement
+                        wire h_c_rvfi_valid = rvfi_valid[0];
+                        ^~~~
+tb.sv:92:30: error: use of undeclared identifier 'h_c_rvfi_valid'; did you mean 'rvfi_valid'?
+                        wire h_c_rvfi_valid = rvfi_valid[0];
+                             ^~~~~~~~~~~~~~
+tb.sv:9:9: note: declared here
+        `RVFI_WIRES
+        ^
+rvfi_macros.vh:10441:71: note: expanded from macro 'RVFI_WIRES'
+  (* keep *) wire [`RISCV_FORMAL_NRET                        - 1 : 0] rvfi_valid    ; \
+                                                                      ^
+tb.sv:93:25: error: expected statement
+                        wire h_c_rvfi_trap  = rvfi_trap[0];
+                        ^~~~
+tb.sv:93:30: error: use of undeclared identifier 'h_c_rvfi_trap'; did you mean 'rvfi_trap'?
+                        wire h_c_rvfi_trap  = rvfi_trap[0];
+                             ^~~~~~~~~~~~~
+tb.sv:9:9: note: declared here
+        `RVFI_WIRES
+        ^
+rvfi_macros.vh:10444:71: note: expanded from macro 'RVFI_WIRES'
+  (* keep *) wire [`RISCV_FORMAL_NRET                        - 1 : 0] rvfi_trap     ; \
+                                                                      ^
+tb.sv:94:25: error: expected statement
+                        wire [4:0] h_c_rs1_addr = rvfi_rs1_addr[0*5 +: 5];
+                        ^~~~
+tb.sv:94:36: error: use of undeclared identifier 'h_c_rs1_addr'; did you mean 'rvfi_rs1_addr'?
+                        wire [4:0] h_c_rs1_addr = rvfi_rs1_addr[0*5 +: 5];
+                                   ^~~~~~~~~~~~
+tb.sv:9:9: note: declared here
+        `RVFI_WIRES
+        ^
+rvfi_macros.vh:10449:71: note: expanded from macro 'RVFI_WIRES'
+  (* keep *) wire [`RISCV_FORMAL_NRET *                  5   - 1 : 0] rvfi_rs1_addr ; \
+                                                                      ^
+tb.sv:95:25: error: expected statement
+                        wire [4:0] h_c_rs2_addr = rvfi_rs2_addr[0*5 +: 5];
+                        ^~~~
+tb.sv:95:36: error: use of undeclared identifier 'h_c_rs2_addr'; did you mean 'rvfi_rs2_addr'?
+                        wire [4:0] h_c_rs2_addr = rvfi_rs2_addr[0*5 +: 5];
+                                   ^~~~~~~~~~~~
+tb.sv:9:9: note: declared here
+        `RVFI_WIRES
+        ^
+rvfi_macros.vh:10450:71: note: expanded from macro 'RVFI_WIRES'
+  (* keep *) wire [`RISCV_FORMAL_NRET *                  5   - 1 : 0] rvfi_rs2_addr ; \
+                                                                      ^
+tb.sv:96:25: error: expected statement
+                        wire [`RISCV_FORMAL_XLEN-1:0] h_c_rs1_rdata = rvfi_rs1_rdata[0*`RISCV_FORMAL_XLEN +: `RISCV_FORMAL_XLEN];
+                        ^~~~
+tb.sv:96:55: error: use of undeclared identifier 'h_c_rs1_rdata'; did you mean 'rvfi_rs1_rdata'?
+                        wire [`RISCV_FORMAL_XLEN-1:0] h_c_rs1_rdata = rvfi_rs1_rdata[0*`RISCV_FORMAL_XLEN +: `RISCV_FORMAL_XLEN];
+                                                      ^~~~~~~~~~~~~
+tb.sv:9:9: note: declared here
+        `RVFI_WIRES
+        ^
+rvfi_macros.vh:10451:71: note: expanded from macro 'RVFI_WIRES'
+  (* keep *) wire [`RISCV_FORMAL_NRET * `RISCV_FORMAL_XLEN   - 1 : 0] rvfi_rs1_rdata; \
+                                                                      ^
+tb.sv:97:25: error: expected statement
+                        wire [`RISCV_FORMAL_XLEN-1:0] h_c_rs2_rdata = rvfi_rs2_rdata[0*`RISCV_FORMAL_XLEN +: `RISCV_FORMAL_XLEN];
+                        ^~~~
+tb.sv:97:55: error: use of undeclared identifier 'h_c_rs2_rdata'; did you mean 'rvfi_rs2_rdata'?
+                        wire [`RISCV_FORMAL_XLEN-1:0] h_c_rs2_rdata = rvfi_rs2_rdata[0*`RISCV_FORMAL_XLEN +: `RISCV_FORMAL_XLEN];
+                                                      ^~~~~~~~~~~~~
+tb.sv:9:9: note: declared here
+        `RVFI_WIRES
+        ^
+rvfi_macros.vh:10452:71: note: expanded from macro 'RVFI_WIRES'
+  (* keep *) wire [`RISCV_FORMAL_NRET * `RISCV_FORMAL_XLEN   - 1 : 0] rvfi_rs2_rdata; \
+                                                                      ^
+tb.sv:98:25: error: expected statement
+                        wire [4:0] h_c_rd_addr = rvfi_rd_addr[0*5 +: 5];
+                        ^~~~
+tb.sv:98:36: error: use of undeclared identifier 'h_c_rd_addr'
+                        wire [4:0] h_c_rd_addr = rvfi_rd_addr[0*5 +: 5];
+                                   ^~~~~~~~~~~
+tb.sv:99:25: error: expected statement
+                        wire [`RISCV_FORMAL_XLEN-1:0] h_c_rd_wdata = rvfi_rd_wdata[0*`RISCV_FORMAL_XLEN +: `RISCV_FORMAL_XLEN];
+                        ^~~~
+tb.sv:99:55: error: use of undeclared identifier 'h_c_rd_wdata'; did you mean 'rvfi_rd_wdata'?
+                        wire [`RISCV_FORMAL_XLEN-1:0] h_c_rd_wdata = rvfi_rd_wdata[0*`RISCV_FORMAL_XLEN +: `RISCV_FORMAL_XLEN];
+                                                      ^~~~~~~~~~~~
+tb.sv:9:9: note: declared here
+        `RVFI_WIRES
+        ^
+rvfi_macros.vh:10454:71: note: expanded from macro 'RVFI_WIRES'
+  (* keep *) wire [`RISCV_FORMAL_NRET * `RISCV_FORMAL_XLEN   - 1 : 0] rvfi_rd_wdata ; \
+                                                                      ^
+tb.sv:101:25: error: expected statement
+                        always @(posedge clock) begin
+                        ^~~~~~
+tb.sv:105:66: error: use of undeclared identifier 'h_c_rvfi_valid'; did you mean 'rvfi_valid'?
+                                        if (h_regfile_q_valid && h_c_rvfi_valid) begin
+                                                                 ^~~~~~~~~~~~~~
+tb.sv:9:9: note: declared here
+        `RVFI_WIRES
+        ^
+rvfi_macros.vh:10441:71: note: expanded from macro 'RVFI_WIRES'
+  (* keep *) wire [`RISCV_FORMAL_NRET                        - 1 : 0] rvfi_valid    ; \
+                                                                      ^
+tb.sv:108:53: error: use of undeclared identifier 'h_c_rs1_addr'; did you mean 'rvfi_rs1_addr'?
+                                                if (h_c_rs1_addr == 0)
+                                                    ^~~~~~~~~~~~
+tb.sv:9:9: note: declared here
+        `RVFI_WIRES
+        ^
+rvfi_macros.vh:10449:71: note: expanded from macro 'RVFI_WIRES'
+  (* keep *) wire [`RISCV_FORMAL_NRET *                  5   - 1 : 0] rvfi_rs1_addr ; \
+                                                                      ^
+fatal error: too many errors emitted, stopping now [--error-limit=]
+ERROR: Compilation failed
+
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[02:34:47 INFO] Yosys: parsing the DUT and generating BTOR.
+[02:34:51 INFO] BMC: Checking correctness of all properties.
+[02:35:04 INFO] BMC found no CEX in limited steps.
+[02:35:04 INFO] Checking inductiveness of all properties.
+[02:35:49 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37] prop.
+ ID  Property               Result        
+ 0   _witness_.assert_2120  Inductive     
+ 1   _witness_.assert_2129  Inductive     
+ 2   _witness_.assert_2138  Inductive     
+ 3   _witness_.assert_2147  Inductive     
+ 4   _witness_.assert_2156  Inductive     
+ 5   _witness_.assert_2165  Inductive     
+ 6   _witness_.assert_2174  Inductive     
+ 7   _witness_.assert_2183  Inductive     
+ 8   _witness_.assert_2192  Inductive     
+ 9   _witness_.assert_2201  Inductive     
+ 10  _witness_.assert_2210  Inductive     
+ 11  _witness_.assert_2219  Inductive     
+ 12  _witness_.assert_2228  Inductive     
+ 13  _witness_.assert_2237  Inductive     
+ 14  _witness_.assert_2246  Inductive     
+ 15  _witness_.assert_2255  Inductive     
+ 16  _witness_.assert_2264  Inductive     
+ 17  _witness_.assert_2273  Inductive     
+ 18  _witness_.assert_2282  Inductive     
+ 19  _witness_.assert_2291  Inductive     
+ 20  _witness_.assert_2300  Inductive     
+ 21  _witness_.assert_2309  Inductive     
+ 22  _witness_.assert_2318  Inductive     
+ 23  _witness_.assert_2327  Inductive     
+ 24  _witness_.assert_2336  Inductive     
+ 25  _witness_.assert_2345  Inductive     
+ 26  _witness_.assert_2354  Inductive     
+ 27  _witness_.assert_2363  Inductive     
+ 28  _witness_.assert_2372  Inductive     
+ 29  _witness_.assert_2381  Inductive     
+ 30  _witness_.assert_2390  Inductive     
+ 31  h_checker_x0_shadow    Inductive     
+ 32  h_rvfi_rd_commit       Inductive     
+ 33  h_rvfi_rs1_match       Inductive     
+ 34  h_rvfi_rs1_x0          Inductive     
+ 35  h_rvfi_rs2_match       Inductive     
+ 36  h_rvfi_rs2_x0          Inductive     
+ 37  h_x0_const             Inductive     
+ 38  o_shadow_rs1r          Not Inductive 
+ 39  o_shadow_rs2r          Not Inductive 
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:reg git:(master) ✗  ric3 cill select 38
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[02:37:56 INFO] Yosys: parsing the DUT and generating BTOR.
+[02:38:00 INFO] BMC: Checking correctness of all properties.
+[02:38:14 INFO] BMC found no CEX in limited steps.
+[02:38:14 INFO] Checking inductiveness of all properties.
+[02:39:00 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39] prop.
+ ID  Property                   Result        
+ 0   _witness_.assert_2120      Inductive     
+ 1   _witness_.assert_2129      Inductive     
+ 2   _witness_.assert_2138      Inductive     
+ 3   _witness_.assert_2147      Inductive     
+ 4   _witness_.assert_2156      Inductive     
+ 5   _witness_.assert_2165      Inductive     
+ 6   _witness_.assert_2174      Inductive     
+ 7   _witness_.assert_2183      Inductive     
+ 8   _witness_.assert_2192      Inductive     
+ 9   _witness_.assert_2201      Inductive     
+ 10  _witness_.assert_2210      Inductive     
+ 11  _witness_.assert_2219      Inductive     
+ 12  _witness_.assert_2228      Inductive     
+ 13  _witness_.assert_2237      Inductive     
+ 14  _witness_.assert_2246      Inductive     
+ 15  _witness_.assert_2255      Inductive     
+ 16  _witness_.assert_2264      Inductive     
+ 17  _witness_.assert_2273      Inductive     
+ 18  _witness_.assert_2282      Inductive     
+ 19  _witness_.assert_2291      Inductive     
+ 20  _witness_.assert_2300      Inductive     
+ 21  _witness_.assert_2309      Inductive     
+ 22  _witness_.assert_2318      Inductive     
+ 23  _witness_.assert_2327      Inductive     
+ 24  _witness_.assert_2336      Inductive     
+ 25  _witness_.assert_2345      Inductive     
+ 26  _witness_.assert_2354      Inductive     
+ 27  _witness_.assert_2363      Inductive     
+ 28  _witness_.assert_2372      Inductive     
+ 29  _witness_.assert_2381      Inductive     
+ 30  _witness_.assert_2390      Inductive     
+ 31  h_checker_shadow_match     Not Inductive 
+ 32  h_checker_shadow_x0_again  Inductive     
+ 33  h_checker_x0_shadow        Inductive     
+ 34  h_rvfi_rd_commit           Inductive     
+ 35  h_rvfi_rs1_match           Inductive     
+ 36  h_rvfi_rs1_x0              Inductive     
+ 37  h_rvfi_rs2_match           Inductive     
+ 38  h_rvfi_rs2_x0              Inductive     
+ 39  h_x0_const                 Inductive     
+ 40  o_shadow_rs1r              Not Inductive 
+ 41  o_shadow_rs2r              Not Inductive 
+The CTI has been successfully blocked.
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:reg git:(master) ✗  ric3 cill select 31
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[02:42:11 INFO] Yosys: parsing the DUT and generating BTOR.
+[02:42:16 INFO] BMC: Checking correctness of all properties.
+A CEX violating _witness_.assert_2399 was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[02:43:25 INFO] Yosys: parsing the DUT and generating BTOR.
+[02:43:29 INFO] BMC: Checking correctness of all properties.
+[02:43:42 INFO] BMC found no CEX in limited steps.
+[02:43:42 INFO] Checking inductiveness of all properties.
+[02:44:28 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 64, 65, 66, 67, 68, 69, 70, 71] prop.
+ ID  Property                   Result        
+ 0   _witness_.assert_2120      Inductive     
+ 1   _witness_.assert_2129      Inductive     
+ 2   _witness_.assert_2138      Inductive     
+ 3   _witness_.assert_2147      Inductive     
+ 4   _witness_.assert_2156      Inductive     
+ 5   _witness_.assert_2165      Inductive     
+ 6   _witness_.assert_2174      Inductive     
+ 7   _witness_.assert_2183      Inductive     
+ 8   _witness_.assert_2192      Inductive     
+ 9   _witness_.assert_2201      Inductive     
+ 10  _witness_.assert_2210      Inductive     
+ 11  _witness_.assert_2219      Inductive     
+ 12  _witness_.assert_2228      Inductive     
+ 13  _witness_.assert_2237      Inductive     
+ 14  _witness_.assert_2246      Inductive     
+ 15  _witness_.assert_2255      Inductive     
+ 16  _witness_.assert_2264      Inductive     
+ 17  _witness_.assert_2273      Inductive     
+ 18  _witness_.assert_2282      Inductive     
+ 19  _witness_.assert_2291      Inductive     
+ 20  _witness_.assert_2300      Inductive     
+ 21  _witness_.assert_2309      Inductive     
+ 22  _witness_.assert_2318      Inductive     
+ 23  _witness_.assert_2327      Inductive     
+ 24  _witness_.assert_2336      Inductive     
+ 25  _witness_.assert_2345      Inductive     
+ 26  _witness_.assert_2354      Inductive     
+ 27  _witness_.assert_2363      Inductive     
+ 28  _witness_.assert_2372      Inductive     
+ 29  _witness_.assert_2381      Inductive     
+ 30  _witness_.assert_2390      Inductive     
+ 31  _witness_.assert_2399      Inductive     
+ 32  _witness_.assert_2408      Inductive     
+ 33  _witness_.assert_2417      Inductive     
+ 34  _witness_.assert_2426      Inductive     
+ 35  _witness_.assert_2435      Inductive     
+ 36  _witness_.assert_2444      Inductive     
+ 37  _witness_.assert_2453      Inductive     
+ 38  _witness_.assert_2462      Inductive     
+ 39  _witness_.assert_2471      Inductive     
+ 40  _witness_.assert_2480      Inductive     
+ 41  _witness_.assert_2489      Inductive     
+ 42  _witness_.assert_2498      Inductive     
+ 43  _witness_.assert_2507      Inductive     
+ 44  _witness_.assert_2516      Inductive     
+ 45  _witness_.assert_2525      Inductive     
+ 46  _witness_.assert_2534      Inductive     
+ 47  _witness_.assert_2543      Inductive     
+ 48  _witness_.assert_2552      Inductive     
+ 49  _witness_.assert_2561      Inductive     
+ 50  _witness_.assert_2570      Inductive     
+ 51  _witness_.assert_2579      Inductive     
+ 52  _witness_.assert_2588      Inductive     
+ 53  _witness_.assert_2597      Inductive     
+ 54  _witness_.assert_2606      Inductive     
+ 55  _witness_.assert_2615      Inductive     
+ 56  _witness_.assert_2624      Inductive     
+ 57  _witness_.assert_2633      Inductive     
+ 58  _witness_.assert_2642      Inductive     
+ 59  _witness_.assert_2651      Inductive     
+ 60  _witness_.assert_2660      Inductive     
+ 61  _witness_.assert_2669      Inductive     
+ 62  _witness_.assert_2678      Inductive     
+ 63  h_checker_shadow_match     Not Inductive 
+ 64  h_checker_shadow_x0_again  Inductive     
+ 65  h_checker_x0_shadow        Inductive     
+ 66  h_rvfi_rd_commit           Inductive     
+ 67  h_rvfi_rs1_match           Inductive     
+ 68  h_rvfi_rs1_x0              Inductive     
+ 69  h_rvfi_rs2_match           Inductive     
+ 70  h_rvfi_rs2_x0              Inductive     
+ 71  h_x0_const                 Inductive     
+ 72  o_shadow_rs1r              Not Inductive 
+ 73  o_shadow_rs2r              Not Inductive 
+The CTI of h_checker_shadow_match has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[02:47:34 INFO] Yosys: parsing the DUT and generating BTOR.
+[02:47:39 INFO] BMC: Checking correctness of all properties.
+[02:47:51 INFO] BMC found no CEX in limited steps.
+[02:47:51 INFO] Checking inductiveness of all properties.
+[02:48:38 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 64, 65, 66, 67, 68, 69, 70, 71] prop.
+ ID  Property                   Result        
+ 0   _witness_.assert_2120      Inductive     
+ 1   _witness_.assert_2129      Inductive     
+ 2   _witness_.assert_2138      Inductive     
+ 3   _witness_.assert_2147      Inductive     
+ 4   _witness_.assert_2156      Inductive     
+ 5   _witness_.assert_2165      Inductive     
+ 6   _witness_.assert_2174      Inductive     
+ 7   _witness_.assert_2183      Inductive     
+ 8   _witness_.assert_2192      Inductive     
+ 9   _witness_.assert_2201      Inductive     
+ 10  _witness_.assert_2210      Inductive     
+ 11  _witness_.assert_2219      Inductive     
+ 12  _witness_.assert_2228      Inductive     
+ 13  _witness_.assert_2237      Inductive     
+ 14  _witness_.assert_2246      Inductive     
+ 15  _witness_.assert_2255      Inductive     
+ 16  _witness_.assert_2264      Inductive     
+ 17  _witness_.assert_2273      Inductive     
+ 18  _witness_.assert_2282      Inductive     
+ 19  _witness_.assert_2291      Inductive     
+ 20  _witness_.assert_2300      Inductive     
+ 21  _witness_.assert_2309      Inductive     
+ 22  _witness_.assert_2318      Inductive     
+ 23  _witness_.assert_2327      Inductive     
+ 24  _witness_.assert_2336      Inductive     
+ 25  _witness_.assert_2345      Inductive     
+ 26  _witness_.assert_2354      Inductive     
+ 27  _witness_.assert_2363      Inductive     
+ 28  _witness_.assert_2372      Inductive     
+ 29  _witness_.assert_2381      Inductive     
+ 30  _witness_.assert_2390      Inductive     
+ 31  _witness_.assert_2399      Inductive     
+ 32  _witness_.assert_2408      Inductive     
+ 33  _witness_.assert_2417      Inductive     
+ 34  _witness_.assert_2426      Inductive     
+ 35  _witness_.assert_2435      Inductive     
+ 36  _witness_.assert_2444      Inductive     
+ 37  _witness_.assert_2453      Inductive     
+ 38  _witness_.assert_2462      Inductive     
+ 39  _witness_.assert_2471      Inductive     
+ 40  _witness_.assert_2480      Inductive     
+ 41  _witness_.assert_2489      Inductive     
+ 42  _witness_.assert_2498      Inductive     
+ 43  _witness_.assert_2507      Inductive     
+ 44  _witness_.assert_2516      Inductive     
+ 45  _witness_.assert_2525      Inductive     
+ 46  _witness_.assert_2534      Inductive     
+ 47  _witness_.assert_2543      Inductive     
+ 48  _witness_.assert_2552      Inductive     
+ 49  _witness_.assert_2561      Inductive     
+ 50  _witness_.assert_2570      Inductive     
+ 51  _witness_.assert_2579      Inductive     
+ 52  _witness_.assert_2588      Inductive     
+ 53  _witness_.assert_2597      Inductive     
+ 54  _witness_.assert_2606      Inductive     
+ 55  _witness_.assert_2615      Inductive     
+ 56  _witness_.assert_2624      Inductive     
+ 57  _witness_.assert_2633      Inductive     
+ 58  _witness_.assert_2642      Inductive     
+ 59  _witness_.assert_2651      Inductive     
+ 60  _witness_.assert_2660      Inductive     
+ 61  _witness_.assert_2669      Inductive     
+ 62  _witness_.assert_2678      Inductive     
+ 63  h_checker_shadow_match     Not Inductive 
+ 64  h_checker_shadow_x0_again  Inductive     
+ 65  h_checker_x0_shadow        Inductive     
+ 66  h_rvfi_rd_commit           Inductive     
+ 67  h_rvfi_rs1_match           Inductive     
+ 68  h_rvfi_rs1_x0              Inductive     
+ 69  h_rvfi_rs2_match           Inductive     
+ 70  h_rvfi_rs2_x0              Inductive     
+ 71  h_x0_const                 Inductive     
+ 72  o_shadow_rs1r              Not Inductive 
+ 73  o_shadow_rs2r              Not Inductive 
+The CTI has been successfully blocked.
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:reg git:(master) ✗  ric3 cill select 72
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[02:52:53 INFO] Yosys: parsing the DUT and generating BTOR.
+[02:52:57 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_checker_shadow_regfile was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[02:55:07 INFO] Yosys: parsing the DUT and generating BTOR.
+[02:55:11 INFO] BMC: Checking correctness of all properties.
+[02:55:24 INFO] BMC found no CEX in limited steps.
+[02:55:24 INFO] Checking inductiveness of all properties.
+[02:56:10 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 65, 66, 67, 68, 69, 70, 71, 72] prop.
+ ID  Property                       Result        
+ 0   _witness_.assert_2120          Inductive     
+ 1   _witness_.assert_2129          Inductive     
+ 2   _witness_.assert_2138          Inductive     
+ 3   _witness_.assert_2147          Inductive     
+ 4   _witness_.assert_2156          Inductive     
+ 5   _witness_.assert_2165          Inductive     
+ 6   _witness_.assert_2174          Inductive     
+ 7   _witness_.assert_2183          Inductive     
+ 8   _witness_.assert_2192          Inductive     
+ 9   _witness_.assert_2201          Inductive     
+ 10  _witness_.assert_2210          Inductive     
+ 11  _witness_.assert_2219          Inductive     
+ 12  _witness_.assert_2228          Inductive     
+ 13  _witness_.assert_2237          Inductive     
+ 14  _witness_.assert_2246          Inductive     
+ 15  _witness_.assert_2255          Inductive     
+ 16  _witness_.assert_2264          Inductive     
+ 17  _witness_.assert_2273          Inductive     
+ 18  _witness_.assert_2282          Inductive     
+ 19  _witness_.assert_2291          Inductive     
+ 20  _witness_.assert_2300          Inductive     
+ 21  _witness_.assert_2309          Inductive     
+ 22  _witness_.assert_2318          Inductive     
+ 23  _witness_.assert_2327          Inductive     
+ 24  _witness_.assert_2336          Inductive     
+ 25  _witness_.assert_2345          Inductive     
+ 26  _witness_.assert_2354          Inductive     
+ 27  _witness_.assert_2363          Inductive     
+ 28  _witness_.assert_2372          Inductive     
+ 29  _witness_.assert_2381          Inductive     
+ 30  _witness_.assert_2390          Inductive     
+ 31  _witness_.assert_2399          Inductive     
+ 32  _witness_.assert_2408          Inductive     
+ 33  _witness_.assert_2417          Inductive     
+ 34  _witness_.assert_2426          Inductive     
+ 35  _witness_.assert_2435          Inductive     
+ 36  _witness_.assert_2444          Inductive     
+ 37  _witness_.assert_2453          Inductive     
+ 38  _witness_.assert_2462          Inductive     
+ 39  _witness_.assert_2471          Inductive     
+ 40  _witness_.assert_2480          Inductive     
+ 41  _witness_.assert_2489          Inductive     
+ 42  _witness_.assert_2498          Inductive     
+ 43  _witness_.assert_2507          Inductive     
+ 44  _witness_.assert_2516          Inductive     
+ 45  _witness_.assert_2525          Inductive     
+ 46  _witness_.assert_2534          Inductive     
+ 47  _witness_.assert_2543          Inductive     
+ 48  _witness_.assert_2552          Inductive     
+ 49  _witness_.assert_2561          Inductive     
+ 50  _witness_.assert_2570          Inductive     
+ 51  _witness_.assert_2579          Inductive     
+ 52  _witness_.assert_2588          Inductive     
+ 53  _witness_.assert_2597          Inductive     
+ 54  _witness_.assert_2606          Inductive     
+ 55  _witness_.assert_2615          Inductive     
+ 56  _witness_.assert_2624          Inductive     
+ 57  _witness_.assert_2633          Inductive     
+ 58  _witness_.assert_2642          Inductive     
+ 59  _witness_.assert_2651          Inductive     
+ 60  _witness_.assert_2660          Inductive     
+ 61  _witness_.assert_2669          Inductive     
+ 62  _witness_.assert_2678          Inductive     
+ 63  h_checker_shadow_match         Not Inductive 
+ 64  h_checker_shadow_prev_regfile  Not Inductive 
+ 65  h_checker_shadow_x0_again      Inductive     
+ 66  h_checker_x0_shadow            Inductive     
+ 67  h_rvfi_rd_commit               Inductive     
+ 68  h_rvfi_rs1_match               Inductive     
+ 69  h_rvfi_rs1_x0                  Inductive     
+ 70  h_rvfi_rs2_match               Inductive     
+ 71  h_rvfi_rs2_x0                  Inductive     
+ 72  h_x0_const                     Inductive     
+ 73  o_shadow_rs1r                  Not Inductive 
+ 74  o_shadow_rs2r                  Not Inductive 
+The CTI has been successfully blocked.
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:reg git:(master) ✗  ric3 cill select 73
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[02:58:24 INFO] Yosys: parsing the DUT and generating BTOR.
+[02:58:28 INFO] BMC: Checking correctness of all properties.
+[02:58:42 INFO] BMC found no CEX in limited steps.
+[02:58:42 INFO] Checking inductiveness of all properties.
+[02:59:39 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196] prop.
+CIll Statistic: Total time: 2860s, Correctness check: 167s, Inductiveness check: 638s
+All properties are inductive. Proof succeeded.

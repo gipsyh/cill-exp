@@ -1,8 +1,9 @@
 Case,AVR-pf,CIll-mp,CIll-pf,CillSuccRate,CIll
-nerv/causal,Timeout,Timeout,Timeout,7/8,510
-nerv/pc_bwd,Timeout,Timeout,Timeout,1/1
+nerv/causal,Timeout,Timeout,Timeout,8/9,510
+nerv/pc_bwd,Timeout,Timeout,Timeout,2/2
 nerv/reg,Timeout,Timeout,Timeout,8/10,956
 picorv32/reg,Timeout,Timeout,Timeout
+picorv32/pc_bwd,Timeout,Timeout,Timeout
 picorv32/insn_sb,Timeout,Timeout,Timeout
 picorv32/insn_remu,Timeout,Timeout,Timeout
 picorv32/insn_mulhu,Timeout,Timeout,Timeout
@@ -31,7 +32,6 @@ serv/insn_auipc,Timeout,Timeout,Timeout
 serv/insn_addi,Timeout,Timeout,Timeout
 serv/insn_add,Timeout,Timeout,Timeout
 serv/causal,Timeout,Timeout,Timeout
-picorv32/pc_bwd,Timeout,Timeout,Timeout
 picorv32/insn_sw,Timeout,Timeout,Timeout
 picorv32/insn_sub,Timeout,Timeout,Timeout
 picorv32/insn_sltu,Timeout,Timeout,Timeout

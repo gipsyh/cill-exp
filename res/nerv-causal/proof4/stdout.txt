@@ -1,0 +1,79 @@
+➜  root@host1:causal git:(master) ✗  ric3 cill check
+[06:43:40 INFO] Yosys: parsing the DUT and generating BTOR.
+[06:43:44 INFO] BMC: Checking correctness of all properties.
+[06:44:03 INFO] BMC found no CEX in limited steps.
+[06:44:03 INFO] Checking inductiveness of all properties.
+ ID  Property  Result        
+ 0   o_causal  Not Inductive 
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:causal git:(master) ✗  ric3 cill select 0
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:causal git:(master) ✗  ric3 cill check
+[06:48:08 INFO] Yosys: parsing the DUT and generating BTOR.
+[06:48:11 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_no_found_non_causal was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:causal git:(master)  ric3 cill check
+[06:57:52 INFO] Yosys: parsing the DUT and generating BTOR.
+[06:57:55 INFO] BMC: Checking correctness of all properties.
+[06:58:12 INFO] BMC found no CEX in limited steps.
+[06:58:12 INFO] Checking inductiveness of all properties.
+[06:58:44 INFO] IC3 proved [0, 1, 2, 3] prop.
+ ID  Property                        Result        
+ 0   h_found_non_causal_rise_reason  Inductive     
+ 1   h_found_non_causal_sticky       Inductive     
+ 2   h_stable_insn_order             Inductive     
+ 3   h_stable_register_index         Inductive     
+ 4   o_causal                        Not Inductive 
+The CTI of o_causal has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:causal git:(master) ✗ 
+➜  root@host1:causal git:(master) ✗  ric3 cill check
+[07:00:07 INFO] Yosys: parsing the DUT and generating BTOR.
+[07:00:10 INFO] BMC: Checking correctness of all properties.
+[07:00:25 INFO] BMC found no CEX in limited steps.
+[07:00:25 INFO] Checking inductiveness of all properties.
+[07:00:57 INFO] IC3 proved [1, 2, 4, 5, 6] prop.
+ ID  Property                             Result        
+ 0   h_found_non_causal_implies_order_gt  Not Inductive 
+ 1   h_found_non_causal_rise_reason       Inductive     
+ 2   h_found_non_causal_sticky            Inductive     
+ 3   h_rvfi_order_nondecreasing           Not Inductive 
+ 4   h_stable_insn_order                  Inductive     
+ 5   h_stable_register_index              Inductive     
+ 6   o_causal                             Inductive     
+The CTI has been successfully blocked.
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:causal git:(master) ✗  ric3 cill check
+[07:01:17 INFO] BMC: Checking correctness of all properties.
+[07:01:31 INFO] BMC found no CEX in limited steps.
+[07:01:31 INFO] Checking inductiveness of all properties.
+[07:02:03 INFO] IC3 proved [1, 2, 4, 5, 6] prop.
+ ID  Property                             Result        
+ 0   h_found_non_causal_implies_order_gt  Not Inductive 
+ 1   h_found_non_causal_rise_reason       Inductive     
+ 2   h_found_non_causal_sticky            Inductive     
+ 3   h_rvfi_order_nondecreasing           Not Inductive 
+ 4   h_stable_insn_order                  Inductive     
+ 5   h_stable_register_index              Inductive     
+ 6   o_causal                             Inductive     
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:causal git:(master) ✗  ric3 cill check
+[07:03:07 INFO] Yosys: parsing the DUT and generating BTOR.
+[07:03:10 INFO] BMC: Checking correctness of all properties.
+[07:03:28 INFO] BMC found no CEX in limited steps.
+[07:03:28 INFO] Checking inductiveness of all properties.
+[07:04:00 INFO] IC3 proved [0, 1, 2, 3] prop.
+ ID  Property                        Result        
+ 0   h_found_non_causal_rise_reason  Inductive     
+ 1   h_found_non_causal_sticky       Inductive     
+ 2   h_stable_insn_order             Inductive     
+ 3   h_stable_register_index         Inductive     
+ 4   o_causal                        Not Inductive 
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:causal git:(master) ✗  ric3 cill check
+[07:05:42 INFO] Yosys: parsing the DUT and generating BTOR.
+[07:05:46 INFO] BMC: Checking correctness of all properties.
+[07:06:02 INFO] BMC found no CEX in limited steps.
+[07:06:02 INFO] Checking inductiveness of all properties.
+[07:06:34 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6] prop.
+CIll Statistic: Total time: 1370s, Correctness check: 103s, Inductiveness check: 197s
+All properties are inductive. Proof succeeded.

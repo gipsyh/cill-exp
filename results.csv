@@ -1,6 +1,6 @@
 Case,AVR-pf,CIll-mp,CIll-pf,CillSuccRate,CIll
 nerv/causal,Timeout,Timeout,Timeout,9/10,510
-nerv/pc_bwd,Timeout,Timeout,Timeout,2/2
+nerv/pc_bwd,Timeout,Timeout,Timeout,3/4
 nerv/reg,Timeout,Timeout,Timeout,8/10,956
 picorv32/reg,Timeout,Timeout,Timeout
 picorv32/pc_bwd,Timeout,Timeout,Timeout

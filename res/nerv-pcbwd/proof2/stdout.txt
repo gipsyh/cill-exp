@@ -1,0 +1,189 @@
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[07:45:06 INFO] Yosys: parsing the DUT and generating BTOR.
+[07:45:10 INFO] BMC: Checking correctness of all properties.
+[07:45:28 INFO] BMC found no CEX in limited steps.
+[07:45:28 INFO] Checking inductiveness of all properties.
+ ID  Property    Result        
+ 0   o_pc_rdata  Not Inductive 
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill select 0
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[07:47:47 INFO] Yosys: parsing the DUT and generating BTOR.
+[07:47:50 INFO] BMC: Checking correctness of all properties.
+[07:48:06 INFO] BMC found no CEX in limited steps.
+[07:48:06 INFO] Checking inductiveness of all properties.
+[07:48:37 INFO] IC3 proved [0, 1, 2] prop.
+ ID  Property                    Result        
+ 0   h_expect_pc_matches         Inductive     
+ 1   h_expect_valid_matches      Inductive     
+ 2   h_no_spurious_expect_valid  Inductive     
+ 3   o_pc_rdata                  Not Inductive 
+The CTI of o_pc_rdata has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[07:51:28 INFO] Yosys: parsing the DUT and generating BTOR.
+[07:51:31 INFO] BMC: Checking correctness of all properties.
+[07:51:46 INFO] BMC found no CEX in limited steps.
+[07:51:46 INFO] Checking inductiveness of all properties.
+[07:52:18 INFO] IC3 proved [0, 1, 2] prop.
+ ID  Property                            Result        
+ 0   h_expect_pc_matches                 Inductive     
+ 1   h_expect_valid_matches              Inductive     
+ 2   h_no_spurious_expect_valid          Inductive     
+ 3   h_rvfi_order_monotonic              Not Inductive 
+ 4   h_seen_next_implies_order_progress  Not Inductive 
+ 5   o_pc_rdata                          Not Inductive 
+The CTI has been successfully blocked.
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill select 4
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill select 5
+A CTI for h_seen_next_implies_order_progress already exists. It has been cleared.
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[07:56:53 INFO] Yosys: parsing the DUT and generating BTOR.
+[07:56:56 INFO] BMC: Checking correctness of all properties.
+[07:57:11 INFO] BMC found no CEX in limited steps.
+[07:57:11 INFO] Checking inductiveness of all properties.
+[07:57:43 INFO] IC3 proved [0, 1, 2, 3, 4, 5] prop.
+ ID  Property                    Result        
+ 0   h_expect_pc_matches         Inductive     
+ 1   h_expect_valid_matches      Inductive     
+ 2   h_no_spurious_expect_valid  Inductive     
+ 3   h_rvfi_order_resetq_zero    Inductive     
+ 4   h_rvfi_order_step_hold      Inductive     
+ 5   h_rvfi_order_step_inc       Inductive     
+ 6   o_pc_rdata                  Not Inductive 
+The CTI of o_pc_rdata has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[07:58:11 INFO] Yosys: parsing the DUT and generating BTOR.
+[07:58:14 INFO] BMC: Checking correctness of all properties.
+[07:58:28 INFO] BMC found no CEX in limited steps.
+[07:58:28 INFO] Checking inductiveness of all properties.
+[07:59:00 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6] prop.
+ ID  Property                    Result        
+ 0   h_expect_pc_matches         Inductive     
+ 1   h_expect_valid_matches      Inductive     
+ 2   h_no_spurious_expect_valid  Inductive     
+ 3   h_no_wrap_expect_valid      Inductive     
+ 4   h_rvfi_order_resetq_zero    Inductive     
+ 5   h_rvfi_order_step_hold      Inductive     
+ 6   h_rvfi_order_step_inc       Inductive     
+ 7   o_pc_rdata                  Not Inductive 
+The CTI has been successfully blocked.
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill select 7
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[08:01:24 INFO] Yosys: parsing the DUT and generating BTOR.
+[08:01:27 INFO] BMC: Checking correctness of all properties.
+[08:01:42 INFO] BMC found no CEX in limited steps.
+[08:01:42 INFO] Checking inductiveness of all properties.
+[08:02:14 INFO] IC3 proved [1, 2, 3, 4, 5, 6, 7] prop.
+ ID  Property                          Result        
+ 0   h_expect_implies_order_not_equal  Not Inductive 
+ 1   h_expect_pc_matches               Inductive     
+ 2   h_expect_valid_matches            Inductive     
+ 3   h_no_spurious_expect_valid        Inductive     
+ 4   h_no_wrap_expect_valid            Inductive     
+ 5   h_rvfi_order_resetq_zero          Inductive     
+ 6   h_rvfi_order_step_hold            Inductive     
+ 7   h_rvfi_order_step_inc             Inductive     
+ 8   o_pc_rdata                        Not Inductive 
+The CTI has been successfully blocked.
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[08:03:49 INFO] Yosys: parsing the DUT and generating BTOR.
+[08:03:52 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_pc_forward_link was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[08:06:23 INFO] Yosys: parsing the DUT and generating BTOR.
+[08:06:27 INFO] BMC: Checking correctness of all properties.
+[08:06:41 INFO] BMC found no CEX in limited steps.
+[08:06:41 INFO] Checking inductiveness of all properties.
+[08:07:13 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 8, 9, 10] prop.
+ ID  Property                      Result        
+ 0   h_expect_pc_matches           Inductive     
+ 1   h_expect_valid_matches        Inductive     
+ 2   h_no_spurious_expect_valid    Inductive     
+ 3   h_no_wrap_expect_valid        Inductive     
+ 4   h_rvfi_order_resetq_zero      Inductive     
+ 5   h_rvfi_order_step_hold        Inductive     
+ 6   h_rvfi_order_step_inc         Inductive     
+ 7   h_seen_next_implies_order_ge  Not Inductive 
+ 8   h_seen_order_matches          Inductive     
+ 9   h_seen_order_nonzero          Inductive     
+ 10  o_pc_rdata                    Inductive     
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[08:08:07 INFO] Yosys: parsing the DUT and generating BTOR.
+[08:08:11 INFO] BMC: Checking correctness of all properties.
+[08:08:25 INFO] BMC found no CEX in limited steps.
+[08:08:25 INFO] Checking inductiveness of all properties.
+[08:08:57 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8] prop.
+ ID  Property                    Result        
+ 0   h_expect_pc_matches         Inductive     
+ 1   h_expect_valid_matches      Inductive     
+ 2   h_no_spurious_expect_valid  Inductive     
+ 3   h_no_wrap_expect_valid      Inductive     
+ 4   h_rvfi_order_resetq_zero    Inductive     
+ 5   h_rvfi_order_step_hold      Inductive     
+ 6   h_rvfi_order_step_inc       Inductive     
+ 7   h_seen_order_matches        Inductive     
+ 8   h_seen_order_nonzero        Inductive     
+ 9   o_pc_rdata                  Not Inductive 
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[08:09:56 INFO] Yosys: parsing the DUT and generating BTOR.
+[08:10:00 INFO] BMC: Checking correctness of all properties.
+[08:10:15 INFO] BMC found no CEX in limited steps.
+[08:10:15 INFO] Checking inductiveness of all properties.
+[08:10:47 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12] prop.
+ ID  Property                        Result        
+ 0   h_expect_pc_matches             Inductive     
+ 1   h_expect_valid_matches          Inductive     
+ 2   h_no_spurious_expect_valid      Inductive     
+ 3   h_no_wrap_expect_valid          Inductive     
+ 4   h_resetq_no_reassert            Inductive     
+ 5   h_rvfi_order_resetq_zero        Inductive     
+ 6   h_rvfi_order_step_hold          Inductive     
+ 7   h_rvfi_order_step_inc           Inductive     
+ 8   h_seen_next_implies_not_resetq  Inductive     
+ 9   h_seen_next_implies_order_ge    Not Inductive 
+ 10  h_seen_order_matches            Inductive     
+ 11  h_seen_order_nonzero            Inductive     
+ 12  o_pc_rdata                      Inductive     
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[08:12:04 INFO] Yosys: parsing the DUT and generating BTOR.
+[08:12:08 INFO] BMC: Checking correctness of all properties.
+[08:12:22 INFO] BMC found no CEX in limited steps.
+[08:12:22 INFO] Checking inductiveness of all properties.
+[08:12:54 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14] prop.
+ ID  Property                        Result        
+ 0   h_expect_pc_matches             Inductive     
+ 1   h_expect_valid_matches          Inductive     
+ 2   h_no_spurious_expect_valid      Inductive     
+ 3   h_no_wrap_expect_valid          Inductive     
+ 4   h_resetq_no_reassert            Inductive     
+ 5   h_rvfi_order_resetq_zero        Inductive     
+ 6   h_rvfi_order_step_hold          Inductive     
+ 7   h_rvfi_order_step_inc           Inductive     
+ 8   h_seen_next_has_history         Inductive     
+ 9   h_seen_next_implies_not_resetq  Inductive     
+ 10  h_seen_next_implies_order_ge    Not Inductive 
+ 11  h_seen_next_sticky              Inductive     
+ 12  h_seen_order_matches            Inductive     
+ 13  h_seen_order_nonzero            Inductive     
+ 14  o_pc_rdata                      Inductive     
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill select 10
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:pc_bwd git:(master) ✗  ric3 cill check
+[08:14:26 INFO] Yosys: parsing the DUT and generating BTOR.
+[08:14:29 INFO] BMC: Checking correctness of all properties.
+[08:14:44 INFO] BMC found no CEX in limited steps.
+[08:14:44 INFO] Checking inductiveness of all properties.
+[08:15:16 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] prop.
+CIll Statistic: Total time: 1808s, Correctness check: 169s, Inductiveness check: 362s
+All properties are inductive. Proof succeeded.

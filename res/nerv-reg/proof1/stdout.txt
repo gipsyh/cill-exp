@@ -1,0 +1,283 @@
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[03:04:36 INFO] Yosys: parsing the DUT and generating BTOR.
+[03:04:40 INFO] BMC: Checking correctness of all properties.
+[03:04:52 INFO] BMC found no CEX in limited steps.
+[03:04:52 INFO] Checking inductiveness of all properties.
+ ID  Property       Result        
+ 0   o_shadow_rs1r  Not Inductive 
+ 1   o_shadow_rs2r  Not Inductive 
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:reg git:(master) ✗  ric3 cill select 0
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[03:11:53 INFO] Yosys: parsing the DUT and generating BTOR.
+[03:11:56 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_rs1_rdata_regfile was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[03:13:51 INFO] Yosys: parsing the DUT and generating BTOR.
+[03:13:54 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_rs1_rdata_regfile was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[03:17:11 INFO] Yosys: parsing the DUT and generating BTOR.
+[03:17:12 INFO] 
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.60+70 (git sha1 8101c87fa, clang++ 18.1.3 -fPIC -O3)
+
+-- Running command `read_slang -Wnone -D FORMAL -D YOSYS_SLANG rvfi_reg_check.sv nerv.sv wrapper.sv tb.sv ; prep -flatten -top testbench ; hierarchy -smtcheck -nokeep_prints ; scc -select; simplemap; select -clear ; memory_nordff ; fminit -seq reset 1,0 ; chformal -cover -remove ; chformal -early ; async2sync ; formalff -clk2ff -ff2anyinit -hierarchy -assume ; memory_map -formal ; dffunmap ; setundef -undriven -anyseq ; opt -fast ; opt_clean ; delete -output ; rename -witness ; check ; write_rtlil ../dut.il ; write_btor -ywmap ../dut.ywb -i ../dut.info ../dut.btor' --
+
+1. Executing SLANG frontend.
+Top level design units:
+    testbench
+
+
+Build failed: 20 errors, 0 warnings
+
+[03:17:12 INFO] tb.sv:43:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd0:  h_regfile_prev = $past(wrapper.uut.regfile[0]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:44:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd1:  h_regfile_prev = $past(wrapper.uut.regfile[1]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:45:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd2:  h_regfile_prev = $past(wrapper.uut.regfile[2]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:46:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd3:  h_regfile_prev = $past(wrapper.uut.regfile[3]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:47:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd4:  h_regfile_prev = $past(wrapper.uut.regfile[4]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:48:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd5:  h_regfile_prev = $past(wrapper.uut.regfile[5]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:49:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd6:  h_regfile_prev = $past(wrapper.uut.regfile[6]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:50:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd7:  h_regfile_prev = $past(wrapper.uut.regfile[7]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:51:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd8:  h_regfile_prev = $past(wrapper.uut.regfile[8]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:52:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd9:  h_regfile_prev = $past(wrapper.uut.regfile[9]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:53:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd10: h_regfile_prev = $past(wrapper.uut.regfile[10]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:54:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd11: h_regfile_prev = $past(wrapper.uut.regfile[11]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:55:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd12: h_regfile_prev = $past(wrapper.uut.regfile[12]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:56:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd13: h_regfile_prev = $past(wrapper.uut.regfile[13]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:57:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd14: h_regfile_prev = $past(wrapper.uut.regfile[14]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:58:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd15: h_regfile_prev = $past(wrapper.uut.regfile[15]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:59:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd16: h_regfile_prev = $past(wrapper.uut.regfile[16]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:60:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd17: h_regfile_prev = $past(wrapper.uut.regfile[17]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:61:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd18: h_regfile_prev = $past(wrapper.uut.regfile[18]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:62:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd19: h_regfile_prev = $past(wrapper.uut.regfile[19]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+fatal error: too many errors emitted, stopping now [--error-limit=]
+ERROR: Compilation failed
+
+Error: Yosys execution failed.
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.60+70 (git sha1 8101c87fa, clang++ 18.1.3 -fPIC -O3)
+
+-- Running command `read_slang -Wnone -D FORMAL -D YOSYS_SLANG rvfi_reg_check.sv nerv.sv wrapper.sv tb.sv ; prep -flatten -top testbench ; hierarchy -smtcheck -nokeep_prints ; scc -select; simplemap; select -clear ; memory_nordff ; fminit -seq reset 1,0 ; chformal -cover -remove ; chformal -early ; async2sync ; formalff -clk2ff -ff2anyinit -hierarchy -assume ; memory_map -formal ; dffunmap ; setundef -undriven -anyseq ; opt -fast ; opt_clean ; delete -output ; rename -witness ; check ; write_rtlil ../dut.il ; write_btor -ywmap ../dut.ywb -i ../dut.info ../dut.btor' --
+
+1. Executing SLANG frontend.
+Top level design units:
+    testbench
+
+
+Build failed: 20 errors, 0 warnings
+
+tb.sv:43:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd0:  h_regfile_prev = $past(wrapper.uut.regfile[0]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:44:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd1:  h_regfile_prev = $past(wrapper.uut.regfile[1]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:45:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd2:  h_regfile_prev = $past(wrapper.uut.regfile[2]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:46:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd3:  h_regfile_prev = $past(wrapper.uut.regfile[3]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:47:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd4:  h_regfile_prev = $past(wrapper.uut.regfile[4]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:48:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd5:  h_regfile_prev = $past(wrapper.uut.regfile[5]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:49:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd6:  h_regfile_prev = $past(wrapper.uut.regfile[6]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:50:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd7:  h_regfile_prev = $past(wrapper.uut.regfile[7]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:51:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd8:  h_regfile_prev = $past(wrapper.uut.regfile[8]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:52:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd9:  h_regfile_prev = $past(wrapper.uut.regfile[9]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:53:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd10: h_regfile_prev = $past(wrapper.uut.regfile[10]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:54:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd11: h_regfile_prev = $past(wrapper.uut.regfile[11]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:55:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd12: h_regfile_prev = $past(wrapper.uut.regfile[12]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:56:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd13: h_regfile_prev = $past(wrapper.uut.regfile[13]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:57:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd14: h_regfile_prev = $past(wrapper.uut.regfile[14]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:58:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd15: h_regfile_prev = $past(wrapper.uut.regfile[15]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:59:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd16: h_regfile_prev = $past(wrapper.uut.regfile[16]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:60:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd17: h_regfile_prev = $past(wrapper.uut.regfile[17]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:61:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd18: h_regfile_prev = $past(wrapper.uut.regfile[18]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tb.sv:62:41: error: system function '$past' can only be called within a clocked procedural block with explicit timing
+                5'd19: h_regfile_prev = $past(wrapper.uut.regfile[19]);
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+fatal error: too many errors emitted, stopping now [--error-limit=]
+ERROR: Compilation failed
+
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[03:19:46 INFO] Yosys: parsing the DUT and generating BTOR.
+[03:19:49 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_shadow_regfile was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[03:22:02 INFO] Yosys: parsing the DUT and generating BTOR.
+[03:22:06 INFO] BMC: Checking correctness of all properties.
+[03:22:18 INFO] BMC found no CEX in limited steps.
+[03:22:18 INFO] Checking inductiveness of all properties.
+[03:22:51 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6] prop.
+ ID  Property             Result        
+ 0   h_rs1_rdata_regfile  Inductive     
+ 1   h_rs1_rdata_x0       Inductive     
+ 2   h_rs2_rdata_regfile  Inductive     
+ 3   h_rs2_rdata_x0       Inductive     
+ 4   h_shadow_hold        Inductive     
+ 5   h_shadow_update      Inductive     
+ 6   h_shadow_x0          Inductive     
+ 7   o_shadow_rs1r        Not Inductive 
+ 8   o_shadow_rs2r        Not Inductive 
+The CTI of o_shadow_rs1r has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[03:25:59 INFO] Yosys: parsing the DUT and generating BTOR.
+[03:26:03 INFO] BMC: Checking correctness of all properties.
+[03:26:16 INFO] BMC found no CEX in limited steps.
+[03:26:16 INFO] Checking inductiveness of all properties.
+[03:26:48 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8] prop.
+ ID  Property             Result        
+ 0   h_rd_wdata_regfile   Inductive     
+ 1   h_rd_wdata_x0        Inductive     
+ 2   h_rs1_rdata_regfile  Inductive     
+ 3   h_rs1_rdata_x0       Inductive     
+ 4   h_rs2_rdata_regfile  Inductive     
+ 5   h_rs2_rdata_x0       Inductive     
+ 6   h_shadow_hold        Inductive     
+ 7   h_shadow_update      Inductive     
+ 8   h_shadow_x0          Inductive     
+ 9   o_shadow_rs1r        Not Inductive 
+ 10  o_shadow_rs2r        Not Inductive 
+The CTI of o_shadow_rs1r has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[03:28:20 INFO] Yosys: parsing the DUT and generating BTOR.
+[03:28:20 INFO] 
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.60+70 (git sha1 8101c87fa, clang++ 18.1.3 -fPIC -O3)
+
+-- Running command `read_slang -Wnone -D FORMAL -D YOSYS_SLANG rvfi_reg_check.sv nerv.sv wrapper.sv tb.sv ; prep -flatten -top testbench ; hierarchy -smtcheck -nokeep_prints ; scc -select; simplemap; select -clear ; memory_nordff ; fminit -seq reset 1,0 ; chformal -cover -remove ; chformal -early ; async2sync ; formalff -clk2ff -ff2anyinit -hierarchy -assume ; memory_map -formal ; dffunmap ; setundef -undriven -anyseq ; opt -fast ; opt_clean ; delete -output ; rename -witness ; check ; write_rtlil ../dut.il ; write_btor -ywmap ../dut.ywb -i ../dut.info ../dut.btor' --
+
+1. Executing SLANG frontend.
+Top level design units:
+    testbench
+
+
+Build failed: 1 error, 0 warnings
+
+[03:28:20 INFO] tb.sv:183:25: error: redefinition of 'h_shadow_regfile_prev'
+                        h_shadow_regfile_prev: assert(checker_inst.register_shadow == h_shadow_regfile_prev);
+                        ^
+tb.sv:42:12: note: previous definition here
+reg [31:0] h_shadow_regfile_prev;
+           ^
+ERROR: Compilation failed
+
+Error: Yosys execution failed.
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.60+70 (git sha1 8101c87fa, clang++ 18.1.3 -fPIC -O3)
+
+-- Running command `read_slang -Wnone -D FORMAL -D YOSYS_SLANG rvfi_reg_check.sv nerv.sv wrapper.sv tb.sv ; prep -flatten -top testbench ; hierarchy -smtcheck -nokeep_prints ; scc -select; simplemap; select -clear ; memory_nordff ; fminit -seq reset 1,0 ; chformal -cover -remove ; chformal -early ; async2sync ; formalff -clk2ff -ff2anyinit -hierarchy -assume ; memory_map -formal ; dffunmap ; setundef -undriven -anyseq ; opt -fast ; opt_clean ; delete -output ; rename -witness ; check ; write_rtlil ../dut.il ; write_btor -ywmap ../dut.ywb -i ../dut.info ../dut.btor' --
+
+1. Executing SLANG frontend.
+Top level design units:
+    testbench
+
+
+Build failed: 1 error, 0 warnings
+
+tb.sv:183:25: error: redefinition of 'h_shadow_regfile_prev'
+                        h_shadow_regfile_prev: assert(checker_inst.register_shadow == h_shadow_regfile_prev);
+                        ^
+tb.sv:42:12: note: previous definition here
+reg [31:0] h_shadow_regfile_prev;
+           ^
+ERROR: Compilation failed
+
+➜  root@host1:reg git:(master) ✗  ric3 cill check
+[03:28:46 INFO] Yosys: parsing the DUT and generating BTOR.
+[03:28:50 INFO] BMC: Checking correctness of all properties.
+[03:29:03 INFO] BMC found no CEX in limited steps.
+[03:29:03 INFO] Checking inductiveness of all properties.
+[03:29:36 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] prop.
+CIll Statistic: Total time: 1524s, Correctness check: 65s, Inductiveness check: 212s
+All properties are inductive. Proof succeeded.

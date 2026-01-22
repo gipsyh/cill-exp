@@ -13,7 +13,7 @@ picorv32/insn_auipc,Timeout,Timeout,Timeout
 nerv/reg,Timeout,Timeout,Timeout,6/6,956
 nerv/csrc_upcnt_minstret,Timeout,Memout,Timeout,
 nerv/csrc_upcnt_mcycle,Timeout,Memout,Timeout,
-nerv/causal,Timeout,Memout,Timeout,2/2,325
+nerv/causal,Timeout,Memout,Timeout,4/4,510
 nerv/pc_bwd,Timeout,Memout,Memout,
 serv/reg,Timeout,Timeout,NotRun
 serv/pc_bwd,Timeout,Timeout,NotRun

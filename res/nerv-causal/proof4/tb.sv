@@ -36,22 +36,13 @@ module testbench (
 	);
 
 /// Helper Assertion Begin
-// Track whether the global order has ever surpassed the selected instruction
-// order. This avoids wrap-around issues in pure order comparisons.
-reg h_order_gt_insn;
-always @(posedge clock) begin
-	if (reset) begin
-		h_order_gt_insn <= 1'b0;
-	end else if (checker_inst.rvfi_order > checker_inst.insn_order) begin
-		h_order_gt_insn <= 1'b1;
+	always @(posedge clock) begin
+		if (!reset && !rvfi_order_loopback) begin
+			h_found_non_causal_implies_later_order: assert(
+				!checker_inst.found_non_causal || (rvfi_order > checker_inst.insn_order)
+			);
+		end
 	end
-end
 
-// A non-causal flag can only be true after rvfi_order has surpassed insn_order.
-always @(posedge clock) begin
-	if (!reset) begin
-		h_found_non_causal_after_order: assert(!checker_inst.found_non_causal || h_order_gt_insn);
-	end
-end
 /// Helper Assertion End
 endmodule

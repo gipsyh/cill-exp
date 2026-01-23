@@ -3,7 +3,7 @@ nerv/causal,Timeout,Timeout,Timeout,9/10,510
 nerv/pc_bwd,Timeout,Timeout,Timeout,9/10,566
 nerv/reg,Timeout,Timeout,Timeout,8/10,956
 picorv32/reg,Timeout,Timeout,Timeout
-picorv32/pc_bwd,Timeout,Timeout,Timeout
+picorv32/pc_bwd,Timeout,Timeout,Timeout,1/1
 picorv32/insn_sb,Timeout,Timeout,Timeout
 picorv32/insn_remu,Timeout,Timeout,Timeout
 picorv32/insn_mulhu,Timeout,Timeout,Timeout

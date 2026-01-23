@@ -48,3 +48,11 @@ You can use it to check whether the assertions are inductive and generate CTI.
     ```
 - Submodule signals can be accessed using '.' notation.
 - `ric3` restricts the reset signal to be high only at cycle 0 (step 0 in CEX (NOT CTI)), with no resets afterward (`fminit -seq reset 0,1`). During cycle 0, register values may be non-deterministic. Therefore, make sure invariants are checked post-reset: `if (!reset) h_*: assert`.
+- There are no built-in quantifiers. If you need quantification, you can emulate it by introducing an intermediate signal:
+```systemverilog
+  wire [W-1:0] any;
+  always @(posedge clk) begin
+    if (!reset)
+      h_*: assert(array[any] > 0);
+  end
+```

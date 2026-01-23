@@ -1,9 +1,3 @@
-[submodule "deps/riscv-formal"]
-	path = deps/riscv-formal
-	url = https://github.com/gipsyh/riscv-formal
-[submodule "deps/sby"]
-	path = deps/sby
-	url = https://github.com/gipsyh/sby
 [submodule "deps/yosys-slang"]
 	path = deps/yosys-slang
 	url = https://github.com/gipsyh/yosys-slang

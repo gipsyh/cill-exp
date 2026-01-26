@@ -42,6 +42,38 @@ def count_asserts_in_file(file_path):
     return len(matches)
 
 
+def count_helper_assertion_lines(file_path):
+    """
+    Count the number of code lines between "/// Helper Assertion Begin" 
+    and "/// Helper Assertion End" markers in a file.
+    Returns the total line count, or 0 if markers are not found.
+    """
+    if not file_path.exists():
+        return 0
+    
+    with open(file_path, 'r') as f:
+        lines = f.readlines()
+    
+    line_count = 0
+    inside_helper_block = False
+    
+    for line in lines:
+        stripped = line.strip()
+        
+        if '/// Helper Assertion Begin' in line:
+            inside_helper_block = True
+            continue  # Don't count the begin marker line itself
+        elif '/// Helper Assertion End' in line:
+            inside_helper_block = False
+            continue  # Don't count the end marker line itself
+        
+        if inside_helper_block:
+            # Count all lines including blank lines and comments
+            line_count += 1
+    
+    return line_count
+
+
 def parse_cill_statistic_line(line):
     """
     Parse a line like:
@@ -85,6 +117,7 @@ def analyze_directory(root_dir):
     
     stats_list = []
     assert_counts = []
+    helper_line_counts = []
     
     # Process each proof directory
     for proof_dir in sorted(proof_dirs):
@@ -109,6 +142,12 @@ def analyze_directory(root_dir):
                         if assert_count > 0:
                             assert_counts.append(assert_count)
                         
+                        # Count helper assertion lines
+                        helper_lines = count_helper_assertion_lines(tb_file)
+                        stats['helper_lines'] = helper_lines
+                        if helper_lines > 0:
+                            helper_line_counts.append(helper_lines)
+                        
                         stats_list.append(stats)
                         break
     
@@ -127,6 +166,7 @@ def analyze_directory(root_dir):
     avg_total_time = sum(total_times) / len(total_times)
     avg_percentage = sum(percentages) / len(percentages)
     avg_assert_count = sum(assert_counts) / len(assert_counts) if assert_counts else 0
+    avg_helper_lines = sum(helper_line_counts) / len(helper_line_counts) if helper_line_counts else 0
     
     # Print results
     print("=" * 80)
@@ -137,6 +177,7 @@ def analyze_directory(root_dir):
     print(f"Average total time: {avg_total_time:.2f}s")
     print(f"Average (Correctness + Inductiveness) / Total time: {avg_percentage:.2f}%")
     print(f"Average assert count in tb.sv: {avg_assert_count:.2f}")
+    print(f"Average helper assertion lines: {avg_helper_lines:.2f}")
     print("\n" + "=" * 80)
     print("INDIVIDUAL RESULTS")
     print("=" * 80)
@@ -149,6 +190,7 @@ def analyze_directory(root_dir):
         print(f"  Inductiveness check: {stats['inductiveness_time']}s")
         print(f"  Combined percentage: {pct:.2f}%")
         print(f"  Assert count: {stats['assert_count']}")
+        print(f"  Helper assertion lines: {stats['helper_lines']}")
 
 
 if __name__ == '__main__':

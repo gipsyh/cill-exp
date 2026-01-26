@@ -1,0 +1,22 @@
+➜  root@host1:csrc_upcnt_mcycle git:(master) ✗  ric3 cill check
+[07:20:52 INFO] Yosys: parsing the DUT and generating BTOR.
+[07:20:55 INFO] BMC: Checking correctness of all properties.
+[07:21:13 INFO] BMC found no CEX in limited steps.
+[07:21:13 INFO] Checking inductiveness of all properties.
+ ID  Property  Result        
+ 0   o_check   Not Inductive 
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:csrc_upcnt_mcycle git:(master) ✗  ric3 cill select 0
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:csrc_upcnt_mcycle git:(master) ✗  ric3 cill check
+[07:28:43 INFO] Yosys: parsing the DUT and generating BTOR.
+[07:28:46 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_mcycle_incr was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:csrc_upcnt_mcycle git:(master) ✗  ric3 cill check
+[07:33:01 INFO] Yosys: parsing the DUT and generating BTOR.
+[07:33:05 INFO] BMC: Checking correctness of all properties.
+[07:33:22 INFO] BMC found no CEX in limited steps.
+[07:33:22 INFO] Checking inductiveness of all properties.
+[07:34:29 INFO] IC3 proved [0, 1] prop.
+CIll Statistic: Total time: 815s, Correctness check: 39s, Inductiveness check: 131s
+All properties are inductive. Proof succeeded.

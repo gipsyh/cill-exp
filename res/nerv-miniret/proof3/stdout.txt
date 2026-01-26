@@ -1,0 +1,42 @@
+➜  root@host1:csrc_upcnt_minstret git:(master) ✗  ric3 cill check
+[10:45:17 INFO] Yosys: parsing the DUT and generating BTOR.
+[10:45:20 INFO] BMC: Checking correctness of all properties.
+[10:45:38 INFO] BMC found no CEX in limited steps.
+[10:45:38 INFO] Checking inductiveness of all properties.
+ ID  Property  Result        
+ 0   o_check   Not Inductive 
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:csrc_upcnt_minstret git:(master) ✗  ric3 cill select 0
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:csrc_upcnt_minstret git:(master) ✗  ric3 cill check
+[10:54:40 INFO] Yosys: parsing the DUT and generating BTOR.
+[10:54:43 INFO] BMC: Checking correctness of all properties.
+[10:55:02 INFO] BMC found no CEX in limited steps.
+[10:55:02 INFO] Checking inductiveness of all properties.
+ ID  Property              Result        
+ 0   h_shadow_le_minstret  Inductive     
+ 1   o_check               Not Inductive 
+The CTI of o_check has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:csrc_upcnt_minstret git:(master) ✗  ric3 cill check
+[10:58:49 INFO] Yosys: parsing the DUT and generating BTOR.
+[10:58:52 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_no_rvfi_when_stall was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:csrc_upcnt_minstret git:(master) ✗  ric3 cill check
+[10:59:29 INFO] Yosys: parsing the DUT and generating BTOR.
+[10:59:32 INFO] BMC: Checking correctness of all properties.
+[10:59:52 INFO] BMC found no CEX in limited steps.
+[10:59:52 INFO] Checking inductiveness of all properties.
+[11:00:57 INFO] IC3 proved [0] prop.
+ ID  Property               Result        
+ 0   h_no_rvfi_after_stall  Inductive     
+ 1   h_shadow_le_minstret   Inductive     
+ 2   o_check                Not Inductive 
+The CTI of o_check has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:csrc_upcnt_minstret git:(master) ✗  ric3 cill check
+[11:03:36 INFO] Yosys: parsing the DUT and generating BTOR.
+[11:03:39 INFO] BMC: Checking correctness of all properties.
+[11:03:57 INFO] BMC found no CEX in limited steps.
+[11:03:57 INFO] Checking inductiveness of all properties.
+[11:05:03 INFO] IC3 proved [1] prop.
+CIll Statistic: Total time: 1184s, Correctness check: 77s, Inductiveness check: 261s
+All properties are inductive. Proof succeeded.

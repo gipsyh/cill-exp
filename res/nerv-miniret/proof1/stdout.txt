@@ -1,0 +1,37 @@
+➜  root@host1:csrc_upcnt_minstret git:(master) ✗  ric3 cill check
+[09:47:57 INFO] Yosys: parsing the DUT and generating BTOR.
+[09:48:00 INFO] BMC: Checking correctness of all properties.
+[09:48:18 INFO] BMC found no CEX in limited steps.
+[09:48:18 INFO] Checking inductiveness of all properties.
+ ID  Property  Result        
+ 0   o_check   Not Inductive 
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:csrc_upcnt_minstret git:(master) ✗  ric3 cill select 0
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:csrc_upcnt_minstret git:(master) ✗  ric3 cill check
+[09:53:58 INFO] Yosys: parsing the DUT and generating BTOR.
+[09:54:01 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_rvfi_minstret_matches_core was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:csrc_upcnt_minstret git:(master) ✗  ric3 cill check
+[09:54:49 INFO] Yosys: parsing the DUT and generating BTOR.
+[09:54:52 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_minstret_no_decrease was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:csrc_upcnt_minstret git:(master) ✗  ric3 cill check
+[09:55:37 INFO] Yosys: parsing the DUT and generating BTOR.
+[09:55:40 INFO] BMC: Checking correctness of all properties.
+[09:55:59 INFO] BMC found no CEX in limited steps.
+[09:55:59 INFO] Checking inductiveness of all properties.
+[09:57:05 INFO] IC3 proved [0] prop.
+ ID  Property                      Result        
+ 0   h_rvfi_minstret_matches_core  Inductive     
+ 1   h_shadow_leq_core_minstret    Inductive     
+ 2   o_check                       Not Inductive 
+The CTI of o_check has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:csrc_upcnt_minstret git:(master) ✗  ric3 cill check
+[09:57:35 INFO] Yosys: parsing the DUT and generating BTOR.
+[09:57:39 INFO] BMC: Checking correctness of all properties.
+[09:57:56 INFO] BMC found no CEX in limited steps.
+[09:57:56 INFO] Checking inductiveness of all properties.
+[09:59:02 INFO] IC3 proved [0] prop.
+CIll Statistic: Total time: 663s, Correctness check: 60s, Inductiveness check: 196s
+All properties are inductive. Proof succeeded.

@@ -1,0 +1,103 @@
+➜  root@host1:csrc_upcnt_mcycle git:(master) ✗  ric3 cill check
+[07:36:42 INFO] Yosys: parsing the DUT and generating BTOR.
+[07:36:45 INFO] BMC: Checking correctness of all properties.
+[07:37:03 INFO] BMC found no CEX in limited steps.
+[07:37:03 INFO] Checking inductiveness of all properties.
+ ID  Property  Result        
+ 0   o_check   Not Inductive 
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:csrc_upcnt_mcycle git:(master) ✗  ric3 cill select 0
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:csrc_upcnt_mcycle git:(master) ✗  ric3 cill check
+[07:39:33 INFO] Yosys: parsing the DUT and generating BTOR.
+[07:39:36 INFO] BMC: Checking correctness of all properties.
+[07:39:54 INFO] BMC found no CEX in limited steps.
+[07:39:54 INFO] Checking inductiveness of all properties.
+[07:40:58 INFO] IC3 proved [0] prop.
+ ID  Property                        Result        
+ 0   h_shadow_requires_sample_phase  Inductive     
+ 1   o_check                         Not Inductive 
+The CTI of o_check has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:csrc_upcnt_mcycle git:(master)  ric3 cill check
+[07:44:07 INFO] Yosys: parsing the DUT and generating BTOR.
+[07:44:11 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_mcycle_value_follows_next was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:csrc_upcnt_mcycle git:(master)  ric3 cill check
+[07:46:33 INFO] Yosys: parsing the DUT and generating BTOR.
+[07:46:37 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_csr_read_matches_mcycle was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:csrc_upcnt_mcycle git:(master)  ric3 cill check
+[07:51:12 INFO] Yosys: parsing the DUT and generating BTOR.
+[07:51:15 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_mcycle_holds_on_stall was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:csrc_upcnt_mcycle git:(master)  ric3 cill check
+[07:54:27 INFO] Yosys: parsing the DUT and generating BTOR.
+[07:54:30 INFO] BMC: Checking correctness of all properties.
+[07:54:49 INFO] BMC found no CEX in limited steps.
+[07:54:49 INFO] Checking inductiveness of all properties.
+[07:55:58 INFO] IC3 proved [0, 1, 2, 3, 4, 5] prop.
+ ID  Property                         Result        
+ 0   h_csr_read_matches_mcycle        Inductive     
+ 1   h_mcycle_next_is_wdata_plus_one  Inductive     
+ 2   h_mcycle_value_follows_next      Inductive     
+ 3   h_shadow_equals_prev_read        Inductive     
+ 4   h_shadow_requires_sample_phase   Inductive     
+ 5   h_shadow_sets_on_sample          Inductive     
+ 6   o_check                          Not Inductive 
+The CTI has been successfully blocked.
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:csrc_upcnt_mcycle git:(master)  ric3 cill select 6
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:csrc_upcnt_mcycle git:(master)  ric3 cill check
+[07:57:25 INFO] Yosys: parsing the DUT and generating BTOR.
+[07:57:29 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_shadow_sets_on_sample was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:csrc_upcnt_mcycle git:(master)  ric3 cill check
+[07:59:27 INFO] Yosys: parsing the DUT and generating BTOR.
+[07:59:30 INFO] BMC: Checking correctness of all properties.
+[07:59:48 INFO] BMC found no CEX in limited steps.
+[07:59:48 INFO] Checking inductiveness of all properties.
+[08:00:59 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7] prop.
+ ID  Property                         Result        
+ 0   h_csr_read_matches_mcycle        Inductive     
+ 1   h_mcycle_next_is_wdata_plus_one  Inductive     
+ 2   h_mcycle_value_follows_next      Inductive     
+ 3   h_shadow_equals_prev_read        Inductive     
+ 4   h_shadow_matches_last_sample     Inductive     
+ 5   h_shadow_requires_sample_phase   Inductive     
+ 6   h_shadow_sets_on_sample          Inductive     
+ 7   h_shadowed_requires_sample_read  Inductive     
+ 8   o_check                          Not Inductive 
+The CTI of o_check has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:csrc_upcnt_mcycle git:(master)  ric3 cill select 8
+A CTI for o_check already exists. It has been cleared.
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:csrc_upcnt_mcycle git:(master)  ric3 cill check
+[08:01:52 INFO] Yosys: parsing the DUT and generating BTOR.
+[08:01:56 INFO] BMC: Checking correctness of all properties.
+[08:02:14 INFO] BMC found no CEX in limited steps.
+[08:02:14 INFO] Checking inductiveness of all properties.
+[08:03:27 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6, 7, 8] prop.
+ ID  Property                         Result        
+ 0   h_csr_read_matches_mcycle        Inductive     
+ 1   h_mcycle_next_is_wdata_plus_one  Inductive     
+ 2   h_mcycle_value_follows_next      Inductive     
+ 3   h_shadow_equals_prev_read        Inductive     
+ 4   h_shadow_matches_last_sample     Inductive     
+ 5   h_shadow_no_overflow             Inductive     
+ 6   h_shadow_requires_sample_phase   Inductive     
+ 7   h_shadow_sets_on_sample          Inductive     
+ 8   h_shadowed_requires_sample_read  Inductive     
+ 9   o_check                          Not Inductive 
+The CTI has been successfully blocked.
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:csrc_upcnt_mcycle git:(master)  ric3 cill select 9
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:csrc_upcnt_mcycle git:(master)  ric3 cill check
+[08:04:50 INFO] Yosys: parsing the DUT and generating BTOR.
+[08:04:54 INFO] BMC: Checking correctness of all properties.
+[08:05:11 INFO] BMC found no CEX in limited steps.
+[08:05:11 INFO] Checking inductiveness of all properties.
+[08:06:25 INFO] IC3 proved [0, 1, 2, 3, 5, 6, 7, 8, 9] prop.
+CIll Statistic: Total time: 1781s, Correctness check: 121s, Inductiveness check: 418s
+All properties are inductive. Proof succeeded.

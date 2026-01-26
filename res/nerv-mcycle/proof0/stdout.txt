@@ -1,0 +1,115 @@
+➜  root@host1:csrc_upcnt_mcycle git:(master) ✗  ric3 cill check
+[08:07:43 INFO] Yosys: parsing the DUT and generating BTOR.
+[08:07:46 INFO] BMC: Checking correctness of all properties.
+[08:08:04 INFO] BMC found no CEX in limited steps.
+[08:08:04 INFO] Checking inductiveness of all properties.
+ ID  Property  Result        
+ 0   o_check   Not Inductive 
+Please run 'ric3 cill select <ID>' to select an non-inductive assertion for CTI generation.
+➜  root@host1:csrc_upcnt_mcycle git:(master) ✗  ric3 cill select 0
+CTI VCD generated in ric3proj/cill/cti.vcd.
+➜  root@host1:csrc_upcnt_mcycle git:(master) ✗  ric3 cill check
+[08:11:15 INFO] Yosys: parsing the DUT and generating BTOR.
+[08:11:15 INFO] 
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.60+70 (git sha1 8101c87fa, clang++ 18.1.3 -fPIC -O3)
+
+-- Running command `read_slang -Wnone -D FORMAL -D YOSYS_SLANG rvfi_csrc_upcnt_check.sv nerv.sv wrapper.sv tb.sv ; prep -flatten -top testbench ; hierarchy -smtcheck -nokeep_prints ; scc -select; simplemap; select -clear ; memory_nordff ; fminit -seq reset 1,0 ; chformal -cover -remove ; chformal -early ; async2sync ; formalff -clk2ff -ff2anyinit -hierarchy -assume ; memory_map -formal ; dffunmap ; setundef -undriven -anyseq ; opt -fast ; opt_clean ; delete -output ; rename -witness ; check ; write_rtlil ../dut.il ; write_btor -ywmap ../dut.ywb -i ../dut.info ../dut.btor' --
+
+1. Executing SLANG frontend.
+Top level design units:
+    testbench
+
+
+Build failed: 2 errors, 0 warnings
+
+[08:11:15 INFO] tb.sv:54:25: error: redefinition of 'h_shadowed_seen'
+                        h_shadowed_seen: assert(checker_inst.csr_read_shadowed == h_shadowed_seen);
+                        ^
+tb.sv:41:13: note: previous definition here
+        reg h_shadowed_seen;
+            ^
+tb.sv:55:25: error: redefinition of 'h_rdata_shadow'
+                        h_rdata_shadow: assert(checker_inst.rdata_shadow == h_rdata_shadow);
+                        ^
+tb.sv:42:38: note: previous definition here
+        reg [`RISCV_FORMAL_XLEN-1:0] h_rdata_shadow;
+                                     ^
+ERROR: Compilation failed
+
+Error: Yosys execution failed.
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.60+70 (git sha1 8101c87fa, clang++ 18.1.3 -fPIC -O3)
+
+-- Running command `read_slang -Wnone -D FORMAL -D YOSYS_SLANG rvfi_csrc_upcnt_check.sv nerv.sv wrapper.sv tb.sv ; prep -flatten -top testbench ; hierarchy -smtcheck -nokeep_prints ; scc -select; simplemap; select -clear ; memory_nordff ; fminit -seq reset 1,0 ; chformal -cover -remove ; chformal -early ; async2sync ; formalff -clk2ff -ff2anyinit -hierarchy -assume ; memory_map -formal ; dffunmap ; setundef -undriven -anyseq ; opt -fast ; opt_clean ; delete -output ; rename -witness ; check ; write_rtlil ../dut.il ; write_btor -ywmap ../dut.ywb -i ../dut.info ../dut.btor' --
+
+1. Executing SLANG frontend.
+Top level design units:
+    testbench
+
+
+Build failed: 2 errors, 0 warnings
+
+tb.sv:54:25: error: redefinition of 'h_shadowed_seen'
+                        h_shadowed_seen: assert(checker_inst.csr_read_shadowed == h_shadowed_seen);
+                        ^
+tb.sv:41:13: note: previous definition here
+        reg h_shadowed_seen;
+            ^
+tb.sv:55:25: error: redefinition of 'h_rdata_shadow'
+                        h_rdata_shadow: assert(checker_inst.rdata_shadow == h_rdata_shadow);
+                        ^
+tb.sv:42:38: note: previous definition here
+        reg [`RISCV_FORMAL_XLEN-1:0] h_rdata_shadow;
+                                     ^
+ERROR: Compilation failed
+
+➜  root@host1:csrc_upcnt_mcycle git:(master) ✗  ric3 cill check
+[08:11:28 INFO] Yosys: parsing the DUT and generating BTOR.
+[08:11:32 INFO] BMC: Checking correctness of all properties.
+[08:11:49 INFO] BMC found no CEX in limited steps.
+[08:11:49 INFO] Checking inductiveness of all properties.
+[08:12:55 INFO] IC3 proved [0, 1] prop.
+ ID  Property             Result        
+ 0   h_rdata_shadow_inv   Inductive     
+ 1   h_shadowed_seen_inv  Inductive     
+ 2   o_check              Not Inductive 
+The CTI of o_check has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:csrc_upcnt_mcycle git:(master) ✗  ric3 cill check
+[08:17:04 INFO] Yosys: parsing the DUT and generating BTOR.
+[08:17:07 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_mcycle_rdata_matches was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:csrc_upcnt_mcycle git:(master) ✗  ric3 cill check
+[08:19:00 INFO] Yosys: parsing the DUT and generating BTOR.
+[08:19:03 INFO] BMC: Checking correctness of all properties.
+A CEX violating h_mcycle_sel_on_read was found. VCD generated at ric3proj/cill/cex.vcd.
+➜  root@host1:csrc_upcnt_mcycle git:(master) ✗  ric3 cill check
+[08:19:45 INFO] Yosys: parsing the DUT and generating BTOR.
+[08:19:48 INFO] BMC: Checking correctness of all properties.
+[08:20:06 INFO] BMC found no CEX in limited steps.
+[08:20:06 INFO] Checking inductiveness of all properties.
+[08:21:13 INFO] IC3 proved [0, 1, 2, 3] prop.
+ ID  Property                     Result        
+ 0   h_mcycle_rdata_matches_past  Inductive     
+ 1   h_mcycle_sel_on_read         Inductive     
+ 2   h_rdata_shadow_inv           Inductive     
+ 3   h_shadowed_seen_inv          Inductive     
+ 4   o_check                      Not Inductive 
+The CTI of o_check has not been blocked yet. ric3proj/cill/cti.vcd refreshed.
+➜  root@host1:csrc_upcnt_mcycle git:(master) ✗  ric3 cill check
+[08:22:26 INFO] Yosys: parsing the DUT and generating BTOR.
+[08:22:30 INFO] BMC: Checking correctness of all properties.
+[08:22:48 INFO] BMC found no CEX in limited steps.
+[08:22:48 INFO] Checking inductiveness of all properties.
+[08:23:56 INFO] IC3 proved [0, 1, 2, 4] prop.
+CIll Statistic: Total time: 971s, Correctness check: 77s, Inductiveness check: 267s
+All properties are inductive. Proof succeeded.

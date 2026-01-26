@@ -14,6 +14,5 @@ always @(posedge clock) begin
 end
 always_comb assume (!(rvfi_order_loopback && check));
 ```
-- We also made a small tweak to `bwd_check` to avoid recording shadow state during `rvfi_order` wrap-around.
 - Since native Yosys does not support hierarchical references to internal module signals, rIC3 utilizes the slang-plugin with Yosys to parse the RTL.
 - For ease of agent analysis and to allow multiple checks to run concurrently, each check includes all RTL files via symbolic links.

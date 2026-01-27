@@ -57,7 +57,6 @@ generate
     h_*: assert (array[i] > 0);
   end
 endgenerate
-
 /// Recommended:
 wire [$clog2(W)-1:0] any;
 always @(posedge clk) begin

@@ -1,7 +1,7 @@
 # rIC3 CIll Artifact
 
-
 ### Note
+- Cover and liveness cases are ignored.
 - Historically, riscv-formal mainly targeted bounded checking. As a result, some checks may not be sound under unbounded proofs. For example, `rvfi_order` can overflow and wrap around (loop back), which can interfere with certain checks. We prevent this by adding an `assume` constraint as shown below.
 ```systemverilog
 reg rvfi_order_loopback;

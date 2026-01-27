@@ -15,6 +15,8 @@ B=(
   "insn_bexti"
   "insn_bge"
   "insn_bgeu"
+  "insn_blt"
+  "insn_bltu"
   "insn_binv"
   "insn_binvi"
   "insn_bne"

@@ -1,0 +1,5 @@
+[18:56:13 INFO] Yosys: parsing the DUT and generating BTOR.
+[18:56:14 INFO] BMC: Checking correctness of all properties.
+… +4 lines
+CIll Statistic: Total time: 15228s, Correctness check: 586s, Inductiveness check: 6140s
+All properties are inductive. Proof succeeded.

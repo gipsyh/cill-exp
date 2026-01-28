@@ -7,3 +7,6 @@
 [submodule "deps/yosys"]
 	path = deps/yosys
 	url = https://github.com/gipsyh/yosys
+[submodule "deps/riscv-formal"]
+	path = deps/riscv-formal
+	url = https://github.com/YosysHQ/riscv-formal

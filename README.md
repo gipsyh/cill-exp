@@ -4,6 +4,8 @@
 - Install Yosys-Slang globally by following `./deps/yosys-slang/README.md`, then run `make install`.
 - Install rIC3 globally by following `./rIC3/README.md`: `cargo install --path .`.
 - Install Yosys globally by following `./deps/yosys/README.md`
+- Go to the `boilerplate` directory under `nerv/serv/picorv32` and use `gen.sh` to generate the checks.
+- Enter the generated check directory, use `PROMPT.md` in Codex, and run it using `GPT5.2-xhigh`.
 
 ### Note
 - Cover and liveness cases are ignored.

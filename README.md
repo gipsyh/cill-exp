@@ -1,9 +1,29 @@
 # CIll Artifact
 
+### Directory Structure
+```text
+cill-exp/
+    PROMPT.md
+    README.md
+    deps/
+        yosys/            # Yosys (dependency)
+        yosys-slang/      # Yosys-Slang (dependency)
+        riscv-formal/     # riscv-formal (dependency)
+    nerv/
+    picorv32/
+    serv/
+    rIC3/                 # rIC3 model checker
+    riscv-formal/         # riscv-formal checks
+    res/                  # saved results / logs
+    tools/
+        analyze_stats.py
+```
+
 ### Setup
 - Install Yosys-Slang globally by following `./deps/yosys-slang/README.md`, then run `make install`.
 - Install rIC3 globally by following `./rIC3/README.md`: `cargo install --path .`.
 - Install Yosys globally by following `./deps/yosys/README.md`
+- Install the `rIC3/tools/vcd_mcp.py` MCP into Codex.
 - Go to the `boilerplate` directory under `nerv/serv/picorv32` and use `gen.sh` to generate the checks.
 - Enter the generated check directory, use `PROMPT.md` in Codex, and run it using `GPT5.2-xhigh`.
 

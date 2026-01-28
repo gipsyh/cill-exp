@@ -1,3 +1,9 @@
 [submodule "deps/yosys-slang"]
 	path = deps/yosys-slang
 	url = https://github.com/gipsyh/yosys-slang
+[submodule "rIC3"]
+	path = rIC3
+	url = https://github.com/gipsyh/rIC3
+[submodule "deps/yosys"]
+	path = deps/yosys
+	url = https://github.com/gipsyh/yosys

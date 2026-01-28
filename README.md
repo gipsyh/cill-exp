@@ -1,4 +1,9 @@
-# rIC3 CIll Artifact
+# CIll Artifact
+
+### Setup
+- Install Yosys-Slang globally by following `./deps/yosys-slang/README.md`, then run `make install`.
+- Install rIC3 globally by following `./rIC3/README.md`: `cargo install --path .`.
+- Install Yosys globally by following `./deps/yosys/README.md`
 
 ### Note
 - Cover and liveness cases are ignored.
@@ -14,5 +19,4 @@ always @(posedge clock) begin
 end
 always_comb assume (!(rvfi_order_loopback && check));
 ```
-- Since native Yosys does not support hierarchical references to internal module signals, rIC3 utilizes the slang-plugin with Yosys to parse the RTL.
 - For ease of agent analysis and to allow multiple checks to run concurrently, each check includes all RTL files via symbolic links.

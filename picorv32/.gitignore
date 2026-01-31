@@ -1,0 +1,7 @@
+*
+!boilerplate
+!boilerplate_insn
+!picorv32.sv
+!wrapper.sv
+!.gitignore
+!COPYING

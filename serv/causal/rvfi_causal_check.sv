@@ -1,0 +1,1 @@
+../../riscv-formal/rvfi_causal_check.sv

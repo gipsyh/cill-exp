@@ -1,0 +1,7 @@
+*
+!boilerplate
+!boilerplate_insn
+!nerv.sv
+!wrapper.sv
+!COPYING
+!.gitignore

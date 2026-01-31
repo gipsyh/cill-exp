@@ -1,0 +1,2 @@
+CIll Statistic: Total time: 10060s, Correctness check: 344s, Inductiveness check: 2563s
+\u001b[38;5;10mAll properties are inductive. Proof succeeded.\u001b[39m

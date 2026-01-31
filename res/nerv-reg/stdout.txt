@@ -1,0 +1,8 @@
+[13:13:58 INFO] Yosys: parsing the DUT and generating BTOR.
+[13:14:01 INFO] BMC: Checking correctness of all properties.
+[13:14:14 INFO] BMC found no CEX in limited steps.
+[13:14:14 INFO] Checking inductiveness of all properties.
+[13:14:47 INFO] IC3 proved [0, 1, 2, 3, 4, 5, 6] prop.
+CIll Statistic: Total time: 956s, Correctness check: 47s, Inductiveness check: 118s
+All properties are inductive. Proof succeeded.
+

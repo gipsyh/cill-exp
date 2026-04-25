@@ -1,5 +1,9 @@
 # CIll Artifact
 
+The artifact for the paper: **CIll: CTI-Guided Invariant Generation via LLMs for Model Checking**  
+
+arXiv: https://arxiv.org/abs/2602.23389
+
 ### Directory Structure
 ```text
 cill-exp/
